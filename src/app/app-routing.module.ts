@@ -5,7 +5,7 @@ const routes: Routes = [
 
   {
     path: '',
-    redirectTo: 'account/login',
+    redirectTo: 'home',
     pathMatch: 'full'
   },
   {
@@ -16,6 +16,11 @@ const routes: Routes = [
     path: 'home',
     loadChildren: () => import('./pages/landing/landing.module').then( m => m.LandingPageModule)
   },
+  {
+    path: 'order',
+    loadChildren: () => import('./pages/order/order.module').then( m => m.OrderPageModule)
+  },
+
 ];
 
 @NgModule({

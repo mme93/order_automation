@@ -1,9 +1,25 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>order</ion-title>
+    <ion-item lines="none">
+      <ion-buttons>
+        <ion-menu-button menu="main-menu"></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Order</ion-title>
+    </ion-item>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
 
+<ion-content>
+  <ion-tabs>
+    <ion-tab-bar slot="bottom">
+
+      <ion-tab-button tab="schedule">
+        <ion-icon name="calendar"></ion-icon>
+        <ion-label>Schedule</ion-label>
+        <ion-badge>6</ion-badge>
+      </ion-tab-button>
+
+    </ion-tab-bar>
+  </ion-tabs>
 </ion-content>
