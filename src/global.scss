@@ -24,3 +24,34 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+ion-header {
+  ion-title {
+    text-align: center;
+  }
+}
+article{
+  h1,h2{
+    text-align: center;
+  }
+  p{
+    margin-left: 20%;
+    margin-right: 20%;
+  }
+}
+
+.account{
+  top: 30%;
+  ion-card {
+    display:block;
+    margin: 0 auto;
+    max-width: 700px;
+    ion-card-header {
+      ion-card-title {
+        text-align: center;
+      }
+    }
+    ion-card-content {
+    }
+  }
+}
