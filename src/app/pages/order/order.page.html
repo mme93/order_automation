@@ -4,7 +4,7 @@
       <ion-buttons>
         <ion-menu-button menu="main-menu"></ion-menu-button>
       </ion-buttons>
-      <ion-title>Order</ion-title>
+      <ion-title>Order Overview</ion-title>
     </ion-item>
   </ion-toolbar>
 </ion-header>
@@ -14,10 +14,20 @@
   <ion-tabs>
     <ion-tab-bar slot="bottom">
 
-      <ion-tab-button tab="schedule">
-        <ion-icon name="calendar"></ion-icon>
-        <ion-label>Schedule</ion-label>
+      <ion-tab-button tab="orders">
+        <ion-icon name="hammer-outline"></ion-icon>
+        <ion-label>Create Oder</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button tab="order">
+        <ion-icon name="documents-outline"></ion-icon>
+        <ion-label>All Orders</ion-label>
         <ion-badge>6</ion-badge>
+      </ion-tab-button>
+
+      <ion-tab-button tab="settings">
+        <ion-icon name="documents-outline"></ion-icon>
+        <ion-label>Order Settings</ion-label>
       </ion-tab-button>
 
     </ion-tab-bar>
