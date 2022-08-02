@@ -7,4 +7,5 @@ export interface Customer {
   postcode: number;
   callNumber: string;
   info: string;
+  id: number;
 }
