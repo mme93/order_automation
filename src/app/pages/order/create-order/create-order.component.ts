@@ -15,7 +15,7 @@ export class CreateOrderComponent implements OnInit {
 
   customer: Customer;
   orderSettings: OrderSettings;
-  todos: Todo[]=[];
+  todos: Todo[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -25,8 +25,8 @@ export class CreateOrderComponent implements OnInit {
   }
 
   ngOnInit() {
-  this.orderSettings=this.orderService.getOrderSettings();
-  this.todos=this.orderService.getTodos();
+    this.orderSettings = this.orderService.getOrderSettings();
+    this.todos = this.orderService.getTodos();
   }
 
 }

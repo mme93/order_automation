@@ -11,10 +11,7 @@ export interface OrderSettings {
   orderIdentifyKey: string;
   orderInfo: string;
   orderStatus: number;
-  orderInfoVisibility: boolean;
-  toDoVisibility: boolean;
   todos: ToDo[];
-  todoResult: ToDo[];
 }
 
 /*
