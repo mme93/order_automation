@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {CustomerService} from '../../../services/http/customer/customer.service';
+import {Customer} from '../../../model/customer';
+import {OrderSettings} from '../../../model/orderSettings';
+import {OrderService} from '../../../services/http/order/order.service';
 
 @Component({
   selector: 'app-create-order',
@@ -7,8 +12,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreateOrderComponent implements OnInit {
 
-  constructor() { }
+  customer: Customer;
+  orderSettings: OrderSettings;
 
-  ngOnInit() {}
+  constructor(
+    private route: ActivatedRoute,
+    private customerService: CustomerService,
+    private orderService: OrderService
+  ) {
+  }
+
+  ngOnInit() {
+
+  }
 
 }

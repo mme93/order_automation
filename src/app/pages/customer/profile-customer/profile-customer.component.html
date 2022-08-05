@@ -4,7 +4,7 @@
       <ion-buttons>
         <ion-menu-button menu="main-menu"></ion-menu-button>
       </ion-buttons>
-      <ion-title>Profile</ion-title>
+      <ion-title>{{title}}</ion-title>
     </ion-item>
   </ion-toolbar>
 </ion-header>
@@ -14,22 +14,24 @@
     <ion-card-content>
       <ion-list>
         <ion-item>
-          <ion-input>Firstname: {{customer.firstName}}</ion-input>
+          <ion-input [(ngModel)]="customer.firstName">Firstname: </ion-input>
         </ion-item>
         <ion-item>
-          <ion-label>Lastname: {{customer.lastName}}</ion-label>
+          <ion-input [(ngModel)]="customer.lastName">Lastname: </ion-input>
         </ion-item>
         <ion-item>
-          <ion-label>Email: {{customer.email}}</ion-label>
+          <ion-input [(ngModel)]="customer.email">Email: </ion-input>
         </ion-item>
         <ion-item>
-          <ion-label>Adress: {{customer.street}} {{customer.town}} {{customer.postcode}}</ion-label>
+          <ion-input [(ngModel)]="customer.street">Street: </ion-input>
+          <ion-input [(ngModel)]="customer.town">Town: </ion-input>
+          <ion-input [(ngModel)]="customer.postcode">Postcode: </ion-input>
         </ion-item>
         <ion-item>
-          <ion-label>Call Number: {{customer.callNumber}}</ion-label>
+          <ion-input [(ngModel)]="customer.callNumber">Call Number: </ion-input>
         </ion-item>
         <ion-item>
-          <ion-textarea disabled="true">Information: {{customer.info}}</ion-textarea>
+          <ion-textarea [(ngModel)]="customer.info">Information: </ion-textarea>
         </ion-item>
       </ion-list>
       <ion-button routerLink="/customer/customers">Back</ion-button>

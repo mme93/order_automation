@@ -28,6 +28,10 @@ export class CustomersComponent implements OnInit {
   }
 
   createOrders(id: number) {
+    this.router.navigate(['/order/create']);
+  }
 
+  createCustomer() {
+    this.router.navigate(['/customer/profile'], { queryParams: { customerID: '-1' } });
   }
 }

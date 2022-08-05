@@ -5,6 +5,7 @@ import {Customer} from '../../../model/customer';
   providedIn: 'root'
 })
 export class CustomerService {
+  idCounter=3;
 
   customers: Customer[]=[
     {
@@ -44,6 +45,19 @@ export class CustomerService {
   }
   loadAllCustomer(): Customer[] {
     return this.customers;
+  }
+  saveCustomer(customer: Customer){
+    if(customer.id===-1){
+      customer.id=this.idCounter;
+      this.customers.push(customer);
+      this.idCounter++;
+    }else{
+      this.customers.forEach((resultCustomer, index) => {
+        if(resultCustomer.id === customer.id){
+          this.customers[index]=customer;
+        }
+      });
+    }
   }
 
 }
