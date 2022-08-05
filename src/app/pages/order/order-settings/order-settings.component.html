@@ -1,5 +1,74 @@
 <ion-content>
-  <h1>Setup Order Settings</h1>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title >Setup Order Settings</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-card-title>Default Customer visibility</ion-card-title>
+      <ion-item>
+        <ion-label>Order Number Customer</ion-label>
+        <ion-checkbox checked="orderSettings.orderNumberVisibility"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label>Firstname Customer</ion-label>
+        <ion-checkbox checked="orderSettings.firstNameVisibility"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label>Lastname Customer</ion-label>
+        <ion-checkbox checked="orderSettings.lastNameVisibility"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label>Email Customer</ion-label>
+        <ion-checkbox checked="orderSettings.emailVisibility"></ion-checkbox>
+      </ion-item>
+      <ion-card-title>Order visibility</ion-card-title>
+      <ion-item>
+        <ion-label>Order number</ion-label>
+        <ion-checkbox checked="orderSettings.orderNumberVisibility"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label>Order information</ion-label>
+        <ion-checkbox checked="orderSettings.orderInfoVisibility"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label>Order status</ion-label>
+        <ion-checkbox checked="orderSettings.orderStatusVisibility"></ion-checkbox>
+      </ion-item>
+      <ion-card-title>Todos visibility</ion-card-title>
+      <ion-item>
+        <ion-label>Todo</ion-label>
+        <ion-checkbox checked="orderSettings.toDoVisibility"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label>Todo Status</ion-label>
+        <ion-checkbox checked="orderSettings.toDoStatusVisibility"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label>Todo Info</ion-label>
+        <ion-checkbox checked="orderSettings.toDoInfoVisibility"></ion-checkbox>
+      </ion-item>
+      <ion-card-title>Edit todos</ion-card-title>
+      <ion-item>
+        <ion-label>Add Todo:</ion-label>
+        <ion-input [(ngModel)]="newTodo"></ion-input>
+        <ion-item button>
+          <ion-icon name="add-circle-outline" (click)="addToDo(newTodo)"></ion-icon>
+        </ion-item>
+      </ion-item>
+      <ion-card-title>Todo List</ion-card-title>
+      <div *ngIf="todos.length >0">
+        <ion-item *ngFor="let todo of todos">
+          <ion-label>Todo: {{todo.name}}</ion-label>
+          <ion-item button>
+            <ion-icon name="trash-outline" (click)="deleteTodo(todo.name)"></ion-icon>
+          </ion-item>
+        </ion-item>
+      </div>
+      <div *ngIf="todos.length === 0">
+        <p>No Todo found</p>
+      </div>
 
-
+    </ion-card-content>
+    <ion-button style="display: block" (click)="saveSettings()">Save</ion-button>
+  </ion-card>
 </ion-content>

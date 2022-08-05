@@ -4,53 +4,49 @@
       <ion-card-title>Create a new Order</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-    <ion-list>
-      <ion-item>
-        <ion-searchbar placeholder="UserID"></ion-searchbar>
-      </ion-item>
-      <ion-item>
-        <ion-label>Order Number:</ion-label>
-        <ion-input></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label>Firstname:</ion-label>
-        <ion-input></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label>Lastname:</ion-label>
-        <ion-input></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label>Email:</ion-label>
-        <ion-input></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label>Phone number:</ion-label>
-        <ion-input></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label>Order Info:</ion-label>
-        <ion-textarea></ion-textarea>
-      </ion-item>
       <ion-list>
         <ion-item>
-          <ion-label>Todo:</ion-label>
+          <ion-searchbar placeholder="UserID"></ion-searchbar>
+        </ion-item>
+        <ion-item *ngIf="orderSettings.orderNumberVisibility">
+          <ion-label>Order Number:</ion-label>
+          <ion-input></ion-input>
+        </ion-item>
+        <ion-item *ngIf="orderSettings.firstNameVisibility">
+          <ion-label>Firstname:</ion-label>
+          <ion-input></ion-input>
+        </ion-item>
+        <ion-item *ngIf="orderSettings.lastNameVisibility">
+          <ion-label>Lastname:</ion-label>
+          <ion-input></ion-input>
+        </ion-item>
+        <ion-item *ngIf="orderSettings.emailVisibility">
+          <ion-label>Email:</ion-label>
           <ion-input></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label>Todo Status:</ion-label>
+          <ion-label>Phone number:</ion-label>
           <ion-input></ion-input>
-        </ion-item>
-        <ion-item>
+        </ion-item >
+        <ion-item *ngIf="orderSettings.orderInfoVisibility">
           <ion-label>Order Info:</ion-label>
           <ion-textarea></ion-textarea>
         </ion-item>
-        <ion-item>
-          <ion-label>Todo Info:</ion-label>
-          <ion-textarea></ion-textarea>
-        </ion-item>
+        <ion-list *ngIf="orderSettings.toDoVisibility">
+          <ion-item>
+            <ion-label>Todo:</ion-label>
+            <ion-input></ion-input>
+          </ion-item>
+          <ion-item *ngIf="orderSettings.toDoStatusVisibility">
+            <ion-label>Todo Status:</ion-label>
+            <ion-input></ion-input>
+          </ion-item>
+          <ion-item *ngIf="orderSettings.toDoInfoVisibility">
+            <ion-label>Todo Info:</ion-label>
+            <ion-textarea></ion-textarea>
+          </ion-item>
+        </ion-list>
       </ion-list>
-    </ion-list>
     </ion-card-content>
   </ion-card>
 

@@ -4,6 +4,7 @@ import {CustomerService} from '../../../services/http/customer/customer.service'
 import {Customer} from '../../../model/customer';
 import {OrderSettings} from '../../../model/orderSettings';
 import {OrderService} from '../../../services/http/order/order.service';
+import {Todo} from '../../../model/todo';
 
 @Component({
   selector: 'app-create-order',
@@ -14,6 +15,7 @@ export class CreateOrderComponent implements OnInit {
 
   customer: Customer;
   orderSettings: OrderSettings;
+  todos: Todo[]=[];
 
   constructor(
     private route: ActivatedRoute,
@@ -23,7 +25,8 @@ export class CreateOrderComponent implements OnInit {
   }
 
   ngOnInit() {
-
+  this.orderSettings=this.orderService.getOrderSettings();
+  this.todos=this.orderService.getTodos();
   }
 
 }

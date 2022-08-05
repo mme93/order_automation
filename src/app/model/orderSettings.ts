@@ -1,5 +1,4 @@
 export interface OrderSettings {
-  orderCustomerVisibility: boolean;
   firstNameVisibility: boolean;
   lastNameVisibility: boolean;
   emailVisibility: boolean;
@@ -8,6 +7,7 @@ export interface OrderSettings {
   orderInfoVisibility: boolean;
   toDoVisibility: boolean;
   toDoStatusVisibility: boolean;
+  toDoInfoVisibility: boolean;
 }
 
 
