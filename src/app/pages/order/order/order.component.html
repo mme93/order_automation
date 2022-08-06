@@ -36,7 +36,7 @@
           <ion-item>
             <input list="todos"  placeholder="Todo" style="width: 100%">
             <datalist id="todos">
-              <option *ngFor="let todo of todos" [value]="todo.code">{{todo.name}}</option>
+              <option *ngFor="let todo of todos" [value]="todo.name">{{todo.name}}</option>
             </datalist>
           </ion-item>
           <ion-item *ngIf="orderSettings.toDoStatusVisibility">
