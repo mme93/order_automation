@@ -1,5 +1,55 @@
 <ion-content>
-  <h1>Show Order</h1>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Show Order</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-searchbar placeholder="UserID"></ion-searchbar>
+        </ion-item>
+        <ion-item *ngIf="orderSettings.orderNumberVisibility">
+          <ion-label>Order Number:</ion-label>
+          <ion-input></ion-input>
+        </ion-item>
+        <ion-item *ngIf="orderSettings.firstNameVisibility">
+          <ion-label>Firstname:</ion-label>
+          <ion-input></ion-input>
+        </ion-item>
+        <ion-item *ngIf="orderSettings.lastNameVisibility">
+          <ion-label>Lastname:</ion-label>
+          <ion-input></ion-input>
+        </ion-item>
+        <ion-item *ngIf="orderSettings.emailVisibility">
+          <ion-label>Email:</ion-label>
+          <ion-input></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Phone number:</ion-label>
+          <ion-input></ion-input>
+        </ion-item >
+        <ion-item *ngIf="orderSettings.orderInfoVisibility">
+          <ion-textarea>Order Info:</ion-textarea>
+        </ion-item>
+        <ion-card-title>Todos</ion-card-title>
+        <ion-list *ngIf="orderSettings.toDoVisibility">
+          <ion-item>
+            <input list="todos"  placeholder="Todo" style="width: 100%">
+            <datalist id="todos">
+              <option *ngFor="let todo of todos" [value]="todo.code">{{todo.name}}</option>
+            </datalist>
+          </ion-item>
+          <ion-item *ngIf="orderSettings.toDoStatusVisibility">
+            <ion-label>Todo Status:</ion-label>
+            <ion-input></ion-input>
+          </ion-item>
+          <ion-item *ngIf="orderSettings.toDoInfoVisibility">
+            <ion-textarea>Todo Info:</ion-textarea>
+          </ion-item>
+        </ion-list>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
 
 
 </ion-content>
