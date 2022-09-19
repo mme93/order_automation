@@ -14,4 +14,9 @@ const httpOptions = {
 export class AccountService {
 
   constructor(private http: HttpClient) { }
+
+  getAccount(){
+
+  }
+
 }
