@@ -2,9 +2,59 @@
   <ion-toolbar>
     <ion-item lines="none">
       <ion-buttons>
-        <ion-menu-button menu="main-menu" ></ion-menu-button>
+        <ion-menu-button menu="main-menu"></ion-menu-button>
       </ion-buttons>
-      <ion-title>Company</ion-title>
+      <ion-title>{{company.companyName}}</ion-title>
     </ion-item>
   </ion-toolbar>
 </ion-header>
+<ion-content>
+  <section>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Company Information</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item>
+          <ion-label>Contact Person: {{company.firstName}} {{company.lastName}}</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>Address: {{company.city}} {{company.street}} {{company.postalCode}}</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>Call-Number: {{company.callNumber}}</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>Sector: {{company.sector}} </ion-label>
+        </ion-item>
+      </ion-card-content>
+
+    </ion-card>
+  </section>
+  <section>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>User</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-card *ngFor="let user of company.userDtoList">
+          <ion-item>
+            <ion-label>Username: {{user.username}}</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>Name: {{user.firstName}} {{user.lastName}}</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>Call-Number: {{user.callNumber}}</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>Roll: {{user.roll}} </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>Further Information: {{user.info}} </ion-label>
+          </ion-item>
+        </ion-card>
+      </ion-card-content>
+    </ion-card>
+  </section>
+</ion-content>
