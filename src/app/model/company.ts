@@ -1,3 +1,5 @@
+import {User} from './user';
+
 export interface Company{
   companyName: string;
   firstName: string;
@@ -8,4 +10,5 @@ export interface Company{
   postalCode: string;
   callNumber: string;
   sector: string;
+  userDtoList: User[];
 }
