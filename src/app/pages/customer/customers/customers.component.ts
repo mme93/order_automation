@@ -16,7 +16,11 @@ export class CustomersComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.customerService.loadAllCustomer().forEach(customer => this.customers.push(customer));
+    this.customerService.loadAllCustomer().subscribe(response =>{
+      this.customers=response;
+    },
+    error => console.log(error)
+    );
   }
 
   edit(id: number) {
@@ -32,6 +36,6 @@ export class CustomersComponent implements OnInit {
   }
 
   createCustomer() {
-    this.router.navigate(['/customer/profile'], { queryParams: { customerID: '-1' } });
+    this.router.navigate(['/customer/create']);
   }
 }

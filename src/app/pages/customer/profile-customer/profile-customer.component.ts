@@ -16,6 +16,7 @@ export class ProfileCustomerComponent implements OnInit {
   }
 
   ngOnInit() {
+    /*
     this.route.queryParams.subscribe(params => {
       const customerID = params.customerID;
       if (customerID === '-1') {
@@ -42,9 +43,10 @@ export class ProfileCustomerComponent implements OnInit {
         }
       }
     });
+     */
   }
   saveCustomer(){
-    this.customerService.saveCustomer(this.customer);
+   // this.customerService.saveCustomer(this.customer);
   }
 
 }

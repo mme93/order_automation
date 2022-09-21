@@ -2,10 +2,10 @@ export interface Customer {
   firstName: string;
   lastName: string;
   email: string;
+  city: string;
   street: string;
-  town: string;
-  postcode: number;
+  postcode: string;
   callNumber: string;
-  info: string;
-  id: number;
+  information: string;
+  company: string;
 }

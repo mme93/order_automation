@@ -10,5 +10,32 @@
 </ion-header>
 
 <ion-content>
-
+  <ion-card>
+    <ion-list>
+      <ion-item>
+        <ion-label>Firstname:</ion-label>
+        <ion-input>{{customer.firstName}}</ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Lastname: {{customer.lastName}}</ion-label>
+        <ion-input></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Email: {{customer.email}}</ion-label>
+        <ion-input></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Adress: {{customer.street}} {{customer.city}} {{customer.postcode}}</ion-label>
+        <ion-input></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Call Number: {{customer.callNumber}}</ion-label>
+        <ion-input></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-textarea>Information: {{customer.information}}</ion-textarea>
+      </ion-item>
+    </ion-list>
+    <ion-button (click)="save()">Save</ion-button>
+  </ion-card>
 </ion-content>

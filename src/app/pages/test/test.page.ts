@@ -14,11 +14,11 @@ export class TestPage implements OnInit {
     lastName: '',
     email: '',
     street: '',
-    town: '',
+    city: '',
     postcode: null,
     callNumber: '',
-    info: '',
-    id: null
+    company:'',
+    information: ''
   };
   selectedCustomer = '';
   customers: Customer[] = [];
@@ -34,13 +34,13 @@ export class TestPage implements OnInit {
   }
 
   ngOnInit() {
-    this.customers = this.customerService.loadAllCustomer();
+     this.customerService.loadAllCustomer().subscribe(value => this.customers=value);
   }
 
 
   changeExistingCustomer() {
     const customerId = this.selectedCustomer.split(':')[0].split(' ')[1];
-    this.existingCustomer = this.customers.filter(customer => customer.id.toString() === customerId)[0];
+   // this.existingCustomer = this.customers.filter(customer => customer.id.toString() === customerId)[0];
   }
 
   test() {
