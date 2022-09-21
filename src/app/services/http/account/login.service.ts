@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../../../environments/environment';
 import {Observable} from 'rxjs';
-import {JwtResponse} from '../../../model/jwtResponse';
+import {JwtLoginToken} from '../../../model/JwtLoginToken';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -19,9 +19,9 @@ export class LoginService {
   constructor(private http: HttpClient) {
   }
 
-  login(username: string, password: string): Observable<JwtResponse> {
+  login(username: string, password: string): Observable<JwtLoginToken> {
     const jwtRequest={username,password};
-    return this.http.post<JwtResponse>( environment.backendUrl+'authenticate', JSON.stringify(jwtRequest), httpOptions);
+    return this.http.post<JwtLoginToken>( environment.backendUrl+'authenticate', JSON.stringify(jwtRequest), httpOptions);
   }
 
 }

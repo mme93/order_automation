@@ -21,6 +21,7 @@ export class LoginComponent {
     this.loginService.login(this.username, this.password).subscribe(
       response => {
         localStorage.setItem('token', response.jwtToken);
+        localStorage.setItem('company', response.company);
         this.route.navigate(['home']);
       }, error => {
         console.log(error);
