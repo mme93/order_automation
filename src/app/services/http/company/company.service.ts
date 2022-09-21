@@ -16,9 +16,7 @@ export class CompanyService {
         // eslint-disable-next-line @typescript-eslint/naming-convention
         'Content-Type': 'application/json',
         // eslint-disable-next-line @typescript-eslint/naming-convention
-        Authorization: 'Bearer '+localStorage.getItem('token'),
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        Company: localStorage.getItem('company')
+        Authorization: 'Bearer '+localStorage.getItem('token')
       })
     };
     return this.http.get<Company>(environment.backendUrl+'company/', httpOptions);
