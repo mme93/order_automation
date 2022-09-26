@@ -28,7 +28,7 @@ export class CustomerService {
   }
 
   createCustomer(customer: Customer) {
-    return this.http.post<Customer[]>('http://localhost:8998/customer/create', JSON.stringify(customer), httpOptions).subscribe(
+    return this.http.post<Customer[]>(environment.backendUrl +'customer/create', JSON.stringify(customer), httpOptions).subscribe(
       response => console.log(response),
       error => console.log(error)
     );
