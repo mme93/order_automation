@@ -33,7 +33,7 @@
             <ion-item>
               <ion-select [(ngModel)]="selectedCustomer" placeholder="No customer selected" (ionChange)="changeExistingCustomer()">
                 <ion-select-option
-                  *ngFor="let customer of customers">ID {{customer.id}}: {{customer.firstName}} {{customer.lastName}}
+                  *ngFor="let customer of customers">ID X: {{customer.firstName}} {{customer.lastName}}
                 </ion-select-option>
               </ion-select>
               <ion-item slot="end">
