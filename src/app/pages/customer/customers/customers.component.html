@@ -17,9 +17,9 @@
   <ion-card *ngFor="let customer of customers">
     <ion-card-header>
       <ion-buttons>
-        <ion-button style="border-style: solid" (click)="edit(customer.id)">Edit</ion-button>
-        <ion-button style="border-style: solid" (click)="showOrders(customer.id)">Orders</ion-button>
-        <ion-button style="border-style: solid" (click)="createOrders(customer.id)">Create Orders</ion-button>
+        <ion-button style="border-style: solid" (click)="edit(1)">Edit</ion-button>
+        <ion-button style="border-style: solid" (click)="showOrders(1)">Orders</ion-button>
+        <ion-button style="border-style: solid" (click)="createOrders(1)">Create Orders</ion-button>
       </ion-buttons>
     </ion-card-header>
     <ion-card-content>
@@ -34,13 +34,13 @@
           <ion-label>Email: {{customer.email}}</ion-label>
         </ion-item>
         <ion-item>
-          <ion-label>Adress: {{customer.street}} {{customer.town}} {{customer.postcode}}</ion-label>
+          <ion-label>Adress: {{customer.street}} {{customer.city}} {{customer.postcode}}</ion-label>
         </ion-item>
         <ion-item>
           <ion-label>Call Number: {{customer.callNumber}}</ion-label>
         </ion-item>
         <ion-item>
-          <ion-textarea disabled="true">Information: {{customer.info}}</ion-textarea>
+          <ion-textarea disabled="true">Information: {{customer.information}}</ion-textarea>
         </ion-item>
       </ion-list>
     </ion-card-content>
