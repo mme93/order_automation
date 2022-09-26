@@ -14,26 +14,28 @@
     <ion-list>
       <ion-item>
         <ion-label>Firstname:</ion-label>
-        <ion-input>{{customer.firstName}}</ion-input>
+        <ion-input [(ngModel)]="customer.firstName"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label>Lastname: {{customer.lastName}}</ion-label>
-        <ion-input></ion-input>
+        <ion-label>Lastname: </ion-label>
+        <ion-input [(ngModel)]="customer.lastName"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label>Email: {{customer.email}}</ion-label>
-        <ion-input></ion-input>
+        <ion-label>Email: </ion-label>
+        <ion-input [(ngModel)]="customer.email"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label>Adress: {{customer.street}} {{customer.city}} {{customer.postcode}}</ion-label>
-        <ion-input></ion-input>
+        <ion-label>Adress: </ion-label>
+        <ion-input [(ngModel)]="customer.street" placeholder="Street"></ion-input>
+        <ion-input [(ngModel)]="customer.city" placeholder="City"></ion-input>
+        <ion-input [(ngModel)]="customer.postcode"placeholder="Postcode"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label>Call Number: {{customer.callNumber}}</ion-label>
-        <ion-input></ion-input>
+        <ion-label>Call Number: </ion-label>
+        <ion-input [(ngModel)]="customer.callNumber"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-textarea>Information: {{customer.information}}</ion-textarea>
+        <ion-textarea [(ngModel)]="customer.information">Information: </ion-textarea>
       </ion-item>
     </ion-list>
     <ion-button (click)="save()">Save</ion-button>

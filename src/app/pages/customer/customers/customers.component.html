@@ -8,42 +8,53 @@
     </ion-item>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
   <ion-item>
     <ion-button (click)="createCustomer()">Create Customer</ion-button>
     <ion-searchbar></ion-searchbar>
   </ion-item>
-  <ion-card *ngFor="let customer of customers">
-    <ion-card-header>
-      <ion-buttons>
-        <ion-button style="border-style: solid" (click)="edit(1)">Edit</ion-button>
-        <ion-button style="border-style: solid" (click)="showOrders(1)">Orders</ion-button>
-        <ion-button style="border-style: solid" (click)="createOrders(1)">Create Orders</ion-button>
-      </ion-buttons>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-list>
-        <ion-item>
-          <ion-label>Firstname: {{customer.firstName}}</ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label>Lastname: {{customer.lastName}}</ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label>Email: {{customer.email}}</ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label>Adress: {{customer.street}} {{customer.city}} {{customer.postcode}}</ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label>Call Number: {{customer.callNumber}}</ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-textarea disabled="true">Information: {{customer.information}}</ion-textarea>
-        </ion-item>
-      </ion-list>
-    </ion-card-content>
-  </ion-card>
+  <div fxLayout="row wrap" fxLayoutGap="30px">
+    <ion-card *ngFor="let customer of customers">
+      <ion-card-header>
+        <ion-card-title>
+          <ion-icon class="icon-header" name="person-circle-outline"></ion-icon>
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-list>
+          <ion-item>
+            <ion-label>Firstname: {{customer.firstName}}</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>Lastname: {{customer.lastName}}</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>Email: {{customer.email}}</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>Adress: {{customer.street}} {{customer.city}} {{customer.postcode}}</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>Call Number: {{customer.callNumber}}</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-textarea disabled="true">Information: {{customer.information}}</ion-textarea>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+      <ion-row>
+        <ion-col>
+          <ion-button style="width: 100%">
+            <ion-icon name="settings-outline"></ion-icon>
+          </ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button style="width: 100%">
+            <ion-icon name="folder-outline"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+  </div>
 </ion-content>
 

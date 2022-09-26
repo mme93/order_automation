@@ -26,4 +26,11 @@ export class CustomerService {
   loadAllCustomer(): Observable<Customer[]> {
     return this.http.get<Customer[]>(environment.backendUrl + 'customer/all', httpOptions);
   }
+
+  createCustomer(customer: Customer) {
+    return this.http.post<Customer[]>('http://localhost:8998/customer/create', JSON.stringify(customer), httpOptions).subscribe(
+      response => console.log(response),
+      error => console.log(error)
+    );
+  }
 }

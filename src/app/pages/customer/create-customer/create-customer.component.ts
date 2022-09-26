@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Customer} from '../../../model/customer';
+import {CustomerService} from '../../../services/http/customer/customer.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-create-customer',
@@ -18,11 +20,14 @@ export class CreateCustomerComponent implements OnInit {
     information: '',
     company: '',
   };
-  constructor() { }
+  constructor(private customerService: CustomerService, private router: Router) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.customer.company=localStorage.getItem('company');
+  }
 
   save() {
-  console.log(this.customer);
+  this.customerService.createCustomer(this.customer);
+  this.router.navigate(['/customer/customers']);
   }
 }

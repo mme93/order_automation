@@ -18,21 +18,16 @@ export class CustomersComponent implements OnInit {
   ngOnInit() {
     this.customerService.loadAllCustomer().subscribe(response =>{
       this.customers=response;
+        this.customers.push(response[0]);
+        this.customers.push(response[0]);
+        this.customers.push(response[0]);
+        this.customers.push(response[0]);
+        this.customers.push(response[0]);
+        this.customers.push(response[0]);
+        this.customers.push(response[0]);
     },
     error => console.log(error)
     );
-  }
-
-  edit(id: number) {
-    this.router.navigate(['/customer/profile'], { queryParams: { customerID: id.toString() } });
-  }
-
-  showOrders(id: number) {
-
-  }
-
-  createOrders(id: number) {
-    this.router.navigate(['/order/create']);
   }
 
   createCustomer() {

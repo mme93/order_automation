@@ -10,13 +10,15 @@ import { CustomerPage } from './customer.page';
 import {CreateCustomerComponent} from './create-customer/create-customer.component';
 import {CustomersComponent} from './customers/customers.component';
 import {ProfileCustomerComponent} from './profile-customer/profile-customer.component';
+import {FlexLayoutModule} from '@angular/flex-layout';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    CustomerPageRoutingModule
+    CustomerPageRoutingModule,
+    FlexLayoutModule
   ],
   declarations: [CustomerPage,CreateCustomerComponent,CustomersComponent,ProfileCustomerComponent]
 })
