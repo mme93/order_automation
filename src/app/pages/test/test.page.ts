@@ -10,12 +10,13 @@ import {CustomerService} from '../../services/http/customer/customer.service';
 export class TestPage implements OnInit {
   existingCustomer: Customer = null;
   newCustomer: Customer = {
+    id:'',
     firstName: '',
     lastName: '',
     email: '',
     street: '',
     city: '',
-    postcode: null,
+    postalCode: null,
     callNumber: '',
     company:'',
     information: ''

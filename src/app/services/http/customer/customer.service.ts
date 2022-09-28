@@ -23,14 +23,26 @@ export class CustomerService {
   constructor(private http: HttpClient) {
   }
 
+  updateCustomer(customer: Customer) {
+    return this.http.put('http://localhost:8998/customer/update', JSON.stringify(customer), httpOptions);
+  }
+
   loadAllCustomer(): Observable<Customer[]> {
     return this.http.get<Customer[]>(environment.backendUrl + 'customer/all', httpOptions);
   }
 
   createCustomer(customer: Customer) {
-    return this.http.post<Customer[]>(environment.backendUrl +'customer/create', JSON.stringify(customer), httpOptions).subscribe(
+    return this.http.post<Customer[]>(environment.backendUrl + 'customer/create', JSON.stringify(customer), httpOptions).subscribe(
       response => console.log(response),
       error => console.log(error)
     );
+  }
+
+  deleteCustomer(id: string) {
+    return this.http.delete<Customer[]>(environment.backendUrl +'customer/delete/' + id, httpOptions);
+  }
+
+  findCustomerByID(customerID: any): Observable<Customer> {
+    return this.http.get<Customer>(environment.backendUrl + 'customer/'+customerID, httpOptions);
   }
 }

@@ -25,7 +25,7 @@
         <ion-item>
           <ion-input [(ngModel)]="customer.street">Street: </ion-input>
           <ion-input [(ngModel)]="customer.city">Town: </ion-input>
-          <ion-input [(ngModel)]="customer.postcode">Postcode: </ion-input>
+          <ion-input [(ngModel)]="customer.postalCode">Postcode: </ion-input>
         </ion-item>
         <ion-item>
           <ion-input [(ngModel)]="customer.callNumber">Call Number: </ion-input>
@@ -35,7 +35,7 @@
         </ion-item>
       </ion-list>
       <ion-button routerLink="/customer/customers">Back</ion-button>
-      <ion-button>Save</ion-button>
+      <ion-button (click)="saveCustomer()">Save</ion-button>
     </ion-card-content>
   </ion-card>
 </ion-content>

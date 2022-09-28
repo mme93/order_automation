@@ -10,12 +10,13 @@ import {Router} from '@angular/router';
 })
 export class CreateCustomerComponent implements OnInit {
   customer: Customer={
+    id:'',
     firstName: '',
     lastName: '',
     email: '',
     city: '',
     street: '',
-    postcode: '',
+    postalCode: '',
     callNumber: '',
     information: '',
     company: '',

@@ -9,44 +9,42 @@ import {CustomerService} from '../../../services/http/customer/customer.service'
   styleUrls: ['./profile-customer.component.scss'],
 })
 export class ProfileCustomerComponent implements OnInit {
-  title = '';
-  customer: Customer;
+  title = 'Edit Customer ';
+  customerID: string;
+  customer: Customer = {
+    id: '',
+    firstName: '',
+    lastName: '',
+    email: '',
+    city: '',
+    street: '',
+    postalCode: '',
+    callNumber: '',
+    information: '',
+    company: '',
+  };
 
-  constructor(private route: ActivatedRoute,private router: Router, private customerService: CustomerService) {
+  constructor(private route: ActivatedRoute, private router: Router, private customerService: CustomerService) {
   }
 
   ngOnInit() {
-    /*
     this.route.queryParams.subscribe(params => {
-      const customerID = params.customerID;
-      if (customerID === '-1') {
-        this.customer = {
-          firstName: '',
-          lastName: '',
-          email: '',
-          street: '',
-          town: '',
-          postcode: null,
-          callNumber: '',
-          info: '',
-          id: customerID
-        };
-        this.title='Create new Customer';
-      } else {
-        const resultCustomer = this.customerService.findCustomerByID(Number(customerID));
-        if (resultCustomer != null) {
-          this.customer = resultCustomer;
-          this.title='Update profile '+this.customer.lastName;
-        }else{
-          alert('Customer not found!');
-          this.router.navigate(['customer/customers']);
-        }
-      }
+      this.customerService.findCustomerByID(params.customerID).subscribe(customer => {
+        this.customer = customer;
+        console.log(customer)
+      });
     });
-     */
   }
-  saveCustomer(){
-   // this.customerService.saveCustomer(this.customer);
+
+  saveCustomer() {
+    console.log('test');
+    this.customerService.updateCustomer(this.customer).subscribe(response => {
+        console.log(response);
+      },
+      error => {
+        console.log(error);
+      });
+    //    this.router.navigate(['/customer/customers']);
   }
 
 }
