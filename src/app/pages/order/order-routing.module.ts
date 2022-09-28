@@ -5,7 +5,6 @@ import { OrderPage } from './order.page';
 import {CreateOrderComponent} from './create-order/create-order.component';
 import {OrderComponent} from './order/order.component';
 import {OrdersComponent} from './orders/orders.component';
-import {OrderSettingsComponent} from './order-settings/order-settings.component';
 
 
 const routes: Routes = [
@@ -24,11 +23,6 @@ const routes: Routes = [
       {
         path: 'orders',
         component: OrdersComponent
-      }
-      ,
-      {
-        path: 'settings',
-        component: OrderSettingsComponent
       }
     ]
   },

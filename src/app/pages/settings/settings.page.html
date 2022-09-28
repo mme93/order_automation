@@ -1,9 +1,25 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>settings</ion-title>
+    <ion-item lines="none">
+      <ion-buttons>
+        <ion-menu-button menu="main-menu"></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Settings Overview</ion-title>
+    </ion-item>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
 
+<ion-content>
+  <ion-tabs>
+    <ion-tab-bar slot="left">
+
+      <ion-tab-button tab="order">
+        <ion-icon name="documents-outline"></ion-icon>
+        <ion-label>Order</ion-label>
+        <ion-badge>6</ion-badge>
+      </ion-tab-button>
+
+    </ion-tab-bar>
+  </ion-tabs>
 </ion-content>
