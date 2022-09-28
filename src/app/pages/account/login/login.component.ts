@@ -10,6 +10,7 @@ import {Router} from '@angular/router';
 export class LoginComponent {
   username = 'admin';
   password = 'admin';
+  isLoading = false;
 
   constructor(
     private loginService: LoginService,
@@ -18,12 +19,15 @@ export class LoginComponent {
   }
 
   login() {
+    this.isLoading = true;
     this.loginService.login(this.username, this.password).subscribe(
       response => {
+        this.isLoading = false;
         localStorage.setItem('token', response.jwtToken);
         localStorage.setItem('company', response.company);
         this.route.navigate(['home']);
       }, error => {
+        this.isLoading = false;
         console.log(error);
       }
     );

@@ -14,15 +14,18 @@
       <form>
         <ion-item lines="full">
           <ion-label position="floating">Username</ion-label>
-          <ion-input type="text" required [(ngModel)]="username" name="username"></ion-input>
+          <ion-input type="text" required [(ngModel)]="username" name="username" [disabled]="isLoading"></ion-input>
         </ion-item>
         <ion-item lines="full">
           <ion-label position="floating">Password</ion-label>
-          <ion-input type="password" required [(ngModel)]="password" name="password"></ion-input>
+          <ion-input type="password" required [(ngModel)]="password" name="password" [disabled]="isLoading"></ion-input>
         </ion-item>
         <ion-row>
           <ion-col>
-            <ion-button type="submit" color="primary" expand="block" (click)="login()">Sign Up</ion-button>
+            <ion-button type="submit" color="primary" expand="block" (click)="login()">
+              <p *ngIf="!isLoading">Sign Up</p>
+              <ion-spinner name="circular" *ngIf="isLoading"></ion-spinner>
+            </ion-button>
           </ion-col>
         </ion-row>
         <!-- ToDo: Email-Server or any Contact Devoloper
