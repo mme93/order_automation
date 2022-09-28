@@ -9,24 +9,28 @@
     <ion-content>
       <ion-list>
         <ion-item button routerLink="home">
-          <ion-icon name="home-outline" slot="start" class="iconStyle"> </ion-icon>
+          <ion-icon name="home-outline" slot="start" class="iconStyle"></ion-icon>
           <ion-label>Start</ion-label>
         </ion-item>
         <ion-item button routerLink="account/company">
-          <ion-icon name="business-outline" slot="start" class="iconStyle"> </ion-icon>
+          <ion-icon name="business-outline" slot="start" class="iconStyle"></ion-icon>
           <ion-label>Company</ion-label>
         </ion-item>
-        <ion-item button routerLink="account/profile" >
+        <ion-item button routerLink="account/profile">
           <ion-icon name="person-outline" slot="start" class="iconStyle"></ion-icon>
           <ion-label>Profile</ion-label>
         </ion-item>
-        <ion-item button routerLink="order/orders" >
+        <ion-item button routerLink="order/orders">
           <ion-icon name="document-text-outline" slot="start" class="iconStyle"></ion-icon>
           <ion-label>Order</ion-label>
         </ion-item>
-        <ion-item button routerLink="customer/customers" >
+        <ion-item button routerLink="customer/customers">
           <ion-icon name="accessibility-outline" slot="start" class="iconStyle"></ion-icon>
           <ion-label>Customer</ion-label>
+        </ion-item>
+        <ion-item button>
+          <ion-icon name="settings-outline" slot="start" class="iconStyle"></ion-icon>
+          <ion-label>Settings</ion-label>
         </ion-item>
         <ion-item button (click)="logout()">
           <ion-icon name="log-out-outline" slot="start" class="iconStyle"></ion-icon>
