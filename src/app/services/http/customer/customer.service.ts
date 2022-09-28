@@ -24,7 +24,7 @@ export class CustomerService {
   }
 
   updateCustomer(customer: Customer) {
-    return this.http.put('http://localhost:8998/customer/update', JSON.stringify(customer), httpOptions);
+    return this.http.put(environment.backendUrl + 'customer/update', JSON.stringify(customer), httpOptions);
   }
 
   loadAllCustomer(): Observable<Customer[]> {
