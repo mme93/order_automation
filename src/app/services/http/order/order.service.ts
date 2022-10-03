@@ -46,12 +46,9 @@ export class OrderService {
         'Content-Type': 'application/json',
         // eslint-disable-next-line @typescript-eslint/naming-convention
         Authorization: 'Bearer ' + localStorage.getItem('token'),
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        Company: localStorage.getItem('company')
       })
     };
-    return this.http.get('http://localhost:8998/order/create', httpOptions)
-      .subscribe(resposen => console.log(resposen), error => console.log(error));
+    return this.http.get<Order[]>('http://localhost:8998/order/all', httpOptions);
   }
 
 

@@ -22,6 +22,7 @@ export interface Order {
   furtherInformation: string;
   todos: OrderTodo[];
   userId: string;
+  status: string;
 }
 
 export interface OrderSettings {
