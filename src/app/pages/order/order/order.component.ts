@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Customer} from '../../../model/customer';
-import {OrderSettings} from '../../../model/orderSettings';
-import {Todo} from '../../../model/todo';
+import {OrderSettings} from '../../../model/order/orderSettings';
+import {Todo} from '../../../model/order/todo';
 import {CustomerService} from '../../../services/http/customer/customer.service';
 import {OrderService} from '../../../services/http/order/order.service';
 
