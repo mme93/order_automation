@@ -48,7 +48,7 @@ export class OrderService {
         Authorization: 'Bearer ' + localStorage.getItem('token'),
       })
     };
-    return this.http.get<Order[]>('http://localhost:8998/order/all', httpOptions);
+    return this.http.get<Order[]>(environment.backendUrl+'order/all', httpOptions);
   }
 
 
