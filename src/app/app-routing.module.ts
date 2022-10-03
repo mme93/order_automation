@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import {ErrorComponent} from './pages/error/error.component';
 
 const routes: Routes = [
 
@@ -27,11 +28,15 @@ const routes: Routes = [
   {
     path: 'test',
     loadChildren: () => import('./pages/test/test.module').then( m => m.TestPageModule)
-  },  {
+  },
+  {
     path: 'settings',
     loadChildren: () => import('./pages/settings/settings.module').then( m => m.SettingsPageModule)
   },
-
+  {
+    path: '**',
+    component: ErrorComponent
+  },
 
 
 ];
