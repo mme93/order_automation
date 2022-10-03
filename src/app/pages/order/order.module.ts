@@ -11,13 +11,15 @@ import {OrderComponent} from './order/order.component';
 import {OrdersComponent} from './orders/orders.component';
 import {CreateOrderComponent} from './create-order/create-order.component';
 import {OrderSettingsComponent} from '../settings/order-settings/order-settings.component';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    OrderPageRoutingModule
+    OrderPageRoutingModule,
+    MatTableModule
   ],
   declarations: [OrderPage,OrderComponent,OrdersComponent,CreateOrderComponent,OrderSettingsComponent]
 })
