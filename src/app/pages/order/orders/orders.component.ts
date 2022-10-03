@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {OrderService} from '../../../services/http/order/order.service';
-import {Order} from '../../../model/order/order';
 
 export interface OrderElement {
   position: number;
