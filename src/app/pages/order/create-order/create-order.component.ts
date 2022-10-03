@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {CustomerService} from '../../../services/http/customer/customer.service';
-import {Customer} from '../../../model/customer';
+import {Customer} from '../../../model/firm/customer';
 import {OrderTodo} from '../../../model/order/todo';
 import {OrderService} from '../../../services/http/order/order.service';
+import { Router} from '@angular/router';
 
 
 @Component({
@@ -47,21 +48,22 @@ export class CreateOrderComponent implements OnInit {
   isNewCustomerVisible = true;
   onlyTelephoneNumber = '';
 
-  orderTodoInformation = 'Test Todo Info';
-  orderTodo = 'Test todo';
+  orderTodoInformation = '';
+  orderTodo = '';
   orderIsStatus = true;
   isEditOrder: boolean[] = [];
   orderTodos: OrderTodo[] = [];
-  orderInformation = 'Ich bin eine Orderinformation';
-  refNr = 'BASC123';
-  furtherInformation = 'Ich bin eine Zukünftige info';
+  orderInformation = '';
+  refNr = '';
+  furtherInformation = '';
   createDate: Date = new Date();
   startDate: Date = new Date();
   endDate: Date = new Date();
 
   constructor(
     private customerService: CustomerService,
-    private orderService: OrderService
+    private orderService: OrderService,
+    private router: Router
   ) {
   }
 
@@ -109,8 +111,7 @@ export class CreateOrderComponent implements OnInit {
   }
 
   saveOrder() {
-      console.log(JSON.stringify(this.orderTodos));
-      this.orderService.createOrder({
+    this.orderService.createOrder({
       id: -1,
       customerID: this.existingCustomer.id,
       firstName: this.existingCustomer.firstName,
@@ -129,7 +130,9 @@ export class CreateOrderComponent implements OnInit {
       startDate: this.startDate,
       endDate: this.endDate,
       furtherInformation: this.furtherInformation,
-      todos: this.orderTodos
-    });
+      todos: this.orderTodos,
+      userId: localStorage.getItem('userId')
+    })
+      .subscribe(() => this.router.navigate(['/order/orders']), error => console.log(error));
   }
 }

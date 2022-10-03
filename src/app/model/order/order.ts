@@ -1,4 +1,4 @@
-import {Customer} from '../customer';
+import {Customer} from '../firm/customer';
 import {OrderTodo} from './todo';
 
 export interface Order {
@@ -21,6 +21,7 @@ export interface Order {
   endDate: Date;
   furtherInformation: string;
   todos: OrderTodo[];
+  userId: string;
 }
 
 export interface OrderSettings {

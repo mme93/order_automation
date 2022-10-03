@@ -23,8 +23,9 @@ export class LoginComponent {
     this.loginService.login(this.username, this.password).subscribe(
       response => {
         this.isLoading = false;
-        localStorage.setItem('token', response.jwtToken);
+        localStorage.setItem('token', response.token);
         localStorage.setItem('company', response.company);
+        localStorage.setItem('userId', response.userId);
         this.route.navigate(['home']);
       }, error => {
         this.isLoading = false;

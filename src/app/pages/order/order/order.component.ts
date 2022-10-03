@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Customer} from '../../../model/customer';
+import {Customer} from '../../../model/firm/customer';
 import {OrderSettings} from '../../../model/order/orderSettings';
 import {Todo} from '../../../model/order/todo';
 import {CustomerService} from '../../../services/http/customer/customer.service';

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {CustomerService} from '../../../services/http/customer/customer.service';
-import {Customer} from '../../../model/customer';
+import {Customer} from '../../../model/firm/customer';
 import {Router} from '@angular/router';
 import { AlertController } from '@ionic/angular';
 

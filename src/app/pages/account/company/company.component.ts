@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {CompanyService} from '../../../services/http/company/company.service';
-import {Company} from '../../../model/company';
-import {User} from '../../../model/user';
+import {Company} from '../../../model/firm/company';
+import {User} from '../../../model/firm/user';
 
 
 @Component({

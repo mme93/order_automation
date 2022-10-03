@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {OrderSettings} from '../../../model/order/orderSettings';
 import {Todo} from '../../../model/order/todo';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Company} from '../../../model/company';
 import {environment} from '../../../../environments/environment';
 import {Order} from '../../../model/order/order';
 
@@ -37,10 +36,25 @@ export class OrderService {
         Company: localStorage.getItem('company')
       })
     };
+    return this.http.post(environment.backendUrl+'order/create', JSON.stringify(order), httpOptions);
+  }
 
-    return this.http.post('http://localhost:8998/order/create', JSON.stringify(order), httpOptions)
+  getOrders(){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        'Content-Type': 'application/json',
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        Company: localStorage.getItem('company')
+      })
+    };
+    return this.http.get('http://localhost:8998/order/create', httpOptions)
       .subscribe(resposen => console.log(resposen), error => console.log(error));
   }
+
+
 
   getTodos(): Todo[] {
     const todos: Todo[] = [{name: 'Changes tires'}, {name: 'Change headlights'}, {name: 'Make TÜV'}, {name: 'Create bill'}];

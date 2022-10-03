@@ -1,4 +1,4 @@
-import {Customer} from '../customer';
+import {Customer} from '../firm/customer';
 import {OrderTodo} from '../order/todo';
 
 export interface CreateOrderUI {
