@@ -132,7 +132,8 @@ export class CreateOrderComponent implements OnInit {
       furtherInformation: this.furtherInformation,
       todos: this.orderTodos,
       userId: localStorage.getItem('userId'),
-      status: '0'
+      status: '0',
+      password: ''
     })
       .subscribe(() => this.router.navigate(['/order/orders']), error => console.log(error));
   }

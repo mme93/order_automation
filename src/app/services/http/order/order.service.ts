@@ -51,7 +51,9 @@ export class OrderService {
     return this.http.get<Order[]>(environment.backendUrl+'order/all', httpOptions);
   }
 
+  getExternalOrder(orderId: string, password: string){
 
+  }
 
   getTodos(): Todo[] {
     const todos: Todo[] = [{name: 'Changes tires'}, {name: 'Change headlights'}, {name: 'Make TÜV'}, {name: 'Create bill'}];

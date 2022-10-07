@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {OrderService} from '../../../services/http/order/order.service';
+import {Order} from '../../../model/order/order';
 
 export interface OrderElement {
   position: number;
@@ -18,8 +19,9 @@ export interface OrderElement {
   styleUrls: ['./orders.component.scss'],
 })
 export class OrdersComponent implements OnInit {
+  resultOrder: Order[] = [];
   orders: OrderElement[] = [];
-  displayedColumns: string[] = ['position', 'refNr', 'editorId', 'callnumber', 'firstName', 'lastName', 'status'];
+  displayedColumns: string[] = ['position', 'refNr', 'editorId', 'callnumber', 'firstName', 'lastName', 'status', 'open'];
   dataSource: OrderElement[] = [];
 
   constructor(private orderService: OrderService) {
@@ -28,6 +30,7 @@ export class OrdersComponent implements OnInit {
   ngOnInit() {
     this.orderService.getOrders()
       .subscribe(responses => {
+        this.resultOrder = responses;
         let counter = 1;
         responses.forEach(order => {
           this.orders.push({
@@ -41,9 +44,12 @@ export class OrdersComponent implements OnInit {
           });
           counter++;
         });
-        this.dataSource=this.orders;
+        this.dataSource = this.orders;
       }, error => console.log(error));
   }
 
+  showOrder(test: any) {
+    console.log(this.resultOrder[test].id);
+  }
 }
 

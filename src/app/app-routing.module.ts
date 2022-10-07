@@ -34,11 +34,13 @@ const routes: Routes = [
     loadChildren: () => import('./pages/settings/settings.module').then( m => m.SettingsPageModule)
   },
   {
+    path: 'external/order',
+    loadChildren: () => import('./pages/external/order/order.module').then( m => m.OrderPageModule)
+  },
+  {
     path: '**',
     component: ErrorComponent
-  },
-
-
+  }
 ];
 
 @NgModule({

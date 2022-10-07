@@ -23,6 +23,7 @@ export interface Order {
   todos: OrderTodo[];
   userId: string;
   status: string;
+  password: string;
 }
 
 export interface OrderSettings {
