@@ -18,7 +18,10 @@
         <ion-label>Password:</ion-label>
         <ion-input type="password" [(ngModel)]="password"></ion-input>
       </ion-item>
-      <ion-button (click)="login()" expand="block">Login</ion-button>
+      <ion-button type="submit" color="primary" expand="block" (click)="login()">
+        <p *ngIf="!isLoading">Sign Up</p>
+        <ion-spinner name="circular" *ngIf="isLoading"></ion-spinner>
+      </ion-button>
     </ion-card-content>
   </ion-card>
 </ion-content>

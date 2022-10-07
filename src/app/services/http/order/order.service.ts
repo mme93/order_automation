@@ -52,7 +52,13 @@ export class OrderService {
   }
 
   getExternalOrder(orderId: string, password: string){
-
+    const httpOptions = {
+      headers: new HttpHeaders({
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        'Content-Type': 'application/json',
+      })
+    };
+    return this.http.post('http://localhost:8998/external/order/exist',JSON.stringify({orderId,password}),httpOptions);
   }
 
   getTodos(): Todo[] {
