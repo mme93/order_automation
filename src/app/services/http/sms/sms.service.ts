@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {environment} from '../../../../environments/environment';
 
 interface SMS{
   phone: string;
@@ -23,7 +24,7 @@ export class SmsService {
         Authorization: 'Bearer ' + localStorage.getItem('token'),
       })
     };
-   return this.http.post<SMS>('http://localhost:8998/SMS/test',JSON.stringify(password), httpOptions);
+   return this.http.post<SMS>(environment.backendUrl +'SMS/test',JSON.stringify(password), httpOptions);
 
   }
   test(sms: SMS) {
@@ -35,7 +36,7 @@ export class SmsService {
         Authorization: 'Bearer ' + localStorage.getItem('token'),
       })
     };
-
+    console.log(sms);
     return this.http.post<SMS>('http://mameie.ddns.net:5000/SMS',JSON.stringify(sms), httpOptions);
 
   }
