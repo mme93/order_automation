@@ -58,7 +58,7 @@ export class OrderService {
         'Content-Type': 'application/json',
       })
     };
-    return this.http.post('http://localhost:8998/external/order/exist', JSON.stringify({
+    return this.http.post(environment.backendUrl +'external/order/exist', JSON.stringify({
       orderId,
       password
     }), httpOptions);
@@ -84,6 +84,6 @@ export class OrderService {
         'Content-Type': 'application/json',
       })
     };
-    return this.http.get<Order>('http://localhost:8998/external/order/' + orderId+'/'+password, httpOptions);
+    return this.http.get<Order>(environment.backendUrl +'external/order/' + orderId+'/'+password, httpOptions);
   }
 }
