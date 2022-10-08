@@ -115,15 +115,6 @@ export class CreateOrderComponent implements OnInit {
   saveOrder() {
     this.isLoading = true;
 
-    this.smsService.sendSMS('response').subscribe(result => {
-        this.smsService.test(result).subscribe(value => {console.log(value);this.isLoading = false;},error => console.log(error));
-
-        //this.router.navigate(['/order/orders']);
-      },
-      error => console.log(error)
-    );
-
-    /*
     this.orderService.createOrder({
       id: -1,
       customerID: this.existingCustomer.id,
@@ -150,20 +141,11 @@ export class CreateOrderComponent implements OnInit {
     })
       .subscribe((response) => {
         console.log(response);
-        /*
-        console.log('Try to send SMS');
-        this.smsService.sendSMS(response).subscribe(result => {
-            console.log(result);
-            this.isLoading = false;
-            this.router.navigate(['/order/orders']);
-          },
-
-        );
-
+        this.isLoading = false;
       }, error => {
         this.isLoading = false;
         console.log(error);
       });
-     */
+
   }
 }
