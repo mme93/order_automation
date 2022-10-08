@@ -141,6 +141,7 @@ export class CreateOrderComponent implements OnInit {
     })
       .subscribe((response) => {
         console.log(response);
+        this.router.navigate(['/order/orders']);
         this.isLoading = false;
       }, error => {
         this.isLoading = false;

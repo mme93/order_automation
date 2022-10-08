@@ -1,6 +1,4 @@
 import {Injectable} from '@angular/core';
-import {OrderSettings} from '../../../model/order/orderSettings';
-import {Todo} from '../../../model/order/todo';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../../../environments/environment';
 import {Order} from '../../../model/order/order';
@@ -9,18 +7,6 @@ import {Order} from '../../../model/order/order';
   providedIn: 'root'
 })
 export class OrderService {
-
-  private defaultOrderSettings: OrderSettings = {
-    firstNameVisibility: true,
-    lastNameVisibility: true,
-    emailVisibility: true,
-    orderNumberVisibility: true,
-    orderStatusVisibility: true,
-    orderInfoVisibility: true,
-    toDoVisibility: true,
-    toDoStatusVisibility: true,
-    toDoInfoVisibility: true
-  };
 
   constructor(private http: HttpClient) {
   }
@@ -56,23 +42,10 @@ export class OrderService {
         'Content-Type': 'application/json',
       })
     };
-    return this.http.post(environment.backendUrl +'external/order/exist', JSON.stringify({
+    return this.http.post(environment.backendUrl + 'external/order/exist', JSON.stringify({
       orderId,
       password
     }), httpOptions);
-  }
-
-  getTodos(): Todo[] {
-    const todos: Todo[] = [{name: 'Changes tires'}, {name: 'Change headlights'}, {name: 'Make TÜV'}, {name: 'Create bill'}];
-    return todos;
-  }
-
-  getOrderSettings(): OrderSettings {
-    return this.defaultOrderSettings;
-  }
-
-  saveOrderSettings(orderSettings: OrderSettings) {
-    console.log(orderSettings);
   }
 
   getOrder(orderId: string, password: string) {
@@ -82,6 +55,6 @@ export class OrderService {
         'Content-Type': 'application/json',
       })
     };
-    return this.http.get<Order>(environment.backendUrl +'external/order/' + orderId+'/'+password, httpOptions);
+    return this.http.get<Order>(environment.backendUrl + 'external/order/' + orderId + '/' + password, httpOptions);
   }
 }

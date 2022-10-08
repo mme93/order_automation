@@ -9,7 +9,7 @@ import {Todo} from '../../../model/order/todo';
   styleUrls: ['./order-settings.component.scss'],
 })
 export class OrderSettingsComponent implements OnInit {
-  newTodo='';
+  newTodo = '';
   orderSettings: OrderSettings;
   todos: Todo[] = [];
 
@@ -17,12 +17,12 @@ export class OrderSettingsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.orderSettings = this.orderService.getOrderSettings();
-    this.todos = this.orderService.getTodos();
+
+
   }
 
   saveSettings() {
-    this.orderService.saveOrderSettings(this.orderSettings);
+
   }
 
   deleteTodo(name: string) {
@@ -30,9 +30,9 @@ export class OrderSettingsComponent implements OnInit {
   }
 
   addToDo(newTodo: string) {
-    if(newTodo.length>0 && this.todos.filter(todo=>todo.name===newTodo).length===0){
-      this.todos.push({name:newTodo});
-      this.newTodo='';
+    if (newTodo.length > 0 && this.todos.filter(todo => todo.name === newTodo).length === 0) {
+      this.todos.push({name: newTodo});
+      this.newTodo = '';
     }
   }
 }

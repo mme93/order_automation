@@ -1,9 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Customer} from '../../../model/firm/customer';
 import {OrderSettings} from '../../../model/order/orderSettings';
 import {Todo} from '../../../model/order/todo';
-import {CustomerService} from '../../../services/http/customer/customer.service';
-import {OrderService} from '../../../services/http/order/order.service';
 
 @Component({
   selector: 'app-order',
@@ -16,15 +14,10 @@ export class OrderComponent implements OnInit {
   orderSettings: OrderSettings;
   todos: Todo[] = [];
 
-  constructor(
-    private customerService: CustomerService,
-    private orderService: OrderService
-  ) {
+  constructor() {
   }
 
   ngOnInit() {
-    this.orderSettings = this.orderService.getOrderSettings();
-    this.todos = this.orderService.getTodos();
   }
 
 }
