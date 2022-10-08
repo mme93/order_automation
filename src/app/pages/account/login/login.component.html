@@ -11,27 +11,38 @@
       <ion-card-title>Login</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <form>
+      <form [formGroup]="ionicForm" (ngSubmit)="login()" novalidate>
         <ion-item lines="full">
-          <ion-label position="floating">Username</ion-label>
-          <ion-input type="text" required [(ngModel)]="username" name="username" [disabled]="isLoading"></ion-input>
+          <ion-label position="floating">Name</ion-label>
+          <ion-input formControlName="name" type="text" required></ion-input>
         </ion-item>
+        <span class="error ion-padding" *ngIf="ionicForm.controls.name.invalid">
+              Name with min. lenght 1 is required.
+         </span>
         <ion-item lines="full">
           <ion-label position="floating">Password</ion-label>
-          <ion-input type="password" required [(ngModel)]="password" name="password" [disabled]="isLoading"></ion-input>
+          <ion-input formControlName="password" type="password" required></ion-input>
         </ion-item>
+        <span class="error ion-padding" *ngIf="ionicForm.controls.password.invalid">
+             Password with min. lenght 1 is required.
+         </span>
+
+        <div style="text-align: center;">
+          <ion-label *ngIf="!isLogin" color="danger">Wrong Username or Password</ion-label>
+        </div>
+
         <ion-row>
           <ion-col>
-            <ion-button type="submit" color="primary" expand="block" (click)="login()">
+            <ion-button type="submit" expand="block" [disabled]="ionicForm.invalid">
               <p *ngIf="!isLoading">Sign Up</p>
               <ion-spinner name="circular" *ngIf="isLoading"></ion-spinner>
             </ion-button>
           </ion-col>
         </ion-row>
-        <!-- ToDo: Email-Server or any Contact Devoloper
-        <a routerLink="/account/reset">Forgot Password</a>
-        -->
       </form>
+      <!-- ToDo: Email-Server or any Contact Devoloper
+      <a routerLink="/account/reset">Forgot Password</a>
+      -->
     </ion-card-content>
   </ion-card>
 </ion-content>
