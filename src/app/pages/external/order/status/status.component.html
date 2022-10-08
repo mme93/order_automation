@@ -41,17 +41,17 @@
         <ion-col>
           <ion-icon name="hourglass-outline"></ion-icon>
           <ion-label> Waiting</ion-label>
-          <ion-icon name="checkmark-circle-outline" *ngIf="order.status>0" color="success"></ion-icon>
+          <ion-icon name="checkmark-circle-outline" *ngIf="orderStatus>0" color="success"></ion-icon>
         </ion-col>
         <ion-col>
           <ion-icon name="hammer-outline"></ion-icon>
           <ion-label> Progress</ion-label>
-          <ion-icon name="checkmark-circle-outline" *ngIf="order.status>1" color="success"></ion-icon>
+          <ion-icon name="checkmark-circle-outline" *ngIf="orderStatus>1" color="success"></ion-icon>
         </ion-col>
         <ion-col>
           <ion-icon name="thumbs-up-outline"></ion-icon>
           <ion-label> Finish</ion-label>
-          <ion-icon name="checkmark-circle-outline" *ngIf="order.status>2" color="success"></ion-icon>
+          <ion-icon name="checkmark-circle-outline" *ngIf="orderStatus>2" color="success"></ion-icon>
         </ion-col>
       </ion-row>
     </ion-card-content>
