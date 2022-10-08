@@ -23,7 +23,11 @@ export class OrderPage implements OnInit {
     this.orderService.getExternalOrder(this.orderId, this.password).subscribe(
       response => {
         console.log(response);
-        this.router.navigate(['/external/order/status']);
+        this.router.navigate(['/external/order/status'],
+          {
+            queryParams: {orderId: this.orderId, password: this.password}
+          }
+        );
       },
       error => {
         console.log('error: ' + error.status);

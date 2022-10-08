@@ -36,10 +36,10 @@ export class OrderService {
         Company: localStorage.getItem('company')
       })
     };
-    return this.http.post(environment.backendUrl+'order/create', JSON.stringify(order), httpOptions);
+    return this.http.post(environment.backendUrl + 'order/create', JSON.stringify(order), httpOptions);
   }
 
-  getOrders(){
+  getOrders() {
     const httpOptions = {
       headers: new HttpHeaders({
         // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -48,17 +48,20 @@ export class OrderService {
         Authorization: 'Bearer ' + localStorage.getItem('token'),
       })
     };
-    return this.http.get<Order[]>(environment.backendUrl+'order/all', httpOptions);
+    return this.http.get<Order[]>(environment.backendUrl + 'order/all', httpOptions);
   }
 
-  getExternalOrder(orderId: string, password: string){
+  getExternalOrder(orderId: string, password: string) {
     const httpOptions = {
       headers: new HttpHeaders({
         // eslint-disable-next-line @typescript-eslint/naming-convention
         'Content-Type': 'application/json',
       })
     };
-    return this.http.post('http://localhost:8998/external/order/exist',JSON.stringify({orderId,password}),httpOptions);
+    return this.http.post('http://localhost:8998/external/order/exist', JSON.stringify({
+      orderId,
+      password
+    }), httpOptions);
   }
 
   getTodos(): Todo[] {
@@ -72,5 +75,15 @@ export class OrderService {
 
   saveOrderSettings(orderSettings: OrderSettings) {
     console.log(orderSettings);
+  }
+
+  getOrder(orderId: string, password: string) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        'Content-Type': 'application/json',
+      })
+    };
+    return this.http.get<Order>('http://localhost:8998/external/order/' + orderId+'/'+password, httpOptions);
   }
 }
