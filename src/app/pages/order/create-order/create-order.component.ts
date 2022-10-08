@@ -3,7 +3,8 @@ import {CustomerService} from '../../../services/http/customer/customer.service'
 import {Customer} from '../../../model/firm/customer';
 import {OrderTodo} from '../../../model/order/todo';
 import {OrderService} from '../../../services/http/order/order.service';
-import { Router} from '@angular/router';
+import {Router} from '@angular/router';
+import {SmsService} from '../../../services/http/sms/sms.service';
 
 
 @Component({
@@ -63,7 +64,8 @@ export class CreateOrderComponent implements OnInit {
   constructor(
     private customerService: CustomerService,
     private orderService: OrderService,
-    private router: Router
+    private router: Router,
+    private smsService: SmsService
   ) {
   }
 
@@ -135,6 +137,12 @@ export class CreateOrderComponent implements OnInit {
       status: '0',
       password: ''
     })
-      .subscribe(() => this.router.navigate(['/order/orders']), error => console.log(error));
+      .subscribe((response) => {
+        this.smsService.sendSMS(response).subscribe(result => {
+            console.log(result);
+            this.router.navigate(['/order/orders']);
+          },
+        );
+      }, error => console.log(error));
   }
 }

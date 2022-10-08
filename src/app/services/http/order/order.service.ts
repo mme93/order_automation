@@ -36,7 +36,7 @@ export class OrderService {
         Company: localStorage.getItem('company')
       })
     };
-    return this.http.post(environment.backendUrl + 'order/create', JSON.stringify(order), httpOptions);
+    return this.http.post<string>(environment.backendUrl + 'order/create', JSON.stringify(order), httpOptions);
   }
 
   getOrders() {
