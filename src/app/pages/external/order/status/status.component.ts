@@ -10,6 +10,7 @@ import {OrderTodo} from '../../../../model/order/todo';
   styleUrls: ['./status.component.scss'],
 })
 export class StatusComponent implements OnInit {
+  orderStatus = 0;
   orderTodos: OrderTodo[] = [];
   order: Order = {
     id: -1,
@@ -44,6 +45,7 @@ export class StatusComponent implements OnInit {
         this.orderService.getOrder(params.get('orderId'), params.get('password')).subscribe(
           response => {
             this.order = response;
+            this.orderStatus=Number(response.status);
           },
           error => {
             console.log(error);
