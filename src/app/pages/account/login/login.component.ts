@@ -9,10 +9,13 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
-  username = 'admin';
-  password = 'admin';
   isLoading = false;
   isLogin = true;
+
+  user = this.formBuilder.group({
+    name: ['dhall', [Validators.required, Validators.minLength(1)]],
+    password: ['admin', [Validators.required, Validators.minLength(1)]]
+  });
 
   constructor(
     private loginService: LoginService,
@@ -21,16 +24,10 @@ export class LoginComponent {
   ) {
   }
 
-  // eslint-disable-next-line @typescript-eslint/member-ordering
-  ionicForm = this.formBuilder.group({
-    name: ['dhall', [Validators.required, Validators.minLength(1)]],
-    password: ['admin', [Validators.required, Validators.minLength(1)]]
-  });
-
   login() {
     this.isLoading = true;
 
-    this.loginService.login(this.ionicForm.controls.name.value, this.ionicForm.controls.password.value).subscribe(
+    this.loginService.login(this.user.controls.name.value, this.user.controls.password.value).subscribe(
       response => {
         this.isLoading = false;
         localStorage.setItem('token', response.token);

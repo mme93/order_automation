@@ -11,19 +11,19 @@
       <ion-card-title>Login</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <form [formGroup]="ionicForm" (ngSubmit)="login()" novalidate>
+      <form [formGroup]="user" (ngSubmit)="login()" novalidate>
         <ion-item lines="full">
           <ion-label position="floating">Name</ion-label>
           <ion-input formControlName="name" type="text" required></ion-input>
         </ion-item>
-        <span class="error ion-padding" *ngIf="ionicForm.controls.name.invalid">
+        <span class="error ion-padding" *ngIf="user.controls.name.invalid">
               Name with min. lenght 1 is required.
          </span>
         <ion-item lines="full">
           <ion-label position="floating">Password</ion-label>
           <ion-input formControlName="password" type="password" required></ion-input>
         </ion-item>
-        <span class="error ion-padding" *ngIf="ionicForm.controls.password.invalid">
+        <span class="error ion-padding" *ngIf="user.controls.password.invalid">
              Password with min. lenght 1 is required.
          </span>
 
@@ -33,7 +33,7 @@
 
         <ion-row>
           <ion-col>
-            <ion-button type="submit" expand="block" [disabled]="ionicForm.invalid">
+            <ion-button type="submit" expand="block" [disabled]="user.invalid">
               <p *ngIf="!isLoading">Sign Up</p>
               <ion-spinner name="circular" *ngIf="isLoading"></ion-spinner>
             </ion-button>
