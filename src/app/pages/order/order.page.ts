@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {OrderService} from '../../services/http/order/order.service';
 
 @Component({
   selector: 'app-order',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrderPage implements OnInit {
 
-  constructor() { }
+  orderSize = 0;
+
+  constructor(private orderService: OrderService) {
+  }
 
   ngOnInit() {
+    this.orderService.getOrders().subscribe(response => this.orderSize = response.length);
   }
 
 }

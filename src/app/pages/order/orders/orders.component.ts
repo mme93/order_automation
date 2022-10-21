@@ -5,7 +5,6 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import {OrderElement, OrderFilterService} from '../../../services/tools/order-filter.service';
 
-
 @Component({
   selector: 'app-orders',
   templateUrl: './orders.component.html',
@@ -17,7 +16,6 @@ export class OrdersComponent implements AfterViewInit {
 
   resultOrder: Order[] = [];
   orders: OrderElement[] = [];
-  filterOrders: OrderElement[] = [];
   displayedColumns: string[] = ['position', 'refNr', 'editorId', 'callnumber', 'firstName', 'lastName', 'status', 'open'];
   dataSource = new MatTableDataSource<OrderElement>([]);
 
@@ -47,7 +45,7 @@ export class OrdersComponent implements AfterViewInit {
   }
 
   showOrder(test: any) {
-    console.log(this.resultOrder[test].id);
+    console.log(this.resultOrder[test]);
   }
 
   handleChange(event) {
