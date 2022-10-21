@@ -4,6 +4,8 @@ import {Order} from '../../../model/order/order';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import {OrderElement, OrderFilterService} from '../../../services/tools/order-filter.service';
+import {Router} from '@angular/router';
+
 
 @Component({
   selector: 'app-orders',
@@ -19,7 +21,7 @@ export class OrdersComponent implements AfterViewInit {
   displayedColumns: string[] = ['position', 'refNr', 'editorId', 'callnumber', 'firstName', 'lastName', 'status', 'open'];
   dataSource = new MatTableDataSource<OrderElement>([]);
 
-  constructor(private orderService: OrderService, private orderFilterService: OrderFilterService) {
+  constructor(private orderService: OrderService, private orderFilterService: OrderFilterService, private router: Router) {
   }
 
   ngAfterViewInit() {
@@ -44,8 +46,12 @@ export class OrdersComponent implements AfterViewInit {
       }, error => console.log(error));
   }
 
-  showOrder(test: any) {
-    console.log(this.resultOrder[test]);
+  showOrder(index: any) {
+    this.router.navigate(
+      ['/order/order'],
+      {
+        queryParams: {sourceURL: '/order/orders', orderId: this.resultOrder[index].id}
+      });
   }
 
   handleChange(event) {

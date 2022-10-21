@@ -8,42 +8,42 @@
         <ion-item>
           <ion-searchbar placeholder="UserID"></ion-searchbar>
         </ion-item>
-        <ion-item *ngIf="orderSettings.orderNumberVisibility">
+        <ion-item>
           <ion-label>Order Number:</ion-label>
           <ion-input></ion-input>
         </ion-item>
-        <ion-item *ngIf="orderSettings.firstNameVisibility">
+        <ion-item>
           <ion-label>Firstname:</ion-label>
           <ion-input></ion-input>
         </ion-item>
-        <ion-item *ngIf="orderSettings.lastNameVisibility">
+        <ion-item>
           <ion-label>Lastname:</ion-label>
           <ion-input></ion-input>
         </ion-item>
-        <ion-item *ngIf="orderSettings.emailVisibility">
+        <ion-item>
           <ion-label>Email:</ion-label>
           <ion-input></ion-input>
         </ion-item>
         <ion-item>
           <ion-label>Phone number:</ion-label>
           <ion-input></ion-input>
-        </ion-item >
-        <ion-item *ngIf="orderSettings.orderInfoVisibility">
+        </ion-item>
+        <ion-item>
           <ion-textarea>Order Info:</ion-textarea>
         </ion-item>
         <ion-card-title>Todos</ion-card-title>
-        <ion-list *ngIf="orderSettings.toDoVisibility">
+        <ion-list>
           <ion-item>
-            <input list="todos"  placeholder="Todo" style="width: 100%">
+            <input list="todos" placeholder="Todo" style="width: 100%">
             <datalist id="todos">
               <option *ngFor="let todo of todos" [value]="todo.name">{{todo.name}}</option>
             </datalist>
           </ion-item>
-          <ion-item *ngIf="orderSettings.toDoStatusVisibility">
+          <ion-item>
             <ion-label>Todo Status:</ion-label>
             <ion-input></ion-input>
           </ion-item>
-          <ion-item *ngIf="orderSettings.toDoInfoVisibility">
+          <ion-item>
             <ion-textarea>Todo Info:</ion-textarea>
           </ion-item>
         </ion-list>
