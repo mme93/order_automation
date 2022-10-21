@@ -1,8 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Customer} from '../../../model/firm/customer';
 import {Todo} from '../../../model/order/todo';
 import {ActivatedRoute, Router} from '@angular/router';
 import {OrderService} from '../../../services/http/order/order.service';
+import {Order} from '../../../model/order/order';
+
 
 @Component({
   selector: 'app-order',
@@ -10,10 +12,36 @@ import {OrderService} from '../../../services/http/order/order.service';
   styleUrls: ['./order.component.scss'],
 })
 export class OrderComponent implements OnInit {
+
+  order: Order = {
+    id: -1,
+    customerID: '',
+    firstName: '',
+    lastName: '',
+    email: '',
+    city: '',
+    street: '',
+    postalCode: '',
+    callNumber: '',
+    information: '',
+    company: '',
+
+    orderInformation: '',
+    refNr: '',
+    createDate: null,
+    startDate: null,
+    endDate: null,
+    furtherInformation: '',
+    todos: [],
+    userId: '',
+    status: '',
+    password: ''
+  };
   sourceURL;
-  order;
   customer: Customer;
   todos: Todo[] = [];
+  isDisabled=false;
+
 
   constructor(
     private route: ActivatedRoute,
@@ -34,7 +62,16 @@ export class OrderComponent implements OnInit {
       });
     });
   }
-  back(){
+
+  editOrder(){
+    this.isDisabled=!this.isDisabled;
+  }
+
+  back() {
     this.router.navigate([this.sourceURL]);
+  }
+
+  delete() {
+
   }
 }

@@ -1,16 +1,82 @@
 <ion-content>
   <ion-card>
     <ion-card-header>
-      <ion-card-title>Show Order</ion-card-title>
+      <ion-row>
+        <ion-col>
+          <ion-buttons>
+            <ion-button (click)="back()">
+              <ion-icon name="arrow-back-outline"></ion-icon>
+            </ion-button>
+            <ion-button (click)="editOrder()">
+              <ion-icon name="hammer-outline"></ion-icon>
+            </ion-button>
+            <ion-button (click)="delete()">
+              <ion-icon name="trash-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-col>
+        <ion-col>
+          <ion-card-title class="ion-text-center">Selected Order</ion-card-title>
+        </ion-col>
+        <ion-col></ion-col>
+      </ion-row>
     </ion-card-header>
+
     <ion-card-content>
+      <ion-accordion-group [multiple]="true" [value]="['first', 'third']">
+        <ion-accordion value="first">
+          <ion-item slot="header" color="light">
+            <ion-label>Order Information</ion-label>
+          </ion-item>
+          <ion-list class="ion-padding" slot="content">
+            <ion-item>
+              <ion-label>Order Number:</ion-label>
+              <ion-input [(ngModel)]="order.id"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>Firstname:</ion-label>
+              <ion-input></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>Lastname:</ion-label>
+              <ion-input></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>Email:</ion-label>
+              <ion-input></ion-input>
+            </ion-item>
+          </ion-list>
+        </ion-accordion>
+
+        <ion-accordion value="second">
+          <ion-item slot="header" color="light">
+            <ion-label>Customer Information</ion-label>
+          </ion-item>
+          <ion-list class="ion-padding" slot="content">
+            <ion-item>
+              <ion-label>Order Number:</ion-label>
+              <ion-input [(ngModel)]="order.id"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>Firstname:</ion-label>
+              <ion-input></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>Lastname:</ion-label>
+              <ion-input></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>Email:</ion-label>
+              <ion-input></ion-input>
+            </ion-item>
+          </ion-list>
+        </ion-accordion>
+      </ion-accordion-group>
+      <!--
       <ion-list>
         <ion-item>
-          <ion-searchbar placeholder="UserID"></ion-searchbar>
-        </ion-item>
-        <ion-item>
           <ion-label>Order Number:</ion-label>
-          <ion-input></ion-input>
+          <ion-input [(ngModel)]="order.id"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label>Firstname:</ion-label>
@@ -48,6 +114,7 @@
           </ion-item>
         </ion-list>
       </ion-list>
+       -->
     </ion-card-content>
   </ion-card>
 
