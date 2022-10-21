@@ -4,7 +4,14 @@
       <ion-buttons>
         <ion-menu-button menu="main-menu"></ion-menu-button>
       </ion-buttons>
-      <ion-title>{{company.companyName}}</ion-title>
+      <ion-buttons slot="end">
+        <ion-button href="/settings">
+          <ion-icon name="settings-outline"></ion-icon>
+        </ion-button>
+        <ion-button href="/account/profile">
+          <ion-icon name="person-circle-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
     </ion-item>
   </ion-toolbar>
 </ion-header>
@@ -12,7 +19,7 @@
   <section>
     <ion-card>
       <ion-card-header>
-        <ion-card-title>Company Information</ion-card-title>
+        <ion-card-title>{{company.companyName}} Information</ion-card-title>
       </ion-card-header>
       <ion-card-content>
         <ion-item>

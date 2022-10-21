@@ -3,23 +3,16 @@
   <ion-menu menuId="main-menu" content-id="main">
     <ion-header>
       <ion-toolbar>
-        <ion-title class="titleStyle">Menu</ion-title>
+        <ion-item>
+          <ion-title class="titleStyle">Order Automation</ion-title>
+          <ion-item button routerLink="/home" lines="none">
+            <ion-icon name="home-outline"></ion-icon>
+          </ion-item>
+        </ion-item>
       </ion-toolbar>
     </ion-header>
     <ion-content>
       <ion-list>
-        <ion-item button routerLink="home">
-          <ion-icon name="home-outline" slot="start" class="iconStyle"></ion-icon>
-          <ion-label>Start</ion-label>
-        </ion-item>
-        <ion-item button routerLink="account/company">
-          <ion-icon name="business-outline" slot="start" class="iconStyle"></ion-icon>
-          <ion-label>Company</ion-label>
-        </ion-item>
-        <ion-item button routerLink="account/profile">
-          <ion-icon name="person-outline" slot="start" class="iconStyle"></ion-icon>
-          <ion-label>Profile</ion-label>
-        </ion-item>
         <ion-item button routerLink="order/orders">
           <ion-icon name="document-text-outline" slot="start" class="iconStyle"></ion-icon>
           <ion-label>Order</ion-label>
@@ -27,10 +20,6 @@
         <ion-item button routerLink="customer/customers">
           <ion-icon name="accessibility-outline" slot="start" class="iconStyle"></ion-icon>
           <ion-label>Customer</ion-label>
-        </ion-item>
-        <ion-item button routerLink="settings">
-          <ion-icon name="settings-outline" slot="start" class="iconStyle"></ion-icon>
-          <ion-label>Settings</ion-label>
         </ion-item>
         <ion-item button (click)="logout()">
           <ion-icon name="log-out-outline" slot="start" class="iconStyle"></ion-icon>
