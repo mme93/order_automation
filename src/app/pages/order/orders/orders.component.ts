@@ -1,18 +1,9 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import {OrderService} from '../../../services/http/order/order.service';
 import {Order} from '../../../model/order/order';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
-
-export interface OrderElement {
-  position: number;
-  refNr: string;
-  editorId: string;
-  callnumber: string;
-  firstName: string;
-  lastName: string;
-  status: string;
-}
+import {OrderElement, OrderFilterService} from '../../../services/tools/order-filter.service';
 
 
 @Component({
@@ -26,13 +17,15 @@ export class OrdersComponent implements AfterViewInit {
 
   resultOrder: Order[] = [];
   orders: OrderElement[] = [];
+  filterOrders: OrderElement[] = [];
   displayedColumns: string[] = ['position', 'refNr', 'editorId', 'callnumber', 'firstName', 'lastName', 'status', 'open'];
   dataSource = new MatTableDataSource<OrderElement>([]);
 
-  constructor(private orderService: OrderService) {
+  constructor(private orderService: OrderService, private orderFilterService: OrderFilterService) {
   }
 
   ngAfterViewInit() {
+
     this.orderService.getOrders()
       .subscribe(responses => {
         this.resultOrder = responses;
@@ -52,10 +45,17 @@ export class OrdersComponent implements AfterViewInit {
         this.dataSource = new MatTableDataSource<OrderElement>(this.orders);
         this.dataSource.paginator = this.paginator;
       }, error => console.log(error));
+
   }
 
   showOrder(test: any) {
     console.log(this.resultOrder[test].id);
+  }
+
+  handleChange(event) {
+    const query: string = event.target.value.toLowerCase();
+    this.dataSource = new MatTableDataSource<OrderElement>(this.orderFilterService.filterOrder(query, new MatTableDataSource<OrderElement>(this.orders)));
+    this.dataSource.paginator = this.paginator;
   }
 }
 

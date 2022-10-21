@@ -3,7 +3,7 @@
 
   <ion-card>
     <ion-card-header>
-      <ion-searchbar></ion-searchbar>
+      <ion-searchbar (ionChange)="handleChange($event)"></ion-searchbar>
     </ion-card-header>
     <ion-card-content class="order-content" >
       <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
