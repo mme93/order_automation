@@ -13,6 +13,7 @@ import {CreateOrderComponent} from './create-order/create-order.component';
 import {OrderSettingsComponent} from '../settings/order-settings/order-settings.component';
 import { MatTableModule } from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { MatDividerModule} from '@angular/material/divider';
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     IonicModule,
     OrderPageRoutingModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatDividerModule
   ],
   declarations: [OrderPage,OrderComponent,OrdersComponent,CreateOrderComponent,OrderSettingsComponent]
 })

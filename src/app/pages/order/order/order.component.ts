@@ -40,7 +40,7 @@ export class OrderComponent implements OnInit {
   sourceURL;
   customer: Customer;
   todos: Todo[] = [];
-  isDisabled=false;
+  isDisabled=true;
 
 
   constructor(
@@ -72,6 +72,15 @@ export class OrderComponent implements OnInit {
   }
 
   delete() {
+    //Todo: Delete MEthod
+    this.router.navigate([this.sourceURL]);
+  }
+
+  startOrder() {
+
+  }
+
+  finishOrder() {
 
   }
 }
