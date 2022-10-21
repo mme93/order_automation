@@ -25,7 +25,6 @@ export class OrdersComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
-
     this.orderService.getOrders()
       .subscribe(responses => {
         this.resultOrder = responses;
@@ -45,7 +44,6 @@ export class OrdersComponent implements AfterViewInit {
         this.dataSource = new MatTableDataSource<OrderElement>(this.orders);
         this.dataSource.paginator = this.paginator;
       }, error => console.log(error));
-
   }
 
   showOrder(test: any) {
@@ -54,7 +52,10 @@ export class OrdersComponent implements AfterViewInit {
 
   handleChange(event) {
     const query: string = event.target.value.toLowerCase();
-    this.dataSource = new MatTableDataSource<OrderElement>(this.orderFilterService.filterOrder(query, new MatTableDataSource<OrderElement>(this.orders)));
+    this.dataSource = new MatTableDataSource<OrderElement>(
+      this.orderFilterService.filterOrder(
+        query, new MatTableDataSource<OrderElement>(this.orders)
+      ));
     this.dataSource.paginator = this.paginator;
   }
 }
