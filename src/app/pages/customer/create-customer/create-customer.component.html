@@ -4,40 +4,55 @@
       <ion-buttons>
         <ion-menu-button menu="main-menu"></ion-menu-button>
       </ion-buttons>
-      <ion-title>Create new customer</ion-title>
+      <div class="firm_text">
+        <ion-label>Services</ion-label>
+      </div>
+      <ion-buttons slot="end">
+        <ion-button href="/settings">
+          <ion-icon name="settings-outline"></ion-icon>
+        </ion-button>
+        <ion-button href="/account/profile">
+          <ion-icon name="person-circle-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
     </ion-item>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-card>
-    <ion-list>
-      <ion-item>
-        <ion-label>Firstname:</ion-label>
-        <ion-input [(ngModel)]="customer.firstName"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label>Lastname: </ion-label>
-        <ion-input [(ngModel)]="customer.lastName"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label>Email: </ion-label>
-        <ion-input [(ngModel)]="customer.email"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label>Adress: </ion-label>
-        <ion-input [(ngModel)]="customer.street" placeholder="Street"></ion-input>
-        <ion-input [(ngModel)]="customer.city" placeholder="City"></ion-input>
-        <ion-input [(ngModel)]="customer.postalCode"placeholder="Postcode"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label>Call Number: </ion-label>
-        <ion-input [(ngModel)]="customer.callNumber"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-textarea [(ngModel)]="customer.information">Information: </ion-textarea>
-      </ion-item>
-    </ion-list>
-    <ion-button (click)="save()">Save</ion-button>
+    <ion-card-header>
+      <ion-card-title>Create new customer</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-label>Firstname:</ion-label>
+          <ion-input [(ngModel)]="customer.firstName"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Lastname:</ion-label>
+          <ion-input [(ngModel)]="customer.lastName"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Email:</ion-label>
+          <ion-input [(ngModel)]="customer.email"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Adress:</ion-label>
+          <ion-input [(ngModel)]="customer.street" placeholder="Street"></ion-input>
+          <ion-input [(ngModel)]="customer.city" placeholder="City"></ion-input>
+          <ion-input [(ngModel)]="customer.postalCode" placeholder="Postcode"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Call Number:</ion-label>
+          <ion-input [(ngModel)]="customer.callNumber"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-textarea [(ngModel)]="customer.information">Information:</ion-textarea>
+        </ion-item>
+      </ion-list>
+      <ion-button (click)="save()">Save</ion-button>
+    </ion-card-content>
   </ion-card>
 </ion-content>

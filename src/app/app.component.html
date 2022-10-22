@@ -4,15 +4,19 @@
     <ion-header>
       <ion-toolbar>
         <ion-item>
-          <ion-title class="titleStyle">Order Automation</ion-title>
-          <ion-item button routerLink="/home" lines="none">
-            <ion-icon name="home-outline"></ion-icon>
+          <ion-item button (click)="closeMenu()">
+            <ion-icon name="menu-outline"></ion-icon>
           </ion-item>
+          <ion-title class="titleStyle">Menu</ion-title>
         </ion-item>
       </ion-toolbar>
     </ion-header>
     <ion-content>
       <ion-list>
+        <ion-item button routerLink="/home">
+          <ion-icon name="home-outline" slot="start" class="iconStyle"></ion-icon>
+          <ion-label>Start</ion-label>
+        </ion-item>
         <ion-item button routerLink="order/orders">
           <ion-icon name="document-text-outline" slot="start" class="iconStyle"></ion-icon>
           <ion-label>Order</ion-label>
@@ -20,6 +24,14 @@
         <ion-item button routerLink="customer/customers">
           <ion-icon name="accessibility-outline" slot="start" class="iconStyle"></ion-icon>
           <ion-label>Customer</ion-label>
+        </ion-item>
+        <ion-item button routerLink="calendar">
+          <ion-icon name="calendar-number-outline" slot="start" class="iconStyle"></ion-icon>
+          <ion-label>Calendar</ion-label>
+        </ion-item>
+        <ion-item button routerLink="help">
+          <ion-icon name="information-circle-outline" slot="start" class="iconStyle"></ion-icon>
+          <ion-label>Help</ion-label>
         </ion-item>
         <ion-item button (click)="logout()">
           <ion-icon name="log-out-outline" slot="start" class="iconStyle"></ion-icon>

@@ -38,9 +38,18 @@ const routes: Routes = [
     loadChildren: () => import('./pages/external/order/order.module').then( m => m.OrderPageModule)
   },
   {
+    path: 'help',
+    loadChildren: () => import('./pages/help/help.module').then( m => m.HelpPageModule)
+  },
+  {
+    path: 'calendar',
+    loadChildren: () => import('./pages/calendar/calendar.module').then( m => m.CalendarPageModule)
+  },
+  {
     path: '**',
     component: ErrorComponent
   }
+
 ];
 
 @NgModule({

@@ -4,45 +4,62 @@
       <ion-buttons>
         <ion-menu-button menu="main-menu" ></ion-menu-button>
       </ion-buttons>
-      <ion-title>Show all Customers</ion-title>
+      <div class="firm_text">
+        <ion-label>Services</ion-label>
+      </div>
+      <ion-buttons slot="end">
+        <ion-button href="/settings">
+          <ion-icon name="settings-outline"></ion-icon>
+        </ion-button>
+        <ion-button href="/account/profile">
+          <ion-icon name="person-circle-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
     </ion-item>
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <ion-item>
-    <ion-button (click)="createCustomer()">Create Customer</ion-button>
-    <ion-searchbar></ion-searchbar>
-  </ion-item>
-  <div fxLayout="row wrap" fxLayoutGap="30px">
-    <ion-card *ngFor="let customer of customers">
-      <ion-card-header>
-        <ion-card-title>
-          <ion-icon class="icon-header" name="person-circle-outline"></ion-icon>
-        </ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <ion-list>
-          <ion-item>
-            <ion-label>Name: {{customer.firstName}} {{customer.lastName}}</ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-label>Call Number: {{customer.callNumber}}</ion-label>
-          </ion-item>
-        </ion-list>
-      </ion-card-content>
-      <ion-row>
-        <ion-col>
-          <ion-button style="width: 100%" (click)="delete(customer)">
-            <ion-icon name="trash-outline"></ion-icon>
-          </ion-button>
-        </ion-col>
-        <ion-col>
-          <ion-button style="width: 100%" (click)="showProfile(customer)">
-            <ion-icon name="person-outline"></ion-icon>
-          </ion-button>
-        </ion-col>
-      </ion-row>
-    </ion-card>
-  </div>
+ <ion-card>
+   <ion-card-header>
+     <ion-card-title>Show all Customers</ion-card-title>
+   </ion-card-header>
+   <ion-card-content>
+     <ion-item>
+       <ion-button (click)="createCustomer()">Create Customer</ion-button>
+       <ion-searchbar></ion-searchbar>
+     </ion-item>
+     <div fxLayout="row wrap" fxLayoutGap="30px">
+       <ion-card *ngFor="let customer of customers">
+         <ion-card-header>
+           <ion-card-title>
+             <ion-icon class="icon-header" name="person-circle-outline"></ion-icon>
+           </ion-card-title>
+         </ion-card-header>
+         <ion-card-content>
+           <ion-list>
+             <ion-item>
+               <ion-label>Name: {{customer.firstName}} {{customer.lastName}}</ion-label>
+             </ion-item>
+             <ion-item>
+               <ion-label>Call Number: {{customer.callNumber}}</ion-label>
+             </ion-item>
+           </ion-list>
+         </ion-card-content>
+         <ion-row>
+           <ion-col>
+             <ion-button style="width: 100%" (click)="delete(customer)">
+               <ion-icon name="trash-outline"></ion-icon>
+             </ion-button>
+           </ion-col>
+           <ion-col>
+             <ion-button style="width: 100%" (click)="showProfile(customer)">
+               <ion-icon name="person-outline"></ion-icon>
+             </ion-button>
+           </ion-col>
+         </ion-row>
+       </ion-card>
+     </div>
+   </ion-card-content>
+ </ion-card>
 </ion-content>
 
