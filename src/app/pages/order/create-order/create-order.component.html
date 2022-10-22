@@ -4,13 +4,13 @@
       <ion-card-title>Create Order</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <ion-accordion-group [multiple]="true" [value]="['second']">
+      <ion-accordion-group [multiple]="true" [value]="['second']" style="border-style: solid; border-width: 2px">
 
         <ion-accordion value="first">
           <ion-item slot="header" color="light">
             <ion-label>Order</ion-label>
           </ion-item>
-          <ion-card slot="content">
+          <ion-card slot="content" style="margin: 0 !important;padding: 0 !important;">
             <ion-card-header>
               <ion-item>
                 <ion-label>Order Settings</ion-label>
@@ -60,7 +60,7 @@
           <ion-item slot="header" color="light">
             <ion-label>Todo</ion-label>
           </ion-item>
-          <ion-card slot="content">
+          <ion-card slot="content" style="margin: 0 !important;padding: 0 !important;">
             <ion-card-content>
               <h1>Todos</h1>
               <ion-list>
@@ -117,7 +117,7 @@
           <ion-item slot="header" color="light">
             <ion-label>Customer</ion-label>
           </ion-item>
-          <ion-card slot="content">
+          <ion-card slot="content" style="margin: 0 !important;padding: 0 !important;">
             <ion-card-header>
               <ion-item>
                 <ion-label>Customer Settings</ion-label>
