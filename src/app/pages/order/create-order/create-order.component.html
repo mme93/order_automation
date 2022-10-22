@@ -4,211 +4,235 @@
       <ion-card-title>Create Order</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <!--Order-->
-      <ion-card>
-        <ion-card-header>
-          <ion-item>
-            <ion-label>Order Settings</ion-label>
-            <ion-radio-group [(ngModel)]="settingsChoice">
-              <ion-item *ngFor="let settings of settingsChoiceArray">
-                <ion-label>{{settings}}</ion-label>
-                <ion-radio slot="start" [value]="settings"></ion-radio>
-              </ion-item>
-            </ion-radio-group>
-          </ion-item>
-        </ion-card-header>
-        <ion-card-content>
-          <!--Default-->
-          <ion-list *ngIf="settingsChoice===settingsChoiceArray[0]">
-            <ion-item>
-              <ion-label>Auftragsbeschreibung</ion-label>
-              <ion-input [(ngModel)]="orderInformation"></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label>Ref. Nr.</ion-label>
-              <ion-input [(ngModel)]="refNr"></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label>Start Datum</ion-label>
-              <ion-input [ngModel]="startDate | date:'yyyy-MM-dd'" (ngModelChange)="startDate = $event" type="date" name="startDate"></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label>End Datum</ion-label>
-              <ion-input [ngModel]="endDate | date:'yyyy-MM-dd'" (ngModelChange)="endDate = $event" type="date" name="endDate"></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label>Information</ion-label>
-              <ion-input [(ngModel)]="furtherInformation"></ion-input>
-            </ion-item>
-          </ion-list>
-          <!--Custom-->
-          <ion-list *ngIf="settingsChoice===settingsChoiceArray[1]">
+      <ion-accordion-group [multiple]="true" [value]="['second']">
 
-          </ion-list>
-        </ion-card-content>
-        <ion-card-content>
-          <h1>Todos</h1>
-          <ion-list>
-            <ion-item>
-              <ion-label>Information:</ion-label>
-              <ion-input [(ngModel)]="orderTodoInformation"></ion-input>
-              <label slot="end">Add ToDo</label>
-              <ion-button slot="end" (click)="addTodo()">
-                <ion-icon name="add-circle-outline"></ion-icon>
-              </ion-button>
-            </ion-item>
-            <ion-item>
-              <ion-label>Todo:</ion-label>
-              <ion-input [(ngModel)]="orderTodo"></ion-input>
-              <label slot="end">Activate Status</label>
-              <ion-checkbox slot="end" [(ngModel)]="orderIsStatus" checked="orderIsStatus"></ion-checkbox>
-            </ion-item>
-          </ion-list>
-          <h1>Todos Overview</h1>
-          <ion-item *ngIf="orderTodos.length===0" style="text-align: center;">
-            <ion-label color="danger">No Todo in List</ion-label>
+        <ion-accordion value="first">
+          <ion-item slot="header" color="light">
+            <ion-label>Order</ion-label>
           </ion-item>
-          <ion-list *ngFor="let todo of orderTodos; let indexOfelement=index;">
-            <ion-item>
-              <ion-label>{{indexOfelement + 1}}) Information:</ion-label>
-              <ion-input [(ngModel)]="todo.information" [disabled]="isEditOrder[indexOfelement]"></ion-input>
-              <ion-label>Todo:</ion-label>
-              <ion-input [(ngModel)]="todo.todo" [disabled]="isEditOrder[indexOfelement]"></ion-input>
+          <ion-card slot="content">
+            <ion-card-header>
               <ion-item>
-                <ion-label>
-                  Status Activated:
-                </ion-label>
-                <ion-icon name="checkmark-circle-outline" color="success"
-                          *ngIf="todo.status!==-1 && isEditOrder[indexOfelement]"></ion-icon>
-                <ion-icon name="close-circle-outline" color="danger"
-                          *ngIf="todo.status===-1 && isEditOrder[indexOfelement]"></ion-icon>
-                <ion-checkbox checked="{{todo.status===1}}" (ionChange)="changeStatus(indexOfelement)"
-                              *ngIf="!isEditOrder[indexOfelement]"></ion-checkbox>
+                <ion-label>Order Settings</ion-label>
+                <ion-radio-group [(ngModel)]="settingsChoice">
+                  <ion-item *ngFor="let settings of settingsChoiceArray">
+                    <ion-label>{{settings}}</ion-label>
+                    <ion-radio slot="start" [value]="settings"></ion-radio>
+                  </ion-item>
+                </ion-radio-group>
               </ion-item>
-              <ion-button (click)="isEditOrder[indexOfelement]= !isEditOrder[indexOfelement]">
-                <ion-icon name="hammer-outline"></ion-icon>
-              </ion-button>
-              <ion-button (click)="deleteTodo(indexOfelement)">
-                <ion-icon name="trash-outline"></ion-icon>
-              </ion-button>
-            </ion-item>
-          </ion-list>
-        </ion-card-content>
-      </ion-card>
-      <!--Customer-->
-      <ion-card>
-        <ion-card-header>
-          <ion-item>
-            <ion-label>Customer Settings</ion-label>
-            <ion-radio-group [(ngModel)]="customerChoice">
-              <ion-item *ngFor="let customer of customerChoiceArray">
-                <ion-label>{{customer}}</ion-label>
-                <ion-radio slot="start" [value]="customer"></ion-radio>
-              </ion-item>
-            </ion-radio-group>
-          </ion-item>
-        </ion-card-header>
-        <ion-card-content>
-          <!--Existing Customer-->
-          <ion-list *ngIf="customerChoice === 'Existing Customer'">
-            <h1>Existing Customer</h1>
-            <ion-list-header>
-              <ion-label>Select existing Customer</ion-label>
-            </ion-list-header>
-            <ion-item>
-              <ion-select [(ngModel)]="selectedCustomer" placeholder="No customer selected"
-                          (ionChange)="changeExistingCustomer()">
-                <ion-select-option
-                  *ngFor="let customer of customers">ID {{customer.id}}: {{customer.firstName}} {{customer.lastName}}
-                </ion-select-option>
-              </ion-select>
-              <ion-item slot="end">
-                <ion-checkbox [(ngModel)]="isExistingCustomerVisible">Customer visibility</ion-checkbox>
-                <ion-label style="margin-left: 5px">Customer visibility</ion-label>
-              </ion-item>
+            </ion-card-header>
+            <ion-card-content>
+              <!--Default-->
+              <ion-list *ngIf="settingsChoice===settingsChoiceArray[0]">
+                <ion-item>
+                  <ion-label>Auftragsbeschreibung</ion-label>
+                  <ion-input [(ngModel)]="orderInformation"></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-label>Ref. Nr.</ion-label>
+                  <ion-input [(ngModel)]="refNr"></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-label>Start Datum</ion-label>
+                  <ion-input [ngModel]="startDate | date:'yyyy-MM-dd'" (ngModelChange)="startDate = $event" type="date"
+                             name="startDate"></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-label>End Datum</ion-label>
+                  <ion-input [ngModel]="endDate | date:'yyyy-MM-dd'" (ngModelChange)="endDate = $event" type="date"
+                             name="endDate"></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-label>Information</ion-label>
+                  <ion-input [(ngModel)]="furtherInformation"></ion-input>
+                </ion-item>
+              </ion-list>
+              <!--Custom-->
+              <ion-list *ngIf="settingsChoice===settingsChoiceArray[1]">
+              </ion-list>
+            </ion-card-content>
+          </ion-card>
+        </ion-accordion>
 
-            </ion-item>
-            <ion-card *ngIf="selectedCustomer.length >0 && isExistingCustomerVisible">
-              <ion-card-content>
-                <ion-list>
-                  <ion-item>
-                    <ion-label>Customer ID:  {{existingCustomer.id}}</ion-label>
-                  </ion-item>
-                  <ion-item>
-                    <ion-label>Firstname: {{existingCustomer.firstName}}</ion-label>
-                  </ion-item>
-                  <ion-item>
-                    <ion-label>Lastname: {{existingCustomer.lastName}}</ion-label>
-                  </ion-item>
-                  <ion-item>
-                    <ion-label>Email: {{existingCustomer.email}}</ion-label>
-                  </ion-item>
+        <!--Todos-->
+        <ion-accordion value="second">
+          <ion-item slot="header" color="light">
+            <ion-label>Todo</ion-label>
+          </ion-item>
+          <ion-card slot="content">
+            <ion-card-content>
+              <h1>Todos</h1>
+              <ion-list>
+                <ion-item>
+                  <ion-label>Information:</ion-label>
+                  <ion-input [(ngModel)]="orderTodoInformation"></ion-input>
+                  <label slot="end">Add ToDo</label>
+                  <ion-button slot="end" (click)="addTodo()">
+                    <ion-icon name="add-circle-outline"></ion-icon>
+                  </ion-button>
+                </ion-item>
+                <ion-item>
+                  <ion-label>Todo:</ion-label>
+                  <ion-input [(ngModel)]="orderTodo"></ion-input>
+                  <label slot="end">Activate Status</label>
+                  <ion-checkbox slot="end" [(ngModel)]="orderIsStatus" checked="orderIsStatus"></ion-checkbox>
+                </ion-item>
+              </ion-list>
+              <h1>Todos Overview</h1>
+              <ion-item *ngIf="orderTodos.length===0" style="text-align: center;">
+                <ion-label color="danger">No Todo in List</ion-label>
+              </ion-item>
+              <ion-list *ngFor="let todo of orderTodos; let indexOfelement=index;">
+                <ion-item>
+                  <ion-label>{{indexOfelement + 1}}) Information:</ion-label>
+                  <ion-input [(ngModel)]="todo.information" [disabled]="isEditOrder[indexOfelement]"></ion-input>
+                  <ion-label>Todo:</ion-label>
+                  <ion-input [(ngModel)]="todo.todo" [disabled]="isEditOrder[indexOfelement]"></ion-input>
                   <ion-item>
                     <ion-label>
-                      Adress: {{existingCustomer.street}} {{existingCustomer.city}} {{existingCustomer.postalCode}}</ion-label>
+                      Status Activated:
+                    </ion-label>
+                    <ion-icon name="checkmark-circle-outline" color="success"
+                              *ngIf="todo.status!==-1 && isEditOrder[indexOfelement]"></ion-icon>
+                    <ion-icon name="close-circle-outline" color="danger"
+                              *ngIf="todo.status===-1 && isEditOrder[indexOfelement]"></ion-icon>
+                    <ion-checkbox checked="{{todo.status===1}}" (ionChange)="changeStatus(indexOfelement)"
+                                  *ngIf="!isEditOrder[indexOfelement]"></ion-checkbox>
+                  </ion-item>
+                  <ion-button (click)="isEditOrder[indexOfelement]= !isEditOrder[indexOfelement]">
+                    <ion-icon name="hammer-outline"></ion-icon>
+                  </ion-button>
+                  <ion-button (click)="deleteTodo(indexOfelement)">
+                    <ion-icon name="trash-outline"></ion-icon>
+                  </ion-button>
+                </ion-item>
+              </ion-list>
+            </ion-card-content>
+          </ion-card>
+        </ion-accordion>
+
+        <!--Customer-->
+        <ion-accordion value="third">
+          <ion-item slot="header" color="light">
+            <ion-label>Customer</ion-label>
+          </ion-item>
+          <ion-card slot="content">
+            <ion-card-header>
+              <ion-item>
+                <ion-label>Customer Settings</ion-label>
+                <ion-radio-group [(ngModel)]="customerChoice">
+                  <ion-item *ngFor="let customer of customerChoiceArray">
+                    <ion-label>{{customer}}</ion-label>
+                    <ion-radio slot="start" [value]="customer"></ion-radio>
+                  </ion-item>
+                </ion-radio-group>
+              </ion-item>
+            </ion-card-header>
+            <ion-card-content>
+              <!--Existing Customer-->
+              <ion-list *ngIf="customerChoice === 'Existing Customer'">
+                <h1>Existing Customer</h1>
+                <ion-list-header>
+                  <ion-label>Select existing Customer</ion-label>
+                </ion-list-header>
+                <ion-item>
+                  <ion-select [(ngModel)]="selectedCustomer" placeholder="No customer selected"
+                              (ionChange)="changeExistingCustomer()">
+                    <ion-select-option
+                      *ngFor="let customer of customers">ID {{customer.id}}
+                      : {{customer.firstName}} {{customer.lastName}}
+                    </ion-select-option>
+                  </ion-select>
+                  <ion-item slot="end">
+                    <ion-checkbox [(ngModel)]="isExistingCustomerVisible">Customer visibility</ion-checkbox>
+                    <ion-label style="margin-left: 5px">Customer visibility</ion-label>
+                  </ion-item>
+
+                </ion-item>
+                <ion-card *ngIf="selectedCustomer.length >0 && isExistingCustomerVisible">
+                  <ion-card-content>
+                    <ion-list>
+                      <ion-item>
+                        <ion-label>Customer ID:  {{existingCustomer.id}}</ion-label>
+                      </ion-item>
+                      <ion-item>
+                        <ion-label>Firstname: {{existingCustomer.firstName}}</ion-label>
+                      </ion-item>
+                      <ion-item>
+                        <ion-label>Lastname: {{existingCustomer.lastName}}</ion-label>
+                      </ion-item>
+                      <ion-item>
+                        <ion-label>Email: {{existingCustomer.email}}</ion-label>
+                      </ion-item>
+                      <ion-item>
+                        <ion-label>
+                          Adress: {{existingCustomer.street}} {{existingCustomer.city}} {{existingCustomer.postalCode}}</ion-label>
+                      </ion-item>
+                      <ion-item>
+                        <ion-label>Telephone number: {{existingCustomer.callNumber}}</ion-label>
+                      </ion-item>
+                      <ion-item>
+                        <ion-textarea disabled="true">{{existingCustomer.information}}</ion-textarea>
+                      </ion-item>
+                    </ion-list>
+                  </ion-card-content>
+                </ion-card>
+              </ion-list>
+              <!--Only Telephone Number-->
+              <ion-list *ngIf="customerChoice === 'Only Telephone number'">
+                <h1>Only Telephone number</h1>
+                <ion-item>
+                  <ion-label>Telephone number:</ion-label>
+                  <ion-input [(ngModel)]="onlyTelephoneNumber"></ion-input>
+                </ion-item>
+              </ion-list>
+              <!--New Customer-->
+              <ion-list *ngIf="customerChoice === 'New Customer'">
+                <h1>New Customer</h1>
+                <ion-item slot="end">
+                  <ion-label style="margin-left: 5px">Customer visibility</ion-label>
+                  <ion-checkbox [(ngModel)]="isNewCustomerVisible">Customer visibility</ion-checkbox>
+                </ion-item>
+                <ion-list *ngIf="isNewCustomerVisible">
+                  <ion-item>
+                    <ion-label>Firstname:</ion-label>
+                    <ion-input [(ngModel)]="newCustomer.firstName"></ion-input>
                   </ion-item>
                   <ion-item>
-                    <ion-label>Telephone number: {{existingCustomer.callNumber}}</ion-label>
+                    <ion-label>Lastname:</ion-label>
+                    <ion-input [(ngModel)]="newCustomer.lastName"></ion-input>
                   </ion-item>
                   <ion-item>
-                    <ion-textarea disabled="true">{{existingCustomer.information}}</ion-textarea>
+                    <ion-label>Email:</ion-label>
+                    <ion-input [(ngModel)]="newCustomer.email"></ion-input>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>Street:</ion-label>
+                    <ion-input [(ngModel)]="newCustomer.street"></ion-input>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>Town:</ion-label>
+                    <ion-input [(ngModel)]="newCustomer.city"></ion-input>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>Postcode:</ion-label>
+                    <ion-input [(ngModel)]="newCustomer.postalCode"></ion-input>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>Phone number:</ion-label>
+                    <ion-input [(ngModel)]="newCustomer.callNumber"></ion-input>
                   </ion-item>
                 </ion-list>
-              </ion-card-content>
-            </ion-card>
-          </ion-list>
-          <!--Only Telephone Number-->
-          <ion-list *ngIf="customerChoice === 'Only Telephone number'">
-            <h1>Only Telephone number</h1>
-            <ion-item>
-              <ion-label>Telephone number:</ion-label>
-              <ion-input [(ngModel)]="onlyTelephoneNumber"></ion-input>
-            </ion-item>
-          </ion-list>
-          <!--New Customer-->
-          <ion-list *ngIf="customerChoice === 'New Customer'">
-            <h1>New Customer</h1>
-            <ion-item slot="end">
-              <ion-label style="margin-left: 5px">Customer visibility</ion-label>
-              <ion-checkbox [(ngModel)]="isNewCustomerVisible">Customer visibility</ion-checkbox>
-            </ion-item>
-            <ion-list *ngIf="isNewCustomerVisible">
-              <ion-item>
-                <ion-label>Firstname:</ion-label>
-                <ion-input [(ngModel)]="newCustomer.firstName"></ion-input>
-              </ion-item>
-              <ion-item>
-                <ion-label>Lastname:</ion-label>
-                <ion-input [(ngModel)]="newCustomer.lastName"></ion-input>
-              </ion-item>
-              <ion-item>
-                <ion-label>Email:</ion-label>
-                <ion-input [(ngModel)]="newCustomer.email"></ion-input>
-              </ion-item>
-              <ion-item>
-                <ion-label>Street:</ion-label>
-                <ion-input [(ngModel)]="newCustomer.street"></ion-input>
-              </ion-item>
-              <ion-item>
-                <ion-label>Town:</ion-label>
-                <ion-input [(ngModel)]="newCustomer.city"></ion-input>
-              </ion-item>
-              <ion-item>
-                <ion-label>Postcode:</ion-label>
-                <ion-input [(ngModel)]="newCustomer.postalCode"></ion-input>
-              </ion-item>
-              <ion-item>
-                <ion-label>Phone number:</ion-label>
-                <ion-input [(ngModel)]="newCustomer.callNumber"></ion-input>
-              </ion-item>
-            </ion-list>
-            <ion-item>
-              <ion-label>Optional*</ion-label>
-              <ion-button>Save new Customer</ion-button>
-            </ion-item>
-          </ion-list>
-        </ion-card-content>
-      </ion-card>
+                <ion-item>
+                  <ion-label>Optional*</ion-label>
+                  <ion-button>Save new Customer</ion-button>
+                </ion-item>
+              </ion-list>
+            </ion-card-content>
+          </ion-card>
+        </ion-accordion>
+      </ion-accordion-group>
     </ion-card-content>
 
     <ion-button expand="full" (click)="saveOrder()">
