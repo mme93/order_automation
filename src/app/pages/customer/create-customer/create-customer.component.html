@@ -43,6 +43,80 @@
       </ion-row>
     </ion-card-header>
     <ion-card-content>
+      <form [formGroup]="customerGroup" (ngSubmit)="save()">
+        <!-- Firstname -->
+        <ion-item lines="full">
+          <ion-label position="floating">Firstname:</ion-label>
+          <ion-input formControlName="firstName" type="text" required></ion-input>
+        </ion-item>
+        <span class="error ion-padding" *ngIf="customerGroup.controls.firstName.invalid
+        && customerGroup.controls.firstName.dirty">
+              Name with min. lenght 1 is required.
+         </span>
+        <!-- Lastname -->
+        <ion-item lines="full">
+          <ion-label position="floating">Lastname:</ion-label>
+          <ion-input formControlName="lastName" type="text" required></ion-input>
+        </ion-item>
+        <span class="error ion-padding" *ngIf="customerGroup.controls.lastName.invalid
+        && customerGroup.controls.lastName.dirty">
+              Name with min. lenght 1 is required.
+         </span>
+        <!-- Email -->
+        <ion-item lines="full">
+          <ion-label position="floating">Email:</ion-label>
+          <ion-input formControlName="email" type="text" required></ion-input>
+        </ion-item>
+        <span class="error ion-padding" *ngIf="customerGroup.controls.email.invalid
+        && customerGroup.controls.email.dirty">
+              Please enter a valid email address.
+         </span>
+        <!-- City -->
+        <ion-item lines="full">
+          <ion-label position="floating">Firstname:</ion-label>
+          <ion-input formControlName="city" type="text" required></ion-input>
+        </ion-item>
+        <span class="error ion-padding" *ngIf="customerGroup.controls.city.invalid
+        && customerGroup.controls.city.dirty">
+              Name with min. lenght 1 is required.
+         </span>
+        <!-- Street -->
+        <ion-item lines="full">
+          <ion-label position="floating">Street:</ion-label>
+          <ion-input formControlName="street" type="text" required></ion-input>
+        </ion-item>
+        <span class="error ion-padding" *ngIf="customerGroup.controls.street.invalid
+        && customerGroup.controls.street.dirty">
+             Test.
+         </span>
+        <!-- Postalcode -->
+        <ion-item lines="full">
+          <ion-label position="floating">PostalCode:</ion-label>
+          <ion-input formControlName="postalCode" type="text" required></ion-input>
+        </ion-item>
+        <span class="error ion-padding" *ngIf="customerGroup.controls.postalCode.invalid
+        && customerGroup.controls.postalCode.dirty">
+              Name with min. lenght 1 is required.
+         </span>
+        <!-- Callnumber -->
+        <ion-item lines="full">
+          <ion-label position="floating">Callnumber:</ion-label>
+          <ion-input formControlName="callNumber" type="text" required></ion-input>
+        </ion-item>
+        <span class="error ion-padding" *ngIf="customerGroup.controls.callNumber.invalid
+        && customerGroup.controls.callNumber.dirty">
+              Please enter a valid callnumber without  a +,- or / at the beginning for example 0208244112.
+         </span>  <!-- Information -->
+        <ion-item lines="full">
+          <ion-label position="floating">Further Information:</ion-label>
+          <ion-input formControlName="information" type="text" required></ion-input>
+        </ion-item>
+        <span class="error ion-padding" *ngIf="customerGroup.controls.information.invalid
+        && customerGroup.controls.information.dirty">
+              Name with min. lenght 1 is required.
+         </span>
+      </form>
+      <!--
       <ion-list>
         <ion-item>
           <ion-label>Firstname:</ion-label>
@@ -70,6 +144,7 @@
           <ion-textarea [(ngModel)]="customer.information">Information:</ion-textarea>
         </ion-item>
       </ion-list>
+      -->
     </ion-card-content>
   </ion-card>
 </ion-content>

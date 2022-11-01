@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {Customer} from '../../../model/firm/customer';
 import {CustomerService} from '../../../services/http/customer/customer.service';
 import {Router} from '@angular/router';
+import {FormBuilder, Validators} from '@angular/forms';
+import {validateEmail, validateStreet} from '../../../shared.tools/Validators';
 
 @Component({
   selector: 'app-create-customer',
@@ -21,8 +23,32 @@ export class CreateCustomerComponent implements OnInit {
     information: '',
     company: '',
   };
+  customerGroup = this.formBuilder.group({
+    firstName: ['', [Validators.required, Validators.pattern('^[A-Za-z\\s]*$')]],
+    lastName: ['', [Validators.required, Validators.pattern('^[A-Za-z\\s]*$')]],
+    email: ['', [Validators.required, validateEmail()]],
+    city: ['', [Validators.required, Validators.pattern('^[A-Za-z\\s]*$')]],
+    street: ['', [Validators.required, validateStreet()]],
+    postalCode: ['', [
+      Validators.required,
+      Validators.pattern('^[0-9]{5}')
+    ]],
+    callNumber: ['', [
+      Validators.required,
+      Validators.pattern('[0-9]{6,15}')
+    ]],
+    information: ['', [
+      Validators.required,
+      Validators.minLength(0),
+      Validators.maxLength(500)
+    ]]
+  });
 
-  constructor(private customerService: CustomerService, private router: Router) {
+  constructor(
+    private customerService: CustomerService,
+    private router: Router,
+    public formBuilder: FormBuilder
+  ) {
   }
 
   ngOnInit() {
@@ -49,7 +75,7 @@ export class CreateCustomerComponent implements OnInit {
       postalCode: '',
       callNumber: '',
       information: '',
-      company: '',
+      company: localStorage.getItem('company'),
     };
   }
 }
