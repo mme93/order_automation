@@ -11,6 +11,8 @@ import {CreateCustomerComponent} from './create-customer/create-customer.compone
 import {CustomersComponent} from './customers/customers.component';
 import {ProfileCustomerComponent} from './profile-customer/profile-customer.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 @NgModule({
   imports: [
@@ -18,6 +20,8 @@ import {FlexLayoutModule} from '@angular/flex-layout';
     FormsModule,
     IonicModule,
     CustomerPageRoutingModule,
+    MatTableModule,
+    MatPaginatorModule,
     FlexLayoutModule
   ],
   declarations: [CustomerPage,CreateCustomerComponent,CustomersComponent,ProfileCustomerComponent]

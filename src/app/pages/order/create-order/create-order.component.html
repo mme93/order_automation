@@ -4,13 +4,14 @@
       <ion-card-title>Create Order</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <ion-accordion-group [multiple]="true" [value]="['second']" style="border-style: solid; border-width: 2px">
+      <ion-accordion-group [multiple]="true" [value]="['first']" style="border-style: solid; border-width: 2px">
 
         <ion-accordion value="first">
           <ion-item slot="header" color="light">
             <ion-label>Order</ion-label>
           </ion-item>
           <ion-card slot="content" style="margin: 0 !important;padding: 0 !important;">
+            <!--TODO:Settings müssen vorher erstellt sein
             <ion-card-header>
               <ion-item>
                 <ion-label>Order Settings</ion-label>
@@ -22,6 +23,7 @@
                 </ion-radio-group>
               </ion-item>
             </ion-card-header>
+            -->
             <ion-card-content>
               <!--Default-->
               <ion-list *ngIf="settingsChoice===settingsChoiceArray[0]">
@@ -65,8 +67,8 @@
               <h1>Todos</h1>
               <ion-list>
                 <ion-item>
-                  <ion-label>Information:</ion-label>
-                  <ion-input [(ngModel)]="orderTodoInformation"></ion-input>
+                  <ion-label>Title:</ion-label>
+                  <ion-input [(ngModel)]="orderTodoTitle"></ion-input>
                   <label slot="end">Add ToDo</label>
                   <ion-button slot="end" (click)="addTodo()">
                     <ion-icon name="add-circle-outline"></ion-icon>

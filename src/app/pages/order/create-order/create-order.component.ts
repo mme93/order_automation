@@ -48,7 +48,7 @@ export class CreateOrderComponent implements OnInit {
   isNewCustomerVisible = true;
   onlyTelephoneNumber = '';
 
-  orderTodoInformation = '';
+  orderTodoTitle = '';
   orderTodo = '';
   orderIsStatus = true;
   isEditOrder: boolean[] = [];
@@ -80,20 +80,20 @@ export class CreateOrderComponent implements OnInit {
   addTodo() {
     if (this.orderIsStatus) {
       this.orderTodos.push({
-        information: this.orderTodoInformation,
+        information: this.orderTodoTitle,
         todo: this.orderTodo,
         status: 1
       });
     } else {
       this.orderTodos.push({
-        information: this.orderTodoInformation,
+        information: this.orderTodoTitle,
         todo: this.orderTodo,
         status: -1
       });
     }
     this.isEditOrder.push(true);
     this.orderTodo = '';
-    this.orderTodoInformation = '';
+    this.orderTodoTitle = '';
   }
 
   deleteTodo(index: number) {
