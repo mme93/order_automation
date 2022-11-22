@@ -57,4 +57,25 @@ export class OrderService {
     };
     return this.http.get<Order>(environment.backendUrl + 'external/order/' + orderId + '/' + password, httpOptions);
   }
+
+  saveOrder(order: Order) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        'Content-Type': 'application/json',
+      })
+    };
+    return this.http.put(environment.backendUrl +'order/updateStatus',JSON.stringify(order), httpOptions);
+  }
+  updateOrderStatus(order: Order) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        'Content-Type': 'application/json',
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        Authorization: 'Bearer ' + localStorage.getItem('token')
+      })
+    };
+    return this.http.put(environment.backendUrl +'order/updateStatus',JSON.stringify(order), httpOptions).subscribe();
+  }
 }

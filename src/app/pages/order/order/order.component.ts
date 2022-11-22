@@ -40,7 +40,8 @@ export class OrderComponent implements OnInit {
   sourceURL;
   customer: Customer;
   todos: Todo[] = [];
-  isDisabled=true;
+  isDisabled = true;
+  orderStatus: boolean [] = [false, false, false, false];
 
 
   constructor(
@@ -51,22 +52,26 @@ export class OrderComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.orderStatus = [false, false, false, false];
     this.route.queryParams.subscribe(params => {
       this.sourceURL = params.sourceURL;
       this.orderService.getOrders().subscribe(orders => {
         orders.forEach(order => {
           if (order.id.toString() === params.orderId) {
             this.order = order;
+            this.orderStatus[this.order.status] = true;
           }
         });
       });
     });
   }
 
-  editOrder(){
-    this.isDisabled=!this.isDisabled;
+  editOrder() {
+    this.isDisabled = !this.isDisabled;
   }
+  changeTodoStatus(){
 
+  }
   back() {
     this.router.navigate([this.sourceURL]);
   }
@@ -77,10 +82,17 @@ export class OrderComponent implements OnInit {
   }
 
   startOrder() {
-
+    this.order.status = '1';
+    this.orderStatus[0] = false;
+    this.orderStatus[1] = true;
+    this.orderService.updateOrderStatus(this.order);
   }
 
   finishOrder() {
-
+    this.order.status = '2';
+    this.orderStatus[1] = false;
+    this.orderStatus[2] = true;
+    this.orderService.updateOrderStatus(this.order);
+    this.router.navigate([this.sourceURL]);
   }
 }
