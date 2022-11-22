@@ -50,7 +50,7 @@ export class OrdersComponent implements AfterViewInit {
     this.router.navigate(
       ['/order/order'],
       {
-        queryParams: {sourceURL: '/order/orders', orderId: this.resultOrder[index].id}
+        queryParams: {sourceURL: '/order/orders', orderId: this.resultOrder[index-1].id}
       });
   }
 
