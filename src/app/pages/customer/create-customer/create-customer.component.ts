@@ -54,6 +54,7 @@ export class CreateCustomerComponent {
         company: localStorage.getItem('company'),
       }
     );
+    this.refresh();
     this.router.navigate(['/customer/customers']);
   }
 

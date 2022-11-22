@@ -32,9 +32,9 @@ export class CreateOrderComponent implements OnInit {
     email: '',
     street: '',
     city: '',
-    postalCode: null,
+    postalCode: '',
     callNumber: '',
-    company: '',
+    company: localStorage.getItem('company'),
     information: ''
   };
   selectedCustomer = '';
@@ -59,6 +59,7 @@ export class CreateOrderComponent implements OnInit {
   createDate: Date = new Date();
   startDate: Date = new Date();
   endDate: Date = new Date();
+  customerIsSave = false;
 
   constructor(
     private customerService: CustomerService,
@@ -109,6 +110,12 @@ export class CreateOrderComponent implements OnInit {
       this.orderTodos[indexOfelement].status = -1;
     }
   }
+
+  saveCustomer() {
+    this.customerService.createCustomer(this.newCustomer);
+    this.customerIsSave = true;
+  }
+
   //TODO: Fehlermeldung im Backend beheben und Route aus dem Error entfernen
   saveOrder() {
     this.isLoading = true;

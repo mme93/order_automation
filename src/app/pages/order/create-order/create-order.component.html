@@ -199,36 +199,40 @@
                 <ion-list *ngIf="isNewCustomerVisible">
                   <ion-item>
                     <ion-label>Firstname:</ion-label>
-                    <ion-input [(ngModel)]="newCustomer.firstName"></ion-input>
+                    <ion-input [(ngModel)]="newCustomer.firstName" [disabled]="customerIsSave"></ion-input>
                   </ion-item>
                   <ion-item>
                     <ion-label>Lastname:</ion-label>
-                    <ion-input [(ngModel)]="newCustomer.lastName"></ion-input>
+                    <ion-input [(ngModel)]="newCustomer.lastName" [disabled]="customerIsSave"></ion-input>
                   </ion-item>
                   <ion-item>
                     <ion-label>Email:</ion-label>
-                    <ion-input [(ngModel)]="newCustomer.email"></ion-input>
+                    <ion-input [(ngModel)]="newCustomer.email" [disabled]="customerIsSave"></ion-input>
                   </ion-item>
                   <ion-item>
                     <ion-label>Street:</ion-label>
-                    <ion-input [(ngModel)]="newCustomer.street"></ion-input>
+                    <ion-input [(ngModel)]="newCustomer.street" [disabled]="customerIsSave"></ion-input>
                   </ion-item>
                   <ion-item>
                     <ion-label>Town:</ion-label>
-                    <ion-input [(ngModel)]="newCustomer.city"></ion-input>
+                    <ion-input [(ngModel)]="newCustomer.city" [disabled]="customerIsSave"></ion-input>
                   </ion-item>
                   <ion-item>
                     <ion-label>Postcode:</ion-label>
-                    <ion-input [(ngModel)]="newCustomer.postalCode"></ion-input>
+                    <ion-input [(ngModel)]="newCustomer.postalCode" [disabled]="customerIsSave"></ion-input>
                   </ion-item>
                   <ion-item>
                     <ion-label>Phone number:</ion-label>
-                    <ion-input [(ngModel)]="newCustomer.callNumber"></ion-input>
+                    <ion-input [(ngModel)]="newCustomer.callNumber" [disabled]="customerIsSave"></ion-input>
                   </ion-item>
                 </ion-list>
                 <ion-item>
                   <ion-label>Optional*</ion-label>
-                  <ion-button>Save new Customer</ion-button>
+                  <ion-button (click)="saveCustomer()" *ngIf="!customerIsSave">Save new Customer</ion-button>
+                    <ion-label *ngIf="customerIsSave" slot="end">
+                      Save
+                      <ion-icon name="checkmark-circle-outline" style="color:green"></ion-icon>
+                    </ion-label>
                 </ion-item>
               </ion-list>
             </ion-card-content>
