@@ -87,37 +87,12 @@
             </ion-item>
           </section>
         </ion-accordion>
-
         <ion-accordion value="second" *ngIf="order.todos.length > 0">
           <ion-item slot="header" color="light">
             <ion-label>Todos</ion-label>
           </ion-item>
           <section slot="content">
-            <ion-card *ngFor="let todo of order.todos">
 
-              <ion-row>
-                <ion-col size="11">
-                  <ion-item>
-                    <ion-label style="width: 10%">Information:</ion-label>
-                    <ion-input [ngModel]="todo.information" [disabled]="isDisabled"></ion-input>
-                  </ion-item>
-                  <ion-item>
-                    <ion-label style="width: 10%">Todo:</ion-label>
-                    <ion-input [ngModel]="todo.todo" [disabled]="isDisabled"></ion-input>
-                  </ion-item>
-                </ion-col>
-                <ion-col size="1">
-                  <ion-icon name="close-circle-outline" style="width: 100%;height: 100%;
-                 color: red" *ngIf="todo.status===0">
-                  </ion-icon>
-                  <ion-icon name="checkmark-circle-outline" style="width: 100%;height: 100%;
-                  color: green" *ngIf="todo.status===1">
-                  </ion-icon>
-                </ion-col>
-              </ion-row>
-              <ion-button expand="block" *ngIf="order.status===1">Finish</ion-button>
-            </ion-card>
-            <!--
             <ion-card *ngFor="let todo of order.todos">
               <ion-row>
                 <ion-col size="11">
@@ -134,14 +109,18 @@
                   <ion-icon name="close-circle-outline" style="width: 100%;height: 100%;
                  color: red" *ngIf="todo.status===0">
                   </ion-icon>
+                  <ion-icon name="build-outline" style="width: 100%;height: 100%;
+                  color: yellow" *ngIf="todo.status===1">
+                  </ion-icon>
                   <ion-icon name="checkmark-circle-outline" style="width: 100%;height: 100%;
-                  color: green" *ngIf="todo.status===1">
+                  color: green" *ngIf="todo.status===2">
                   </ion-icon>
                 </ion-col>
               </ion-row>
-              <ion-button expand="block" *ngIf="order.status===1">Finish</ion-button>
+              <ion-button expand="block" *ngIf="todo.status===0" (click)="(todo.status=1) && changeTodoStatus(todo)">Start</ion-button>
+              <ion-button expand="block" *ngIf="todo.status===1" (click)="(todo.status=2) &&changeTodoStatus(todo)">Finish</ion-button>
             </ion-card>
-            -->
+
           </section>
         </ion-accordion>
 

@@ -83,7 +83,7 @@ export class CreateOrderComponent implements OnInit {
       this.orderTodos.push({
         information: this.orderTodoTitle,
         todo: this.orderTodo,
-        status: 1
+        status: 0
       });
     } else {
       this.orderTodos.push({

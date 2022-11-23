@@ -1,6 +1,6 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Customer} from '../../../model/firm/customer';
-import {Todo} from '../../../model/order/todo';
+import {OrderTodo, Todo} from '../../../model/order/todo';
 import {ActivatedRoute, Router} from '@angular/router';
 import {OrderService} from '../../../services/http/order/order.service';
 import {Order} from '../../../model/order/order';
@@ -43,7 +43,6 @@ export class OrderComponent implements OnInit {
   isDisabled = true;
   orderStatus: boolean [] = [false, false, false, false];
 
-
   constructor(
     private route: ActivatedRoute,
     private orderService: OrderService,
@@ -69,9 +68,32 @@ export class OrderComponent implements OnInit {
   editOrder() {
     this.isDisabled = !this.isDisabled;
   }
-  changeTodoStatus(){
 
+  changeTodoStatus(todo: OrderTodo) {
+    //Todo: TodoStatus save in Backend
+    this.sortedTodosByStatus();
   }
+
+  sortedTodosByStatus(){
+    const sortedTodo: OrderTodo[] = [];
+    this.order.todos.forEach(todos => {
+      if(todos.status === 0){
+        sortedTodo.push(todos);
+      }
+    });
+    this.order.todos.forEach(todos => {
+      if(todos.status === 1){
+        sortedTodo.push(todos);
+      }
+    });
+    this.order.todos.forEach(todos => {
+      if(todos.status === 2){
+        sortedTodo.push(todos);
+      }
+    });
+    this.order.todos = sortedTodo;
+  }
+
   back() {
     this.router.navigate([this.sourceURL]);
   }
