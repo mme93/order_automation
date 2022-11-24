@@ -38,7 +38,6 @@ export class OrderComponent implements OnInit {
   };
   sourceURL;
   customer: Customer;
-  todos: Todo[] = [];
   isDisabled = true;
   orderStatus: boolean [] = [false, false, false, false];
 
@@ -68,11 +67,6 @@ export class OrderComponent implements OnInit {
     this.isDisabled = !this.isDisabled;
   }
 
-  changeTodoStatus(todo: OrderTodo) {
-    //Todo: TodoStatus save in Backend
-    this.sortedTodosByStatus();
-  }
-
   sortedTodosByStatus() {
     const sortedTodo: OrderTodo[] = [];
     this.order.todos.forEach(todos => {
@@ -98,7 +92,7 @@ export class OrderComponent implements OnInit {
   }
 
   delete() {
-    //Todo: Delete MEthod
+    this.orderService.deleteOrder(this.order);
     this.router.navigate([this.sourceURL]);
   }
 
@@ -118,8 +112,7 @@ export class OrderComponent implements OnInit {
   }
 
   save() {
-    console.log(this.order);
-    //this.orderService.updateOrder(this.order);
+    this.orderService.updateOrder(this.order);
     this.isDisabled = true;
   }
 }

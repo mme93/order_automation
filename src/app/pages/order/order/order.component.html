@@ -62,15 +62,15 @@
 
             <ion-item>
               <ion-label style="width: 10%">Oder ID:</ion-label>
-              <ion-input [ngModel]="order.id" [disabled]="true"></ion-input>
+              <ion-input [(ngModel)]="order.id" [disabled]="true"></ion-input>
             </ion-item>
             <ion-item>
               <ion-label style="width: 10%">Information:</ion-label>
-              <ion-input [ngModel]="order.orderInformation" [disabled]="isDisabled"></ion-input>
+              <ion-input  [(ngModel)]="order.orderInformation" [disabled]="isDisabled"></ion-input>
             </ion-item>
             <ion-item>
               <ion-label style="width: 10%">Ref. Nr.:</ion-label>
-              <ion-input [ngModel]="order.refNr" [disabled]="isDisabled"></ion-input>
+              <ion-input [(ngModel)]="order.refNr" [disabled]="isDisabled"></ion-input>
             </ion-item>
             <ion-item>
               <ion-label style="width: 10%">Start Date:</ion-label>
@@ -84,11 +84,11 @@
             </ion-item>
             <ion-item>
               <ion-label style="width: 10%">Further Information:</ion-label>
-              <ion-input [ngModel]="order.furtherInformation" [disabled]="isDisabled"></ion-input>
+              <ion-input [(ngModel)]="order.furtherInformation" [disabled]="isDisabled"></ion-input>
             </ion-item>
             <ion-item>
               <ion-label style="width: 10%">Order Password:</ion-label>
-              <ion-input [ngModel]="order.password" [disabled]="isDisabled"></ion-input>
+              <ion-input [(ngModel)]="order.password" [disabled]="isDisabled"></ion-input>
             </ion-item>
 
           </section>
@@ -99,16 +99,16 @@
           </ion-item>
           <section slot="content">
 
-            <ion-card *ngFor="let todo of order.todos">
+            <ion-card *ngFor="let todo of order.todos" >
               <ion-row>
                 <ion-col size="11">
                   <ion-item>
                     <ion-label style="width: 10%">Information:</ion-label>
-                    <ion-input [ngModel]="todo.information" [disabled]="isDisabled"></ion-input>
+                    <ion-input [(ngModel)]="todo.information" [disabled]="isDisabled"></ion-input>
                   </ion-item>
                   <ion-item>
                     <ion-label style="width: 10%">Todo:</ion-label>
-                    <ion-input [ngModel]="todo.todo" [disabled]="isDisabled"></ion-input>
+                    <ion-input [(ngModel)]="todo.todo" [disabled]="isDisabled"></ion-input>
                   </ion-item>
                 </ion-col>
                 <ion-col size="1">
@@ -123,8 +123,8 @@
                   </ion-icon>
                 </ion-col>
               </ion-row>
-              <ion-button expand="block" *ngIf="todo.status===0" (click)="(todo.status=1) && changeTodoStatus(todo)">Start</ion-button>
-              <ion-button expand="block" *ngIf="todo.status===1" (click)="(todo.status=2) &&changeTodoStatus(todo)">Finish</ion-button>
+              <ion-button expand="block" *ngIf="todo.status===0" (click)="(todo.status=1) && sortedTodosByStatus()">Start</ion-button>
+              <ion-button expand="block" *ngIf="todo.status===1" (click)="(todo.status=2) &&sortedTodosByStatus()">Finish</ion-button>
             </ion-card>
 
           </section>
@@ -137,35 +137,35 @@
           <section slot="content">
             <ion-item>
               <ion-label style="width: 10%">Firstname:</ion-label>
-              <ion-input [ngModel]="order.firstName" [disabled]="isDisabled"></ion-input>
+              <ion-input [(ngModel)]="order.firstName" [disabled]="isDisabled"></ion-input>
             </ion-item>
             <ion-item>
               <ion-label style="width: 10%">Lastname:</ion-label>
-              <ion-input [ngModel]="order.lastName" [disabled]="isDisabled"></ion-input>
+              <ion-input [(ngModel)]="order.lastName" [disabled]="isDisabled"></ion-input>
             </ion-item>
             <ion-item>
               <ion-label style="width: 10%">Email:</ion-label>
-              <ion-input [ngModel]="order.email" [disabled]="isDisabled"></ion-input>
+              <ion-input [(ngModel)]="order.email" [disabled]="isDisabled"></ion-input>
             </ion-item>
             <ion-item>
               <ion-label style="width: 10%">City:</ion-label>
-              <ion-input [ngModel]="order.city" [disabled]="isDisabled"></ion-input>
+              <ion-input [(ngModel)]="order.city" [disabled]="isDisabled"></ion-input>
             </ion-item>
             <ion-item>
               <ion-label style="width: 10%">Street:</ion-label>
-              <ion-input [ngModel]="order.street" [disabled]="isDisabled"></ion-input>
+              <ion-input [(ngModel)]="order.street" [disabled]="isDisabled"></ion-input>
             </ion-item>
             <ion-item>
               <ion-label style="width: 10%">Postalcode:</ion-label>
-              <ion-input [ngModel]="order.postalCode" [disabled]="isDisabled"></ion-input>
+              <ion-input [(ngModel)]="order.postalCode" [disabled]="isDisabled"></ion-input>
             </ion-item>
             <ion-item>
               <ion-label style="width: 10%">Call Number:</ion-label>
-              <ion-input [ngModel]="order.callNumber" [disabled]="isDisabled"></ion-input>
+              <ion-input [(ngModel)]="order.callNumber" [disabled]="isDisabled"></ion-input>
             </ion-item>
             <ion-item>
               <ion-label style="width: 10%">Information:</ion-label>
-              <ion-input [ngModel]="order.information" [disabled]="isDisabled"></ion-input>
+              <ion-input [(ngModel)]="order.information" [disabled]="isDisabled"></ion-input>
             </ion-item>
           </section>
         </ion-accordion>
