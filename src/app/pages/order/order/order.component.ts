@@ -1,10 +1,9 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Customer} from '../../../model/firm/customer';
-import {Todo} from '../../../model/order/todo';
+import {OrderTodo, Todo} from '../../../model/order/todo';
 import {ActivatedRoute, Router} from '@angular/router';
 import {OrderService} from '../../../services/http/order/order.service';
 import {Order} from '../../../model/order/order';
-
 
 @Component({
   selector: 'app-order',
@@ -39,9 +38,8 @@ export class OrderComponent implements OnInit {
   };
   sourceURL;
   customer: Customer;
-  todos: Todo[] = [];
-  isDisabled=true;
-
+  isDisabled = true;
+  orderStatus: boolean [] = [false, false, false, false];
 
   constructor(
     private route: ActivatedRoute,
@@ -51,20 +49,42 @@ export class OrderComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.orderStatus = [false, false, false, false];
     this.route.queryParams.subscribe(params => {
       this.sourceURL = params.sourceURL;
       this.orderService.getOrders().subscribe(orders => {
         orders.forEach(order => {
           if (order.id.toString() === params.orderId) {
             this.order = order;
+            this.orderStatus[this.order.status] = true;
           }
         });
       });
     });
   }
 
-  editOrder(){
-    this.isDisabled=!this.isDisabled;
+  editOrder() {
+    this.isDisabled = !this.isDisabled;
+  }
+
+  sortedTodosByStatus() {
+    const sortedTodo: OrderTodo[] = [];
+    this.order.todos.forEach(todos => {
+      if (todos.status === 0) {
+        sortedTodo.push(todos);
+      }
+    });
+    this.order.todos.forEach(todos => {
+      if (todos.status === 1) {
+        sortedTodo.push(todos);
+      }
+    });
+    this.order.todos.forEach(todos => {
+      if (todos.status === 2) {
+        sortedTodo.push(todos);
+      }
+    });
+    this.order.todos = sortedTodo;
   }
 
   back() {
@@ -72,15 +92,27 @@ export class OrderComponent implements OnInit {
   }
 
   delete() {
-    //Todo: Delete MEthod
+    this.orderService.deleteOrder(this.order);
     this.router.navigate([this.sourceURL]);
   }
 
   startOrder() {
-
+    this.order.status = '1';
+    this.orderStatus[0] = false;
+    this.orderStatus[1] = true;
+    this.orderService.updateOrderStatus(this.order);
   }
 
   finishOrder() {
+    this.order.status = '2';
+    this.orderStatus[1] = false;
+    this.orderStatus[2] = true;
+    this.orderService.updateOrderStatus(this.order);
+    this.router.navigate([this.sourceURL]);
+  }
 
+  save() {
+    this.orderService.updateOrder(this.order);
+    this.isDisabled = true;
   }
 }

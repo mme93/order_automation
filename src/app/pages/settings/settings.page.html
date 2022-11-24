@@ -4,7 +4,17 @@
       <ion-buttons>
         <ion-menu-button menu="main-menu"></ion-menu-button>
       </ion-buttons>
-      <ion-title>Settings Overview</ion-title>
+      <div class="firm_text">
+        <ion-label>Services</ion-label>
+      </div>
+      <ion-buttons slot="end">
+        <ion-button href="/settings">
+          <ion-icon name="settings-outline"></ion-icon>
+        </ion-button>
+        <ion-button href="/account/profile">
+          <ion-icon name="person-circle-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
     </ion-item>
   </ion-toolbar>
 </ion-header>
@@ -23,3 +33,4 @@
     </ion-tab-bar>
   </ion-tabs>
 </ion-content>
+

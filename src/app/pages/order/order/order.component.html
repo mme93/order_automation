@@ -13,6 +13,9 @@
             <ion-button (click)="delete()">
               <ion-icon name="trash-outline"></ion-icon>
             </ion-button>
+            <ion-button (click)="save()">
+              <ion-icon name="save-outline"></ion-icon>
+            </ion-button>
           </ion-buttons>
         </ion-col>
         <ion-col>
@@ -25,23 +28,49 @@
     <mat-divider></mat-divider>
 
     <ion-card-content>
-      <ion-accordion-group [multiple]="true" [value]="['first']">
+
+      <ion-row>
+        <ion-col size="4" class="todoStatus">
+          <ion-label> Not in process</ion-label>
+          <ion-icon name="checkmark-circle-outline" style="color: green">
+          </ion-icon>
+        </ion-col>
+        <ion-col size="4" class="todoStatus">
+          <ion-label style="padding-right: 5px"  *ngIf="!orderStatus[3]">Process</ion-label>
+          <ion-icon name="close-circle-outline" style="color: red" *ngIf="order.status.toString() === '0'"></ion-icon>
+          <ion-icon name="build-outline" style="color: yellow" *ngIf="order.status.toString()  === '1'"></ion-icon>
+          <ion-icon name="checkmark-circle-outline" style="color: green" *ngIf="order.status.toString() === '2'"></ion-icon>
+        </ion-col>
+        <ion-col size="4" class="todoStatus" *ngIf="orderStatus[3]">
+          <ion-label style="padding-right: 5px">Paused</ion-label>
+          <ion-icon name="build-outline" style="color: yellow"></ion-icon>
+        </ion-col>
+        <ion-col size="4" class="todoStatus">
+          <ion-label style="padding-right: 5px">Finish</ion-label>
+          <ion-icon name="close-circle-outline" style="color: red" *ngIf="order.status.toString() !== '2'"></ion-icon>
+          <ion-icon name="checkmark-circle-outline" style="color: green" *ngIf="order.status.toString() === '2'"></ion-icon>
+        </ion-col>
+      </ion-row>
+
+      <ion-accordion-group [multiple]="true" [value]="['second']">
         <ion-accordion value="first">
           <ion-item slot="header" color="light">
             <ion-label>Order Information</ion-label>
           </ion-item>
           <section slot="content">
+
+
             <ion-item>
               <ion-label style="width: 10%">Oder ID:</ion-label>
-              <ion-input [ngModel]="order.id" [disabled]="isDisabled"></ion-input>
+              <ion-input [(ngModel)]="order.id" [disabled]="true"></ion-input>
             </ion-item>
             <ion-item>
               <ion-label style="width: 10%">Information:</ion-label>
-              <ion-input [ngModel]="order.orderInformation" [disabled]="isDisabled"></ion-input>
+              <ion-input  [(ngModel)]="order.orderInformation" [disabled]="isDisabled"></ion-input>
             </ion-item>
             <ion-item>
               <ion-label style="width: 10%">Ref. Nr.:</ion-label>
-              <ion-input [ngModel]="order.refNr" [disabled]="isDisabled"></ion-input>
+              <ion-input [(ngModel)]="order.refNr" [disabled]="isDisabled"></ion-input>
             </ion-item>
             <ion-item>
               <ion-label style="width: 10%">Start Date:</ion-label>
@@ -55,43 +84,49 @@
             </ion-item>
             <ion-item>
               <ion-label style="width: 10%">Further Information:</ion-label>
-              <ion-input [ngModel]="order.furtherInformation" [disabled]="isDisabled"></ion-input>
+              <ion-input [(ngModel)]="order.furtherInformation" [disabled]="isDisabled"></ion-input>
             </ion-item>
             <ion-item>
               <ion-label style="width: 10%">Order Password:</ion-label>
-              <ion-input [ngModel]="order.password" [disabled]="isDisabled"></ion-input>
+              <ion-input [(ngModel)]="order.password" [disabled]="isDisabled"></ion-input>
             </ion-item>
+
           </section>
         </ion-accordion>
-
-        <ion-accordion value="second">
+        <ion-accordion value="second" *ngIf="order.todos.length > 0">
           <ion-item slot="header" color="light">
             <ion-label>Todos</ion-label>
           </ion-item>
           <section slot="content">
-            <ion-card *ngFor="let todo of order.todos">
+
+            <ion-card *ngFor="let todo of order.todos" >
               <ion-row>
                 <ion-col size="11">
                   <ion-item>
                     <ion-label style="width: 10%">Information:</ion-label>
-                    <ion-input [ngModel]="todo.information" [disabled]="isDisabled"></ion-input>
+                    <ion-input [(ngModel)]="todo.information" [disabled]="isDisabled"></ion-input>
                   </ion-item>
                   <ion-item>
                     <ion-label style="width: 10%">Todo:</ion-label>
-                    <ion-input [ngModel]="todo.todo" [disabled]="isDisabled"></ion-input>
+                    <ion-input [(ngModel)]="todo.todo" [disabled]="isDisabled"></ion-input>
                   </ion-item>
                 </ion-col>
                 <ion-col size="1">
                   <ion-icon name="close-circle-outline" style="width: 100%;height: 100%;
                  color: red" *ngIf="todo.status===0">
                   </ion-icon>
+                  <ion-icon name="build-outline" style="width: 100%;height: 100%;
+                  color: yellow" *ngIf="todo.status===1">
+                  </ion-icon>
                   <ion-icon name="checkmark-circle-outline" style="width: 100%;height: 100%;
-                  color: green" *ngIf="todo.status===1">
+                  color: green" *ngIf="todo.status===2">
                   </ion-icon>
                 </ion-col>
               </ion-row>
-              <ion-button expand="block" *ngIf="order.status===1">Finish</ion-button>
+              <ion-button expand="block" *ngIf="todo.status===0" (click)="(todo.status=1) && sortedTodosByStatus()">Start</ion-button>
+              <ion-button expand="block" *ngIf="todo.status===1" (click)="(todo.status=2) &&sortedTodosByStatus()">Finish</ion-button>
             </ion-card>
+
           </section>
         </ion-accordion>
 
@@ -102,35 +137,35 @@
           <section slot="content">
             <ion-item>
               <ion-label style="width: 10%">Firstname:</ion-label>
-              <ion-input [ngModel]="order.firstName" [disabled]="isDisabled"></ion-input>
+              <ion-input [(ngModel)]="order.firstName" [disabled]="isDisabled"></ion-input>
             </ion-item>
             <ion-item>
               <ion-label style="width: 10%">Lastname:</ion-label>
-              <ion-input [ngModel]="order.lastName" [disabled]="isDisabled"></ion-input>
+              <ion-input [(ngModel)]="order.lastName" [disabled]="isDisabled"></ion-input>
             </ion-item>
             <ion-item>
               <ion-label style="width: 10%">Email:</ion-label>
-              <ion-input [ngModel]="order.email" [disabled]="isDisabled"></ion-input>
+              <ion-input [(ngModel)]="order.email" [disabled]="isDisabled"></ion-input>
             </ion-item>
             <ion-item>
               <ion-label style="width: 10%">City:</ion-label>
-              <ion-input [ngModel]="order.city" [disabled]="isDisabled"></ion-input>
+              <ion-input [(ngModel)]="order.city" [disabled]="isDisabled"></ion-input>
             </ion-item>
             <ion-item>
               <ion-label style="width: 10%">Street:</ion-label>
-              <ion-input [ngModel]="order.street" [disabled]="isDisabled"></ion-input>
+              <ion-input [(ngModel)]="order.street" [disabled]="isDisabled"></ion-input>
             </ion-item>
             <ion-item>
               <ion-label style="width: 10%">Postalcode:</ion-label>
-              <ion-input [ngModel]="order.postalCode" [disabled]="isDisabled"></ion-input>
+              <ion-input [(ngModel)]="order.postalCode" [disabled]="isDisabled"></ion-input>
             </ion-item>
             <ion-item>
               <ion-label style="width: 10%">Call Number:</ion-label>
-              <ion-input [ngModel]="order.callNumber" [disabled]="isDisabled"></ion-input>
+              <ion-input [(ngModel)]="order.callNumber" [disabled]="isDisabled"></ion-input>
             </ion-item>
             <ion-item>
               <ion-label style="width: 10%">Information:</ion-label>
-              <ion-input [ngModel]="order.information" [disabled]="isDisabled"></ion-input>
+              <ion-input [(ngModel)]="order.information" [disabled]="isDisabled"></ion-input>
             </ion-item>
           </section>
         </ion-accordion>
@@ -138,8 +173,9 @@
     </ion-card-content>
     <mat-divider></mat-divider>
     <ion-card-content>
-      <ion-button expand="block" (click)="startOrder()" *ngIf="order.status===0">Start Order</ion-button>
-      <ion-button expand="block" (click)="finishOrder()" *ngIf="order.status===1">Finish Order</ion-button>
+      <ion-button expand="block" (click)="startOrder()" *ngIf="orderStatus[0]">Start Order</ion-button>
+      <ion-button expand="block" (click)="finishOrder()" *ngIf="orderStatus[1]">Finish Order</ion-button>
+
     </ion-card-content>
 
   </ion-card>

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -11,6 +11,8 @@ import {CreateCustomerComponent} from './create-customer/create-customer.compone
 import {CustomersComponent} from './customers/customers.component';
 import {ProfileCustomerComponent} from './profile-customer/profile-customer.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 @NgModule({
   imports: [
@@ -18,6 +20,9 @@ import {FlexLayoutModule} from '@angular/flex-layout';
     FormsModule,
     IonicModule,
     CustomerPageRoutingModule,
+    MatTableModule,
+    MatPaginatorModule,
+    ReactiveFormsModule,
     FlexLayoutModule
   ],
   declarations: [CustomerPage,CreateCustomerComponent,CustomersComponent,ProfileCustomerComponent]

@@ -37,7 +37,7 @@ export class OrdersComponent implements AfterViewInit {
             callnumber: order.callNumber,
             firstName: order.firstName,
             lastName: order.lastName,
-            status: order.status
+            status: this.getStatusTextFromNumber(order.status)
           });
           counter++;
         });
@@ -50,10 +50,20 @@ export class OrdersComponent implements AfterViewInit {
     this.router.navigate(
       ['/order/order'],
       {
-        queryParams: {sourceURL: '/order/orders', orderId: this.resultOrder[index].id}
+        queryParams: {sourceURL: '/order/orders', orderId: this.resultOrder[index-1].id}
       });
   }
-
+  getStatusTextFromNumber(status: string): string{
+    if(status.toString() === '0'){
+      return 'Created';
+    }else if(status.toString() === '1'){
+      return 'Processing';
+    }else if(status.toString() === '2'){
+      return 'Finished';
+    }else if(status.toString() === '3'){
+      return 'Paused';
+    }
+  }
   handleChange(event) {
     const query: string = event.target.value.toLowerCase();
     this.dataSource = new MatTableDataSource<OrderElement>(

@@ -4,7 +4,6 @@ import {Customer} from '../../../model/firm/customer';
 import {OrderTodo} from '../../../model/order/todo';
 import {OrderService} from '../../../services/http/order/order.service';
 import {Router} from '@angular/router';
-import {SmsService} from '../../../services/http/sms/sms.service';
 
 
 @Component({
@@ -33,9 +32,9 @@ export class CreateOrderComponent implements OnInit {
     email: '',
     street: '',
     city: '',
-    postalCode: null,
+    postalCode: '',
     callNumber: '',
-    company: '',
+    company: localStorage.getItem('company'),
     information: ''
   };
   selectedCustomer = '';
@@ -49,7 +48,7 @@ export class CreateOrderComponent implements OnInit {
   isNewCustomerVisible = true;
   onlyTelephoneNumber = '';
 
-  orderTodoInformation = '';
+  orderTodoTitle = '';
   orderTodo = '';
   orderIsStatus = true;
   isEditOrder: boolean[] = [];
@@ -60,12 +59,12 @@ export class CreateOrderComponent implements OnInit {
   createDate: Date = new Date();
   startDate: Date = new Date();
   endDate: Date = new Date();
+  customerIsSave = false;
 
   constructor(
     private customerService: CustomerService,
     private orderService: OrderService,
-    private router: Router,
-    private smsService: SmsService
+    private router: Router
   ) {
   }
 
@@ -82,20 +81,20 @@ export class CreateOrderComponent implements OnInit {
   addTodo() {
     if (this.orderIsStatus) {
       this.orderTodos.push({
-        information: this.orderTodoInformation,
+        information: this.orderTodoTitle,
         todo: this.orderTodo,
-        status: 1
+        status: 0
       });
     } else {
       this.orderTodos.push({
-        information: this.orderTodoInformation,
+        information: this.orderTodoTitle,
         todo: this.orderTodo,
         status: -1
       });
     }
     this.isEditOrder.push(true);
     this.orderTodo = '';
-    this.orderTodoInformation = '';
+    this.orderTodoTitle = '';
   }
 
   deleteTodo(index: number) {
@@ -112,41 +111,123 @@ export class CreateOrderComponent implements OnInit {
     }
   }
 
+  saveCustomer() {
+    this.customerService.createCustomer(this.newCustomer);
+    this.customerIsSave = true;
+  }
+
+  //TODO: Fehlermeldung im Backend beheben und Route aus dem Error entfernen
   saveOrder() {
     this.isLoading = true;
+    //Existing Customer
+    if (this.customerChoice === this.customerChoiceArray[0]) {
+      this.orderService.createOrder({
+        id: -1,
+        customerID: this.existingCustomer.id,
+        firstName: this.existingCustomer.firstName,
+        lastName: this.existingCustomer.lastName,
+        email: this.existingCustomer.email,
+        city: this.existingCustomer.city,
+        street: this.existingCustomer.street,
+        postalCode: this.existingCustomer.postalCode,
+        callNumber: this.existingCustomer.callNumber,
+        information: this.existingCustomer.information,
+        company: localStorage.getItem('company'),
 
-    this.orderService.createOrder({
-      id: -1,
-      customerID: this.existingCustomer.id,
-      firstName: this.existingCustomer.firstName,
-      lastName: this.existingCustomer.lastName,
-      email: this.existingCustomer.email,
-      city: this.existingCustomer.city,
-      street: this.existingCustomer.street,
-      postalCode: this.existingCustomer.postalCode,
-      callNumber: this.existingCustomer.callNumber,
-      information: this.existingCustomer.information,
-      company: localStorage.getItem('company'),
+        orderInformation: this.orderInformation,
+        refNr: this.refNr,
+        createDate: this.createDate,
+        startDate: this.startDate,
+        endDate: this.endDate,
+        furtherInformation: this.furtherInformation,
+        todos: this.orderTodos,
+        userId: localStorage.getItem('userId'),
+        status: '0',
+        password: ''
+      })
+        .subscribe((response) => {
+          console.log(response);
+          this.router.navigate(['/order/orders']);
+          this.isLoading = false;
+        }, error => {
+          this.isLoading = false;
+          console.log(error);
+          this.router.navigate(['/order/orders']);
+        });
 
-      orderInformation: this.orderInformation,
-      refNr: this.refNr,
-      createDate: this.createDate,
-      startDate: this.startDate,
-      endDate: this.endDate,
-      furtherInformation: this.furtherInformation,
-      todos: this.orderTodos,
-      userId: localStorage.getItem('userId'),
-      status: '0',
-      password: ''
-    })
-      .subscribe((response) => {
-        console.log(response);
-        this.router.navigate(['/order/orders']);
-        this.isLoading = false;
-      }, error => {
-        this.isLoading = false;
-        console.log(error);
-      });
+    } // New Customer
+    else if (this.customerChoice === this.customerChoiceArray[1]) {
+      this.orderService.createOrder({
+        id: -1,
+        customerID: '-1',
+        firstName: this.newCustomer.firstName,
+        lastName: this.newCustomer.lastName,
+        email: this.newCustomer.email,
+        city: this.newCustomer.city,
+        street: this.newCustomer.street,
+        postalCode: this.newCustomer.postalCode,
+        callNumber: this.newCustomer.callNumber,
+        information: this.newCustomer.information,
+        company: localStorage.getItem('company'),
+
+        orderInformation: this.orderInformation,
+        refNr: this.refNr,
+        createDate: this.createDate,
+        startDate: this.startDate,
+        endDate: this.endDate,
+        furtherInformation: this.furtherInformation,
+        todos: this.orderTodos,
+        userId: localStorage.getItem('userId'),
+        status: '0',
+        password: ''
+      })
+        .subscribe((response) => {
+          console.log(response);
+          this.router.navigate(['/order/orders']);
+          this.isLoading = false;
+        }, error => {
+          this.isLoading = false;
+          console.log(error);
+          this.router.navigate(['/order/orders']);
+        });
+
+    } //Only Telephonenumber
+    else if (this.customerChoice === this.customerChoiceArray[2]) {
+      this.orderService.createOrder({
+        id: -1,
+        customerID: '-1',
+        firstName: '',
+        lastName: '',
+        email: '',
+        city: '',
+        street: '',
+        postalCode: '',
+        callNumber: this.onlyTelephoneNumber,
+        information: '',
+        company: localStorage.getItem('company'),
+
+        orderInformation: this.orderInformation,
+        refNr: this.refNr,
+        createDate: this.createDate,
+        startDate: this.startDate,
+        endDate: this.endDate,
+        furtherInformation: this.furtherInformation,
+        todos: this.orderTodos,
+        userId: localStorage.getItem('userId'),
+        status: '0',
+        password: ''
+      })
+        .subscribe((response) => {
+          console.log('SMS would send!');
+          console.log(response);
+          this.router.navigate(['/order/orders']);
+          this.isLoading = false;
+        }, error => {
+          this.isLoading = false;
+          console.log(error);
+          this.router.navigate(['/order/orders']);
+        });
+    }
 
   }
 }
