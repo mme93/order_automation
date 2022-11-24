@@ -5,7 +5,6 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {OrderService} from '../../../services/http/order/order.service';
 import {Order} from '../../../model/order/order';
 
-
 @Component({
   selector: 'app-order',
   templateUrl: './order.component.html',
@@ -74,20 +73,20 @@ export class OrderComponent implements OnInit {
     this.sortedTodosByStatus();
   }
 
-  sortedTodosByStatus(){
+  sortedTodosByStatus() {
     const sortedTodo: OrderTodo[] = [];
     this.order.todos.forEach(todos => {
-      if(todos.status === 0){
+      if (todos.status === 0) {
         sortedTodo.push(todos);
       }
     });
     this.order.todos.forEach(todos => {
-      if(todos.status === 1){
+      if (todos.status === 1) {
         sortedTodo.push(todos);
       }
     });
     this.order.todos.forEach(todos => {
-      if(todos.status === 2){
+      if (todos.status === 2) {
         sortedTodo.push(todos);
       }
     });
@@ -116,5 +115,11 @@ export class OrderComponent implements OnInit {
     this.orderStatus[2] = true;
     this.orderService.updateOrderStatus(this.order);
     this.router.navigate([this.sourceURL]);
+  }
+
+  save() {
+    console.log(this.order);
+    //this.orderService.updateOrder(this.order);
+    this.isDisabled = true;
   }
 }

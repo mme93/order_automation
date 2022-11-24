@@ -13,6 +13,9 @@
             <ion-button (click)="delete()">
               <ion-icon name="trash-outline"></ion-icon>
             </ion-button>
+            <ion-button (click)="save()">
+              <ion-icon name="save-outline"></ion-icon>
+            </ion-button>
           </ion-buttons>
         </ion-col>
         <ion-col>
@@ -55,9 +58,11 @@
             <ion-label>Order Information</ion-label>
           </ion-item>
           <section slot="content">
+
+
             <ion-item>
               <ion-label style="width: 10%">Oder ID:</ion-label>
-              <ion-input [ngModel]="order.id" [disabled]="isDisabled"></ion-input>
+              <ion-input [ngModel]="order.id" [disabled]="true"></ion-input>
             </ion-item>
             <ion-item>
               <ion-label style="width: 10%">Information:</ion-label>
@@ -85,6 +90,7 @@
               <ion-label style="width: 10%">Order Password:</ion-label>
               <ion-input [ngModel]="order.password" [disabled]="isDisabled"></ion-input>
             </ion-item>
+
           </section>
         </ion-accordion>
         <ion-accordion value="second" *ngIf="order.todos.length > 0">
