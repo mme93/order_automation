@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {CalendarMode} from 'ionic2-calendar/calendar';
 import {CalendarComponent} from 'ionic2-calendar';
 import {ModalController} from '@ionic/angular';
-import {EventdetailsPage} from "./eventdetails/eventdetails.page";
+import {EventdetailsPage} from './eventdetails/eventdetails.page';
 
 @Component({
   selector: 'app-calendar',
@@ -10,6 +10,8 @@ import {EventdetailsPage} from "./eventdetails/eventdetails.page";
   styleUrls: ['./calendar.page.scss'],
 })
 export class CalendarPage implements OnInit {
+
+  //https://www.youtube.com/watch?v=V8zPORSbX7Y
 
   @ViewChild(CalendarComponent, null) myCal: CalendarComponent;
 
