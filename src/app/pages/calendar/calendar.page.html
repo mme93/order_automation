@@ -15,10 +15,103 @@
           <ion-icon name="person-circle-outline"></ion-icon>
         </ion-button>
       </ion-buttons>
+      <ion-title>Calendar Events</ion-title>
     </ion-item>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="primary" (click)="today()">Today</ion-button>
+      <ion-button color="primary" (click)="changeMode('month')">Month</ion-button>
+      <ion-button color="primary" (click)="changeMode('week')">Week</ion-button>
+      <ion-button color="primary" (click)="changeMode('day')">Day</ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-<h1>Calendar</h1>
+<ion-content *ngIf="showAddenEvent">
+  <ion-item>
+    <ion-label>
+      <b>Title :</b>
+    </ion-label>
+    <ion-input type="text" placeholder="Title " [(ngModel)]="newEvent.title">
+    </ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>
+      <b>Description :</b>
+    </ion-label>
+    <ion-input type="text" placeholder="Title " [(ngModel)]="newEvent.description">
+    </ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>
+      <b>Start Date :</b>
+    </ion-label>
+    <ion-datetime
+      done-text="OK"
+      cancel-text="Cancel"
+      displayFormat="DD/MM/YYYY HH:MM"
+      pickerFormat="MMM DHH:mm"
+      [(ngModel)]="newEvent.startTime">
+    </ion-datetime>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>
+      <b>End Date :</b>
+    </ion-label>
+    <ion-datetime
+      done-text="OK"
+      cancel-text="Cancel"
+      displayFormat="DD/MM/YYYY HH:MM"
+      pickerFormat="MMM DHH:mm"
+      [(ngModel)]="newEvent.endTime"
+    >
+    </ion-datetime>
+  </ion-item>
+  <ion-button color="danger" expand="block" (click)="addEvent()">Add Event</ion-button>
 </ion-content>
+
+<ion-content *ngIf="!showAddenEvent">
+  <ion-row>
+    <ion-col size="2">
+      <ion-button fill="clear" (click)="back()">
+        <ion-icon name="arrow-back" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-col>
+
+    <ion-col size="8" class="ion-text-center">
+      <h2>{{currentMonth}}</h2>
+    </ion-col>
+
+    <ion-col size="2">
+      <ion-button fill="clear" (click)="next()">
+        <ion-icon name="arrow-forward" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+
+  <calendar
+    id="myCal"
+    [eventSource]="allEvents"
+    [calendarMode]="calendar.mode"
+    startHours="0"
+    noEventsLabel="There is no Event to display"
+    endHours="23"
+    step="30"
+    startingDayWeek="1"
+    [currentDate]="calendar.currentDate"
+    (onTitleChanged)="onViewTitleChanged($event)"
+    (onEventSelected)="onEventSelected($event)"
+    [timeInterval]="30"
+  ></calendar>
+</ion-content>
+
+<ion-fab vertical="bottom" horizontal="end">
+  <ion-fab-button (click)="showHideForm()">
+    <ion-icon *ngIf="!showAddenEvent" name="add"></ion-icon>
+    <ion-icon *ngIf="showAddenEvent" name="close"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
