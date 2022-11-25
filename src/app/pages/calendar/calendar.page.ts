@@ -12,6 +12,7 @@ import {EventdetailsPage} from './eventdetails/eventdetails.page';
 export class CalendarPage implements OnInit {
 
   //https://www.youtube.com/watch?v=V8zPORSbX7Y
+  //https://ionicframework.com/docs/api/modal
 
   @ViewChild(CalendarComponent, null) myCal: CalendarComponent;
 
