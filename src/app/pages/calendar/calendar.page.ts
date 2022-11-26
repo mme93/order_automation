@@ -3,6 +3,14 @@ import {CalendarMode} from 'ionic2-calendar/calendar';
 import {CalendarComponent} from 'ionic2-calendar';
 import {ModalController} from '@ionic/angular';
 import {EventdetailsPage} from './eventdetails/eventdetails.page';
+import {CalendarService} from '../../services/http/calendar/calendar.service';
+
+export interface CalendarView {
+  title: string;
+  description: string;
+  startTime: string;
+  endTime: string;
+}
 
 @Component({
   selector: 'app-calendar',
@@ -58,6 +66,12 @@ export class CalendarPage implements OnInit {
       description: 'My fith Description',
       startTime: new Date('November 16, 2022 13:15:30'),
       endTime: new Date('November 16, 2022 23:15:30'),
+    },
+    {
+      title: 'Masdasdasdsent',
+      description: 'My fith Description',
+      startTime: new Date('November 22, 2022 21:24:54'),
+      endTime: new Date('November 22, 2022 22:24:54'),
     }
   ];
 
@@ -77,12 +91,26 @@ export class CalendarPage implements OnInit {
   showAddenEvent: boolean;
 
   constructor(
-    private modalController: ModalController
+    private modalController: ModalController,
+    private calendarService: CalendarService
   ) {
-    this.allEvents = this.myData;
+    //this.allEvents = this.myData;
   }
-
+  //Todo: Backend Daten werden nicht richtig angezeigt
   ngOnInit() {
+    this.calendarService.getCalendarEvents().subscribe(
+      result => {
+        result.forEach(event => {
+          console.log(event.startTime+' | '+event.endTime);
+          this.allEvents.push({
+            title: event.title,
+            description: event.description,
+            startTime: new Date(event.startTime),
+            endTime: new Date(event.endTime)
+          });
+        });
+      }
+    );
   }
 
   onViewTitleChanged(title: string) {
