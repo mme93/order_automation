@@ -28,8 +28,8 @@ export class CalendarPage implements OnInit {
     {
       title: 'My first Event',
       description: 'My first Description',
-      startTime: new Date('November 26, 2022 13:15:30'),
-      endTime: new Date('November 26, 2022 23:15:30'),
+      startTime: new Date('November 27, 2022 13:15:30'),
+      endTime: new Date('November 27, 2022 23:15:30'),
     },
     {
       title: 'My second Event',
@@ -94,7 +94,7 @@ export class CalendarPage implements OnInit {
     private modalController: ModalController,
     private calendarService: CalendarService
   ) {
-    //this.allEvents = this.myData;
+    this.allEvents = this.myData;
   }
   //Todo: Backend Daten werden nicht richtig angezeigt
   ngOnInit() {
