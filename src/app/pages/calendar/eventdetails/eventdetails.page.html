@@ -1,9 +1,11 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>eventdetails</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
- <h1>{{title}}</h1>
-</ion-content>
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>{{title}}</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+  <ion-label>Description: {{description}}</ion-label>
+  </ion-card-content>
+  <ion-buttons>
+    <ion-button expand="block">OK</ion-button>
+  </ion-buttons>
+</ion-card>

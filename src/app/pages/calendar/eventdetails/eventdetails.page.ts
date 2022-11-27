@@ -8,12 +8,14 @@ import {ModalController, NavParams} from '@ionic/angular';
 })
 export class EventdetailsPage implements OnInit {
   title: string;
+  description: string;
 
   constructor(
     private modalController: ModalController,
     private navParams: NavParams
     ) {
     this.title=navParams.get('title');
+    this.description=navParams.get('description');
   }
 
   ngOnInit() {
