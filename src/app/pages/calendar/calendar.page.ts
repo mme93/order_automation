@@ -101,7 +101,7 @@ export class CalendarPage implements OnInit {
     this.calendarService.getCalendarEvents().subscribe(
       result => {
         result.forEach(event => {
-          console.log(event.startTime+' | '+event.endTime);
+          //console.log(event.startTime+' | '+event.endTime);
           this.allEvents.push({
             title: event.title,
             description: event.description,

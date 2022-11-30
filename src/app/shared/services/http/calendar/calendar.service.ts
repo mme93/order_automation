@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {CalendarView} from '../../../../pages/calendar/calendar.page';
+import {environment} from '../../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,6 @@ export class CalendarService {
         Authorization: 'Bearer '+localStorage.getItem('token')
       })
     };
-    return this.http.get<CalendarView[]>('http://localhost:8998/calendar/'+localStorage.getItem('userId'), httpOptions);
+    return this.http.get<CalendarView[]>(environment.backendUrl+'calendar/'+localStorage.getItem('userId'), httpOptions);
   }
 }
