@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {OrderService} from '../../../services/http/order/order.service';
-import {OrderSettings} from '../../../model/order/orderSettings';
-import {Todo} from '../../../model/order/todo';
+import {OrderSettings} from '../../../shared/model/order/orderSettings';
+import {Todo} from '../../../shared/model/order/todo';
+import {OrderService} from '../../../shared/services/http/order/order.service';
 
 @Component({
   selector: 'app-order-settings',

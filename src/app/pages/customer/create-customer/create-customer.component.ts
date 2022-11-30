@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
-import {CustomerService} from '../../../services/http/customer/customer.service';
 import {Router} from '@angular/router';
 import {FormBuilder, Validators} from '@angular/forms';
-import {validateEmail, validateStreet} from '../../../shared.tools/Validators';
+import {validateEmail, validateStreet} from '../../../shared/tools/Validators';
+import {CustomerService} from '../../../shared/services/http/customer/customer.service';
 
 @Component({
   selector: 'app-create-customer',

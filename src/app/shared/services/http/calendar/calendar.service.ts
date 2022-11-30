@@ -1,16 +1,15 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {environment} from '../../../../environments/environment';
-import {User} from '../../../model/firm/user';
+import {CalendarView} from '../../../../pages/calendar/calendar.page';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AccountService {
+export class CalendarService {
 
   constructor(private http: HttpClient) { }
 
-  getAccount(){
+  getCalendarEvents() {
     const httpOptions = {
       headers: new HttpHeaders({
         // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -19,7 +18,6 @@ export class AccountService {
         Authorization: 'Bearer '+localStorage.getItem('token')
       })
     };
-    return this.http.get<User>(environment.backendUrl+'user/', httpOptions);
+    return this.http.get<CalendarView[]>('http://localhost:8998/calendar/'+localStorage.getItem('userId'), httpOptions);
   }
-
 }

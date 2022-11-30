@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {CustomerService} from '../../../services/http/customer/customer.service';
-import {Customer} from '../../../model/firm/customer';
-import {OrderTodo} from '../../../model/order/todo';
-import {OrderService} from '../../../services/http/order/order.service';
 import {Router} from '@angular/router';
+import {Customer} from '../../../shared/model/firm/customer';
+import {OrderTodo} from '../../../shared/model/order/todo';
+import {CustomerService} from '../../../shared/services/http/customer/customer.service';
+import {OrderService} from '../../../shared/services/http/order/order.service';
 
 
 @Component({

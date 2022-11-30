@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Customer} from '../../../model/firm/customer';
-import {CustomerService} from '../../../services/http/customer/customer.service';
+import {CustomerService} from '../../../shared/services/http/customer/customer.service';
+import {Customer} from '../../../shared/model/firm/customer';
 
 @Component({
   selector: 'app-profile-customer',
@@ -31,7 +31,6 @@ export class ProfileCustomerComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.customerService.findCustomerByID(params.customerID).subscribe(customer => {
         this.customer = customer;
-        console.log(customer)
       });
     });
   }

@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {OrderService} from '../../../../services/http/order/order.service';
-import {Order} from '../../../../model/order/order';
-import {OrderTodo} from '../../../../model/order/todo';
+import {OrderTodo} from '../../../../shared/model/order/todo';
+import {Order} from '../../../../shared/model/order/order';
+import {OrderService} from '../../../../shared/services/http/order/order.service';
 
 @Component({
   selector: 'app-status',

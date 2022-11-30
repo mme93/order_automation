@@ -1,24 +1,27 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {environment} from '../../../../environments/environment';
-import {CalendarView} from '../../../pages/calendar/calendar.page';
+import {environment} from '../../../../../environments/environment';
+import {Company} from '../../../model/firm/company';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CalendarService {
+export class CompanyService {
 
   constructor(private http: HttpClient) { }
 
-  getCalendarEvents() {
+  getCompany(){
     const httpOptions = {
       headers: new HttpHeaders({
         // eslint-disable-next-line @typescript-eslint/naming-convention
         'Content-Type': 'application/json',
         // eslint-disable-next-line @typescript-eslint/naming-convention
-        Authorization: 'Bearer '+localStorage.getItem('token')
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        Company: localStorage.getItem('company')
       })
     };
-    return this.http.get<CalendarView[]>('http://localhost:8998/calendar/'+localStorage.getItem('userId'), httpOptions);
+    return this.http.get<Company>(environment.backendUrl+'company/', httpOptions);
   }
+
 }

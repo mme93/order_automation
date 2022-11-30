@@ -3,7 +3,7 @@ import {CalendarMode} from 'ionic2-calendar/calendar';
 import {CalendarComponent} from 'ionic2-calendar';
 import {ModalController} from '@ionic/angular';
 import {EventdetailsPage} from './eventdetails/eventdetails.page';
-import {CalendarService} from '../../services/http/calendar/calendar.service';
+import {CalendarService} from '../../shared/services/http/calendar/calendar.service';
 
 export interface CalendarView {
   title: string;

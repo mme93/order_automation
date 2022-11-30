@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {Customer} from '../../../model/firm/customer';
-import {OrderTodo, Todo} from '../../../model/order/todo';
 import {ActivatedRoute, Router} from '@angular/router';
-import {OrderService} from '../../../services/http/order/order.service';
-import {Order} from '../../../model/order/order';
+import {Order} from '../../../shared/model/order/order';
+import {Customer} from '../../../shared/model/firm/customer';
+import {OrderService} from '../../../shared/services/http/order/order.service';
+import {OrderTodo} from '../../../shared/model/order/todo';
 
 @Component({
   selector: 'app-order',

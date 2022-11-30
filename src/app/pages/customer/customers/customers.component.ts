@@ -1,10 +1,10 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {CustomerService} from '../../../services/http/customer/customer.service';
-import {Customer} from '../../../model/firm/customer';
 import {Router} from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
+import {CustomerService} from '../../../shared/services/http/customer/customer.service';
+import {Customer} from '../../../shared/model/firm/customer';
 
 interface CustomerTable{
   position: number;
