@@ -9,6 +9,13 @@
  * https://ionicframework.com/docs/layout/global-stylesheets
  */
 
+@import "theme/responsive_component_small_handy.scss";
+@import "theme/responsive_component_handy.scss";
+@import "theme/responsive_component_tablet.scss";
+@import "theme/responsive_component_laptop.scss";
+@import "theme/responsive_component_desktop.scss";
+
+
 /* Core CSS required for Ionic components to work properly */
 @import "~@ionic/angular/css/core.css";
 
@@ -62,7 +69,7 @@ ion-card{
     }
   }
 }
-.account{
+.ion-card-input-layout{
   top: 30%;
   ion-card {
     display:block;
