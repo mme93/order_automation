@@ -10,6 +10,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ErrorComponent} from './pages/error/error.component';
+import {RoutingGuard} from './shared/guard/routing.guard';
 
 @NgModule({
   declarations: [AppComponent,ErrorComponent],
@@ -21,7 +22,7 @@ import {ErrorComponent} from './pages/error/error.component';
     FormsModule,
     BrowserAnimationsModule
   ],
-  providers: [{provide: RouteReuseStrategy, useClass: IonicRouteStrategy}],
+  providers: [{provide: RouteReuseStrategy, useClass: IonicRouteStrategy},RoutingGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {

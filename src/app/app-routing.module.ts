@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import {ErrorComponent} from './pages/error/error.component';
+import {RoutingGuard} from './shared/guard/routing.guard';
 
 const routes: Routes = [
 
@@ -27,7 +28,8 @@ const routes: Routes = [
   },
   {
     path: 'test',
-    loadChildren: () => import('./pages/test/test.module').then( m => m.TestPageModule)
+    loadChildren: () => import('./pages/test/test.module').then( m => m.TestPageModule),
+    canActivate:[RoutingGuard]
   },
   {
     path: 'settings',
