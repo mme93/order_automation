@@ -19,7 +19,7 @@ export class TokenService {
         'Content-Type': 'application/json',
       })
     };
-    this.http.post<JwtResponse>('http://localhost:8998/isTokenExpired',
+    this.http.post<JwtResponse>(environment.backendUrl + 'isTokenExpired',
       JSON.stringify({jwtToken: localStorage.getItem('token')}
       ), httpOptions).subscribe(
       response => {
