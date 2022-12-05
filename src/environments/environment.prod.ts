@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  backendUrl: 'https://automationorderservice.herokuapp.com/'
+  backendUrl: 'http://services-meier.de:8998/'
 };
