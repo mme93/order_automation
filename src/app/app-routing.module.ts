@@ -16,15 +16,18 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    loadChildren: () => import('./pages/landing/landing.module').then( m => m.LandingPageModule)
+    loadChildren: () => import('./pages/landing/landing.module').then( m => m.LandingPageModule),
+    canActivate:[RoutingGuard]
   },
   {
     path: 'order',
-    loadChildren: () => import('./pages/order/order.module').then( m => m.OrderPageModule)
+    loadChildren: () => import('./pages/order/order.module').then( m => m.OrderPageModule),
+    canActivate:[RoutingGuard]
   },
   {
     path: 'customer',
-    loadChildren: () => import('./pages/customer/customer.module').then( m => m.CustomerPageModule)
+    loadChildren: () => import('./pages/customer/customer.module').then( m => m.CustomerPageModule),
+    canActivate:[RoutingGuard]
   },
   {
     path: 'test',
@@ -33,7 +36,8 @@ const routes: Routes = [
   },
   {
     path: 'settings',
-    loadChildren: () => import('./pages/settings/settings.module').then( m => m.SettingsPageModule)
+    loadChildren: () => import('./pages/settings/settings.module').then( m => m.SettingsPageModule),
+    canActivate:[RoutingGuard]
   },
   {
     path: 'external/order',
@@ -41,11 +45,13 @@ const routes: Routes = [
   },
   {
     path: 'help',
-    loadChildren: () => import('./pages/help/help.module').then( m => m.HelpPageModule)
+    loadChildren: () => import('./pages/help/help.module').then( m => m.HelpPageModule),
+    canActivate:[RoutingGuard]
   },
   {
     path: 'calendar',
-    loadChildren: () => import('./pages/calendar/calendar.module').then( m => m.CalendarPageModule)
+    loadChildren: () => import('./pages/calendar/calendar.module').then( m => m.CalendarPageModule),
+    canActivate:[RoutingGuard]
   },
   {
     path: '**',
