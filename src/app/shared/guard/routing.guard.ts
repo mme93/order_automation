@@ -12,7 +12,8 @@ export class RoutingGuard implements CanActivate {
   }
 
   canActivate() {
-    return this.tokenService.isTokenExpired();
+    this.tokenService.isTokenExpired();
+    return true;
   }
 
 }
