@@ -13,6 +13,7 @@ import {ProfileCustomerComponent} from './profile-customer/profile-customer.comp
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   imports: [
@@ -23,7 +24,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     MatTableModule,
     MatPaginatorModule,
     ReactiveFormsModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatIconModule
   ],
   declarations: [CustomerPage,CreateCustomerComponent,CustomersComponent,ProfileCustomerComponent]
 })

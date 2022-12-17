@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { TestPageRoutingModule } from './test-routing.module';
 
 import { TestPage } from './test.page';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { TestPage } from './test.page';
     FormsModule,
     IonicModule,
     TestPageRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatIconModule
   ],
   declarations: [TestPage]
 })

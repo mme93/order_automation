@@ -7,6 +7,8 @@ import {Component, OnInit} from '@angular/core';
 })
 export class TestPage implements OnInit {
 
+  icons = ['menu', 'key'];
+
   constructor() {
   }
 

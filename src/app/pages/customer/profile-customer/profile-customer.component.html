@@ -25,20 +25,26 @@
       <ion-row>
         <ion-col>
           <ion-buttons>
-            <ion-button (click)="back()">
-              <ion-icon name="arrow-back-outline"></ion-icon>
+            <ion-button (click)="back()" *ngIf="isEditing">
+              <mat-icon>arrow_back</mat-icon>
             </ion-button>
             <ion-button (click)="editOrder()" *ngIf="isEditing">
-              <ion-icon name="hammer-outline"></ion-icon>
+              <mat-icon>edit</mat-icon>
             </ion-button>
             <ion-button (click)="cancel()" *ngIf="!isEditing">
-              <ion-icon name="close-circle-outline"></ion-icon>
+              <mat-icon>cancel</mat-icon>
             </ion-button>
             <ion-button (click)="save()" *ngIf="!isEditing">
-              <ion-icon name="save-outline"></ion-icon>
+              <mat-icon>save</mat-icon>
             </ion-button>
-            <ion-button (click)="delete()">
-              <ion-icon name="trash-outline"></ion-icon>
+            <ion-button (click)="delete()" *ngIf="!isEditing">
+              <mat-icon >delete</mat-icon>
+            </ion-button>
+            <ion-button *ngIf="isEditing">
+              <mat-icon>description</mat-icon>
+            </ion-button>
+            <ion-button *ngIf="isEditing">
+              <mat-icon>note_add</mat-icon>
             </ion-button>
           </ion-buttons>
         </ion-col>

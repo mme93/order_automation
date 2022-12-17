@@ -11,6 +11,7 @@ import {FormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ErrorComponent} from './pages/error/error.component';
 import {RoutingGuard} from './shared/guard/routing.guard';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [AppComponent,ErrorComponent],
@@ -20,7 +21,8 @@ import {RoutingGuard} from './shared/guard/routing.guard';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatIconModule
   ],
   providers: [{provide: RouteReuseStrategy, useClass: IonicRouteStrategy},RoutingGuard],
   bootstrap: [AppComponent],
