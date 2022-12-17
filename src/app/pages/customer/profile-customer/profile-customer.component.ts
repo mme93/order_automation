@@ -4,7 +4,7 @@ import {CustomerService} from '../../../shared/services/http/customer/customer.s
 import {Customer} from '../../../shared/model/firm/customer';
 import {FormBuilder, Validators} from '@angular/forms';
 import {validateEmail, validateStreet} from '../../../shared/tools/Validators';
-import {ModalController} from '@ionic/angular';
+
 
 @Component({
   selector: 'app-profile-customer',
@@ -43,8 +43,7 @@ export class ProfileCustomerComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private customerService: CustomerService,
-    private formBuilder: FormBuilder,
-    private modalController: ModalController
+    private formBuilder: FormBuilder
   ) {
   }
 
@@ -111,7 +110,8 @@ export class ProfileCustomerComponent implements OnInit {
     if (result.role === 'cancel') {
       console.log('No delete');
     } else if (result.role === 'confirm') {
-      console.log('delete');
+      this.customerService.deleteCustomer(this.customer.id);
+      this.router.navigate(['/customer/customers']);
     }
   }
 
