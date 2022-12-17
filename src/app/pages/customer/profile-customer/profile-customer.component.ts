@@ -5,8 +5,6 @@ import {Customer} from '../../../shared/model/firm/customer';
 import {FormBuilder, Validators} from '@angular/forms';
 import {validateEmail, validateStreet} from '../../../shared/tools/Validators';
 import {ModalController} from '@ionic/angular';
-import {EventdetailsPage} from "../../calendar/eventdetails/eventdetails.page";
-import {InfoAlertPage} from "../../../shared/pages/info-alert/info-alert.page";
 
 @Component({
   selector: 'app-profile-customer',
@@ -36,7 +34,7 @@ export class ProfileCustomerComponent implements OnInit {
     ]]
   });
 
-
+  alert = document.createElement('ion-alert');
   isEditing = true;
 
   customer: Customer;
@@ -51,7 +49,6 @@ export class ProfileCustomerComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.cancel();
     this.route.queryParams.subscribe(params => {
       this.customerService.findCustomerByID(params.customerID).subscribe(customer => {
         this.customer = customer;
@@ -67,7 +64,7 @@ export class ProfileCustomerComponent implements OnInit {
     });
   }
 
-  saveCustomer() {
+  save() {
     this.customer.firstName = this.customerGroup.controls.firstName.value;
     this.customer.lastName = this.customerGroup.controls.lastName.value;
     this.customer.email = this.customerGroup.controls.email.value;
@@ -86,28 +83,60 @@ export class ProfileCustomerComponent implements OnInit {
     //    this.router.navigate(['/customer/customers']);
   }
 
-  save() {
-    console.log(this.customer);
-  }
-
   back() {
-
+    this.router.navigate(['/customer/customers']);
   }
 
   editOrder() {
     this.isEditing = !this.isEditing;
   }
 
-  delete() {
+  async delete() {
+    this.alert.header = 'Delete Customer';
+    this.alert.message = 'Are you sure you want to delete the customer?';
+    this.alert.buttons = [
+      {
+        text: 'Cancel',
+        role: 'cancel'
+      },
+      {
+        text: 'OK',
+        role: 'confirm'
+      }
+    ];
 
+    document.body.appendChild(this.alert);
+    await this.alert.present();
+    const result = await this.alert.onDidDismiss();
+    if (result.role === 'cancel') {
+      console.log('No delete');
+    } else if (result.role === 'confirm') {
+      console.log('delete');
+    }
   }
 
   async cancel() {
+    this.alert.header = 'Cancle update Customer';
+    this.alert.message = 'Are you sure you want to cancel without saving?';
+    this.alert.buttons = [
+      {
+        text: 'Cancel',
+        role: 'cancel'
+      },
+      {
+        text: 'OK',
+        role: 'confirm'
+      }
+    ];
+
+    document.body.appendChild(this.alert);
+    await this.alert.present();
+    const result = await this.alert.onDidDismiss();
+    if (result.role === 'cancel') {
+      console.log('No delete');
+    } else if (result.role === 'confirm') {
+      console.log('delete');
+    }
     this.isEditing = !this.isEditing;
-    const modal = await this.modalController.create({
-      component: InfoAlertPage,
-      componentProps: {contentText: 'Are you sure you want to continue without saving?'}
-    });
-    await modal.present();
   }
 }
