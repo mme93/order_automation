@@ -64,6 +64,7 @@ export class CustomerService {
         'Content-Type': 'application/json',
         // eslint-disable-next-line @typescript-eslint/naming-convention
         Authorization: 'Bearer ' + localStorage.getItem('token'),
+        //TODO: Need Company to knwo?
         // eslint-disable-next-line @typescript-eslint/naming-convention
         Company: localStorage.getItem('company')
       })
