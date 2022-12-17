@@ -56,7 +56,11 @@ const routes: Routes = [
   {
     path: '**',
     component: ErrorComponent
+  },  {
+    path: 'info-alert',
+    loadChildren: () => import('./shared/pages/info-alert/info-alert.module').then( m => m.InfoAlertPageModule)
   }
+
 
 ];
 

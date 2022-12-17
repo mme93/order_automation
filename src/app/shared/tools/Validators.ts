@@ -5,7 +5,7 @@ import {AbstractControl, ValidatorFn} from '@angular/forms';
 export function validateStreet(): ValidatorFn {
   return (control: AbstractControl): { [key: string]: boolean } => {
     if (control.value.toString() === null || control.value.toString().length === 0) {
-      console.log(control.value.toString());
+      //console.log(control.value.toString());
       return false ? {required: true} : null;
     }
     const streetSplit: string[] = control.value.toString().split(' ');

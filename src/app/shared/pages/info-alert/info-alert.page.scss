@@ -1,0 +1,16 @@
+ion-content{
+
+  ion-toolbar {
+
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+
+    .ion-content-alert-text {
+      text-align: center;
+      font-size: 32px;
+    }
+
+  }
+}
+
