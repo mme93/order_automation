@@ -40,10 +40,10 @@
             <ion-button (click)="delete()" *ngIf="!isEditing">
               <mat-icon >delete</mat-icon>
             </ion-button>
-            <ion-button *ngIf="isEditing">
+            <ion-button (click)="openCustomerOrderDialog()" *ngIf="isEditing">
               <mat-icon>description</mat-icon>
             </ion-button>
-            <ion-button *ngIf="isEditing">
+            <ion-button *ngIf="isEditing" (click)="openAddCustomerOrderDialog()">
               <mat-icon>note_add</mat-icon>
             </ion-button>
           </ion-buttons>

@@ -4,6 +4,9 @@ import {CustomerService} from '../../../shared/services/http/customer/customer.s
 import {Customer} from '../../../shared/model/firm/customer';
 import {FormBuilder, Validators} from '@angular/forms';
 import {validateEmail, validateStreet} from '../../../shared/tools/Validators';
+import {ModalController} from '@ionic/angular';
+import {OrderDialogPage} from '../../../shared/dialog/order/order-dialog/order-dialog.page';
+import {CreateOrderDialogPage} from '../../../shared/dialog/order/create-order-dialog/create-order-dialog.page';
 
 
 @Component({
@@ -43,7 +46,8 @@ export class ProfileCustomerComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private customerService: CustomerService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private modalController: ModalController
   ) {
   }
 
@@ -138,5 +142,20 @@ export class ProfileCustomerComponent implements OnInit {
       console.log('delete');
     }
     this.isEditing = !this.isEditing;
+  }
+
+  async openCustomerOrderDialog() {
+    const modal = await this.modalController.create({
+      component: OrderDialogPage
+    });
+    await modal.present();
+  }
+
+  async openAddCustomerOrderDialog() {
+    const modal = await this.modalController.create({
+      component: CreateOrderDialogPage,
+      componentProps: {value: JSON.stringify(this.customer)}
+    });
+    await modal.present();
   }
 }

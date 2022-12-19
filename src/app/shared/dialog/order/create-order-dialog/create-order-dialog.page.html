@@ -1,0 +1,110 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Create new Order</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-accordion-group [multiple]="true" [value]="['second']">
+    <ion-accordion value="first">
+      <ion-item slot="header" color="light">
+        <ion-label>Order</ion-label>
+      </ion-item>
+      <ion-card slot="content" style="margin: 0 !important;padding: 0 !important;">
+        <ion-card-content>
+          <ion-list>
+            <ion-item>
+              <ion-label>Auftragsbeschreibung</ion-label>
+              <ion-input [(ngModel)]="orderInformation"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>Ref. Nr.</ion-label>
+              <ion-input [(ngModel)]="refNr"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>Start Datum</ion-label>
+              <ion-input [ngModel]="startDate | date:'yyyy-MM-dd'" (ngModelChange)="startDate = $event" type="date"
+                         name="startDate"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>End Datum</ion-label>
+              <ion-input [ngModel]="endDate | date:'yyyy-MM-dd'" (ngModelChange)="endDate = $event" type="date"
+                         name="endDate"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>Information</ion-label>
+              <ion-input [(ngModel)]="furtherInformation"></ion-input>
+            </ion-item>
+          </ion-list>
+        </ion-card-content>
+      </ion-card>
+    </ion-accordion>
+
+    <ion-accordion value="second">
+      <ion-item slot="header" color="light">
+        <ion-label>Table</ion-label>
+      </ion-item>
+
+      <ion-list slot="content">
+        <ion-item>
+          <ion-label>Title:</ion-label>
+          <ion-input [(ngModel)]="orderTodoTitle"></ion-input>
+          <label slot="end">Add ToDo</label>
+          <ion-button slot="end" (click)="addTodo()">
+            <ion-icon name="add-circle-outline"></ion-icon>
+          </ion-button>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label>Todo:</ion-label>
+          <ion-input [(ngModel)]="orderTodo"></ion-input>
+          <label slot="end">Activate Status</label>
+          <ion-checkbox slot="end" [(ngModel)]="orderIsStatus" checked="orderIsStatus"></ion-checkbox>
+        </ion-item>
+      </ion-list>
+      <ion-card slot="content" class="dialog_table">
+
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+          <ng-container matColumnDef="position">
+            <th mat-header-cell *matHeaderCellDef> No.</th>
+            <td mat-cell *matCellDef="let row; let i = index;">{{i + 1}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="title">
+            <th mat-header-cell *matHeaderCellDef>Todo Title</th>
+            <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="context">
+            <th mat-header-cell *matHeaderCellDef>Todo context</th>
+            <td mat-cell *matCellDef="let element"> {{element.context}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef> Status</th>
+            <td mat-cell *matCellDef="let element">
+              <ion-checkbox checked="{{element.status}}"></ion-checkbox>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef>Delete</th>
+            <td mat-cell *matCellDef="let row; let i = index;">
+              <ion-button (click)="deleteTodo(i)">
+                <mat-icon>delete</mat-icon>
+              </ion-button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </ion-card>
+    </ion-accordion>
+
+  </ion-accordion-group>
+</ion-content>
+<ion-button expand="block" color="primary" (click)="saveOrder()">
+  <p *ngIf="!isLoading">Save Order</p>
+  <ion-spinner name="circular" *ngIf="isLoading">
+  </ion-spinner>
+</ion-button>
