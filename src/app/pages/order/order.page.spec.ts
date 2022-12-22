@@ -1,7 +1,10 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { IonicModule } from '@ionic/angular';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
+import {IonicModule} from '@ionic/angular';
 
-import { OrderPage } from './order.page';
+import {OrderPage} from './order.page';
+import {RouterTestingModule} from '@angular/router/testing';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {HttpClientModule} from '@angular/common/http';
 
 describe('OrderPage', () => {
   let component: OrderPage;
@@ -9,8 +12,8 @@ describe('OrderPage', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ OrderPage ],
-      imports: [IonicModule.forRoot()]
+      declarations: [OrderPage],
+      imports: [IonicModule.forRoot(), HttpClientModule, RouterTestingModule, HttpClientTestingModule]
     }).compileComponents();
 
     fixture = TestBed.createComponent(OrderPage);

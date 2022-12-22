@@ -14,7 +14,7 @@ export class OrderPage implements OnInit {
   }
 
   ngOnInit() {
-    this.orderService.getOrders().subscribe(response => this.orderSize = response.length);
+   this.orderService.getOrders().subscribe(response => this.orderSize = response.length);
   }
 
 }

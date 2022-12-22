@@ -2,13 +2,14 @@ import { TestBed } from '@angular/core/testing';
 
 import { SmsService } from './sms.service';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {HttpClientModule} from '@angular/common/http';
 
 describe('SmsService', () => {
   let service: SmsService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
+      imports: [HttpClientModule],
     });
     service = TestBed.inject(SmsService);
   });

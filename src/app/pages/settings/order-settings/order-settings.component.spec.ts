@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
 import { OrderSettingsComponent } from './order-settings.component';
+import {HttpClientModule} from '@angular/common/http';
 
 describe('OrderSettingsComponent', () => {
   let component: OrderSettingsComponent;
@@ -10,7 +11,7 @@ describe('OrderSettingsComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ OrderSettingsComponent ],
-      imports: [IonicModule.forRoot()]
+      imports: [IonicModule.forRoot(),HttpClientModule]
     }).compileComponents();
 
     fixture = TestBed.createComponent(OrderSettingsComponent);
