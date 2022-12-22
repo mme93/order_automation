@@ -1,4 +1,5 @@
-FROM node:14.15-alpine as build
+FROM node:18.12.1-alpine as build
+#FROM node:14.15-alpine as build
 WORKDIR /app
 COPY package*.json /app/
 #RUN node --max-old-space-size=512 index.js
