@@ -1,7 +1,7 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { IonicModule } from '@ionic/angular';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
+import {IonicModule} from '@ionic/angular';
 
-import { ErrorComponent } from './error.component';
+import {ErrorComponent} from './error.component';
 
 describe('ErrorComponent', () => {
   let component: ErrorComponent;
@@ -9,7 +9,7 @@ describe('ErrorComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ ErrorComponent ],
+      declarations: [ErrorComponent],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
@@ -20,5 +20,8 @@ describe('ErrorComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+  fit('try to create', () => {
+    expect('Error Page').toEqual(component.title);
   });
 });

@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {FormBuilder, Validators} from '@angular/forms';
 import {validateEmail, validateStreet} from '../../../shared/tools/Validators';
 import {CustomerService} from '../../../shared/services/http/customer/customer.service';
+import {Customer} from '../../../shared/model/firm/customer';
 
 @Component({
   selector: 'app-create-customer',
@@ -41,7 +42,8 @@ export class CreateCustomerComponent {
 
   save() {
     this.customerService.createCustomer(
-      {
+      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      <Customer>{
         id: '-1',
         firstName: this.customerGroup.controls.firstName.value,
         lastName: this.customerGroup.controls.lastName.value,

@@ -8,8 +8,8 @@ import {OrderService} from '../../../shared/services/http/order/order.service';
   styleUrls: ['./order.page.scss'],
 })
 export class OrderPage implements OnInit {
-  orderId: string;
-  password: string;
+  orderId: string | undefined;
+  password: string| undefined;
   isLoading = false;
 
   constructor(private orderService: OrderService, private router: Router) {
@@ -20,19 +20,21 @@ export class OrderPage implements OnInit {
 
   login() {
     this.isLoading = true;
-    this.orderService.getExternalOrder(this.orderId, this.password).subscribe(
-      response => {
-        console.log(response);
-        this.router.navigate(['/external/order/status'],
-          {
-            queryParams: {orderId: this.orderId, password: this.password}
-          }
-        );
-      },
-      error => {
-        console.log('error: ' + error.status);
-        this.isLoading = false;
-      }
-    );
+    if (this.orderId != null && this.password != null) {
+      this.orderService.getExternalOrder(this.orderId, this.password).subscribe(
+        response => {
+          console.log(response);
+          this.router.navigate(['/external/order/status'],
+            {
+              queryParams: {orderId: this.orderId, password: this.password}
+            }
+          );
+        },
+        error => {
+          console.log('error: ' + error.status);
+          this.isLoading = false;
+        }
+      );
+    }
   }
 }

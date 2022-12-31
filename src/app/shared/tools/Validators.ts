@@ -3,10 +3,10 @@ import {AbstractControl, ValidatorFn} from '@angular/forms';
 
 // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
 export function validateStreet(): ValidatorFn {
-  return (control: AbstractControl): { [key: string]: boolean } => {
+  return (control: AbstractControl): { [p: string]: boolean } | null => {
     if (control.value.toString() === null || control.value.toString().length === 0) {
       //console.log(control.value.toString());
-      return false ? {required: true} : null;
+      return null;
     }
     const streetSplit: string[] = control.value.toString().split(' ');
     const splitLenght = streetSplit.length - 1;
@@ -24,7 +24,7 @@ export function validateStreet(): ValidatorFn {
 
 // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
 export function validateEmail(): ValidatorFn {
-  return (control: AbstractControl): { [key: string]: boolean } => !(
+  return (control: AbstractControl): { validateDate: boolean } | null => !(
     (!control.value.toString().includes(' ')) && control.value.toString().includes('@')) ? {validateDate: true} : null;
 }
 

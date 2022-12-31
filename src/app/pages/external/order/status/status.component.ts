@@ -12,6 +12,7 @@ import {OrderService} from '../../../../shared/services/http/order/order.service
 export class StatusComponent implements OnInit {
   orderStatus = 0;
   orderTodos: OrderTodo[] = [];
+
   order: Order = {
     id: -1,
     customerID: '',
@@ -26,9 +27,13 @@ export class StatusComponent implements OnInit {
     company: '',
     orderInformation: '',
     refNr: '',
+    // @ts-ignore
     createDate: null,
+    // @ts-ignore
     startDate: null,
+    // @ts-ignore
     endDate: null,
+    // @ts-ignore
     furtherInformation: null,
     todos: this.orderTodos,
     userId: '',
@@ -42,7 +47,8 @@ export class StatusComponent implements OnInit {
   ngOnInit() {
     this.route.queryParamMap
       .subscribe((params) => {
-        this.orderService.getOrder(params.get('orderId'), params.get('password')).subscribe(
+        // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+        this.orderService.getOrder(<string>params.get('orderId'), <string>params.get('password')).subscribe(
           response => {
             this.order = response;
             this.orderStatus=Number(response.status);

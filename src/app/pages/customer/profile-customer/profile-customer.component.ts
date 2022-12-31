@@ -40,7 +40,7 @@ export class ProfileCustomerComponent implements OnInit {
   alert = document.createElement('ion-alert');
   isEditing = true;
 
-  customer: Customer;
+  customer: Customer | undefined;
 
   constructor(
     private route: ActivatedRoute,
@@ -52,8 +52,8 @@ export class ProfileCustomerComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.queryParams.subscribe(params => {
-      this.customerService.findCustomerByID(params.customerID).subscribe(customer => {
+    this.route.queryParams.subscribe(({customerID}) => {
+      this.customerService.findCustomerByID(customerID).subscribe(customer => {
         this.customer = customer;
         this.customerGroup.controls.firstName.setValue(customer.firstName);
         this.customerGroup.controls.lastName.setValue(customer.lastName);
@@ -68,22 +68,32 @@ export class ProfileCustomerComponent implements OnInit {
   }
 
   save() {
-    this.customer.firstName = this.customerGroup.controls.firstName.value;
-    this.customer.lastName = this.customerGroup.controls.lastName.value;
-    this.customer.email = this.customerGroup.controls.email.value;
-    this.customer.city = this.customerGroup.controls.city.value;
-    this.customer.street = this.customerGroup.controls.street.value;
-    this.customer.postalCode = this.customerGroup.controls.postalCode.value;
-    this.customer.callNumber = this.customerGroup.controls.callNumber.value;
-    this.customer.information = this.customerGroup.controls.information.value;
-
-    this.customerService.updateCustomer(this.customer).subscribe(response => {
-        console.log(response);
-      },
-      error => {
-        console.log(error);
-      });
-    //    this.router.navigate(['/customer/customers']);
+    if (this.customer) {
+      if (typeof this.customerGroup.controls.firstName.value === 'string' &&
+        typeof this.customerGroup.controls.lastName.value === 'string' &&
+        typeof this.customerGroup.controls.email.value === 'string' &&
+        typeof this.customerGroup.controls.city.value === 'string' &&
+        typeof this.customerGroup.controls.street.value === 'string' &&
+        typeof this.customerGroup.controls.postalCode.value === 'string' &&
+        typeof this.customerGroup.controls.callNumber.value === 'string' &&
+        typeof this.customerGroup.controls.information.value === 'string') {
+        this.customer.firstName = this.customerGroup.controls.firstName.value;
+        this.customer.lastName = this.customerGroup.controls.lastName.value;
+        this.customer.email = this.customerGroup.controls.email.value;
+        this.customer.city = this.customerGroup.controls.city.value;
+        this.customer.street = this.customerGroup.controls.street.value;
+        this.customer.postalCode = this.customerGroup.controls.postalCode.value;
+        this.customer.callNumber = this.customerGroup.controls.callNumber.value;
+        this.customer.information = this.customerGroup.controls.information.value;
+      }
+      this.customerService.updateCustomer(this.customer).subscribe(response => {
+          console.log(response);
+        },
+        error => {
+          console.log(error);
+        });
+      //    this.router.navigate(['/customer/customers']);
+    }
   }
 
   back() {
@@ -114,6 +124,7 @@ export class ProfileCustomerComponent implements OnInit {
     if (result.role === 'cancel') {
       console.log('No delete');
     } else if (result.role === 'confirm') {
+      // @ts-ignore
       this.customerService.deleteCustomer(this.customer.id);
       this.router.navigate(['/customer/customers']);
     }

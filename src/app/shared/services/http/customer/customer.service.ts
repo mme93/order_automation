@@ -13,6 +13,7 @@ export class CustomerService {
   }
 
   updateCustomer(customer: Customer) {
+    //
     const httpOptions = {
       headers: new HttpHeaders({
         // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -20,7 +21,7 @@ export class CustomerService {
         // eslint-disable-next-line @typescript-eslint/naming-convention
         Authorization: 'Bearer ' + localStorage.getItem('token'),
         // eslint-disable-next-line @typescript-eslint/naming-convention
-        Company: localStorage.getItem('company')
+        Company: localStorage.getItem(`company`)|| '{}'
       })
     };
     return this.http.put(environment.backendUrl + 'customer/update', JSON.stringify(customer), httpOptions);
@@ -33,8 +34,8 @@ export class CustomerService {
         'Content-Type': 'application/json',
         // eslint-disable-next-line @typescript-eslint/naming-convention
         Authorization: 'Bearer ' + localStorage.getItem('token'),
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        Company: localStorage.getItem('company')
+        // eslint-disable-next-line @typescript-eslint/naming-convention,@typescript-eslint/consistent-type-assertions
+        Company: <string>localStorage.getItem('company')
       })
     };
     return this.http.get<Customer[]>(environment.backendUrl + 'customer/all', httpOptions);
@@ -47,8 +48,8 @@ export class CustomerService {
         'Content-Type': 'application/json',
         // eslint-disable-next-line @typescript-eslint/naming-convention
         Authorization: 'Bearer ' + localStorage.getItem('token'),
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        Company: localStorage.getItem('company')
+        // eslint-disable-next-line @typescript-eslint/naming-convention,@typescript-eslint/consistent-type-assertions
+        Company: <string>localStorage.getItem('company')
       })
     };
     return this.http.post<Customer[]>(environment.backendUrl + 'customer/create', JSON.stringify(customer), httpOptions).subscribe(
@@ -65,11 +66,12 @@ export class CustomerService {
         // eslint-disable-next-line @typescript-eslint/naming-convention
         Authorization: 'Bearer ' + localStorage.getItem('token'),
         //TODO: Need Company to knwo?
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        Company: localStorage.getItem('company')
+
+        // eslint-disable-next-line @typescript-eslint/naming-convention,@typescript-eslint/consistent-type-assertions
+        Company: <string>localStorage.getItem('company')
       })
     };
-    return this.http.delete<Customer[]>(environment.backendUrl +'customer/delete/' + id, httpOptions);
+    return this.http.delete<Customer[]>(environment.backendUrl + 'customer/delete/' + id, httpOptions);
   }
 
 
@@ -80,10 +82,10 @@ export class CustomerService {
         'Content-Type': 'application/json',
         // eslint-disable-next-line @typescript-eslint/naming-convention
         Authorization: 'Bearer ' + localStorage.getItem('token'),
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        Company: localStorage.getItem('company')
+        // eslint-disable-next-line @typescript-eslint/naming-convention,@typescript-eslint/consistent-type-assertions
+        Company: <string>localStorage.getItem('company')
       })
     };
-    return this.http.get<Customer>(environment.backendUrl + 'customer/'+customerID, httpOptions);
+    return this.http.get<Customer>(environment.backendUrl + 'customer/' + customerID, httpOptions);
   }
 }

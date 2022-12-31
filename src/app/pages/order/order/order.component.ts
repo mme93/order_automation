@@ -27,8 +27,11 @@ export class OrderComponent implements OnInit {
 
     orderInformation: '',
     refNr: '',
+    // @ts-ignore
     createDate: null,
+    // @ts-ignore
     startDate: null,
+    // @ts-ignore
     endDate: null,
     furtherInformation: '',
     todos: [],
@@ -36,8 +39,8 @@ export class OrderComponent implements OnInit {
     status: '',
     password: ''
   };
-  sourceURL;
-  customer: Customer;
+  sourceURL: any;
+  customer: Customer | undefined;
   isDisabled = true;
   orderStatus: boolean [] = [false, false, false, false];
 
@@ -51,11 +54,12 @@ export class OrderComponent implements OnInit {
   ngOnInit() {
     this.orderStatus = [false, false, false, false];
     this.route.queryParams.subscribe(params => {
-      this.sourceURL = params.sourceURL;
+      this.sourceURL = params['sourceURL'];
       this.orderService.getOrders().subscribe(orders => {
         orders.forEach(order => {
-          if (order.id.toString() === params.orderId) {
+          if (order.id.toString() === params['orderId']) {
             this.order = order;
+            // @ts-ignore
             this.orderStatus[this.order.status] = true;
           }
         });

@@ -20,7 +20,7 @@ interface CustomerTable{
 })
 export class CustomersComponent implements OnInit {
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
 
   displayedColumns: string[] = ['position','firstName', 'lastName', 'callnumber','open'];
   dataSource = new MatTableDataSource<CustomerTable>([]);
@@ -43,6 +43,7 @@ export class CustomersComponent implements OnInit {
           pos++;
         });
         this.dataSource = new MatTableDataSource<CustomerTable>(this.customerTable);
+        // @ts-ignore
         this.dataSource.paginator = this.paginator;
     },
     error => console.log(error)

@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {CalendarMode} from 'ionic2-calendar/calendar';
+import {CalendarMode, IEvent} from 'ionic2-calendar/calendar';
 import {CalendarComponent} from 'ionic2-calendar';
 import {ModalController} from '@ionic/angular';
 import {EventdetailsPage} from './eventdetails/eventdetails.page';
@@ -22,7 +22,8 @@ export class CalendarPage implements OnInit {
   //https://www.youtube.com/watch?v=V8zPORSbX7Y
   //https://ionicframework.com/docs/api/modal
 
-  @ViewChild(CalendarComponent, null) myCal: CalendarComponent;
+
+  @ViewChild(CalendarComponent, {static: true}) myCal: CalendarComponent | undefined;
 
   myData = [
     {
@@ -76,32 +77,38 @@ export class CalendarPage implements OnInit {
   ];
 
   allEvents = [];
-  currentMonth: string;
+  currentMonth: string | undefined;
   calendar = {
     mode: 'month' as CalendarMode,
     currentDate: new Date()
   };
-  newEvent = {
+
+  newEvent: IEvent = {
     title: '',
     description: '',
+    // @ts-ignore
     startTime: '',
+    // @ts-ignore
     endTime: ''
   };
 
-  showAddenEvent: boolean;
+  showAddenEvent: boolean | undefined;
 
   constructor(
     private modalController: ModalController,
     private calendarService: CalendarService
   ) {
+    // @ts-ignore
     this.allEvents = this.myData;
   }
+
   //Todo: Backend Daten werden nicht richtig angezeigt
   ngOnInit() {
     this.calendarService.getCalendarEvents().subscribe(
       result => {
         result.forEach(event => {
           //console.log(event.startTime+' | '+event.endTime);
+          // @ts-ignore
           this.allEvents.push({
             title: event.title,
             description: event.description,
@@ -117,7 +124,7 @@ export class CalendarPage implements OnInit {
     this.currentMonth = title;
   }
 
-  async onEventSelected(ev) {
+  async onEventSelected(ev: IEvent) {
     this.newEvent = ev;
     const modal = await this.modalController.create({
       component: EventdetailsPage,
@@ -127,10 +134,12 @@ export class CalendarPage implements OnInit {
   }
 
   next() {
+    // @ts-ignore
     this.myCal.slideNext();
   }
 
   back() {
+    // @ts-ignore
     this.myCal.slidePrev();
   }
 
@@ -139,7 +148,9 @@ export class CalendarPage implements OnInit {
     this.newEvent = {
       title: '',
       description: '',
+      // @ts-ignore
       startTime: new Date().toISOString(),
+      // @ts-ignore
       endTime: new Date().toISOString()
     };
   }
@@ -153,8 +164,10 @@ export class CalendarPage implements OnInit {
   }
 
   addEvent() {
+    // @ts-ignore
     this.allEvents.push({
       title: this.newEvent.title,
+      // @ts-ignore
       description: this.newEvent.description,
       startTime: new Date(this.newEvent.startTime),
       endTime: new Date(this.newEvent.endTime)

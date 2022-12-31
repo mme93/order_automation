@@ -27,6 +27,7 @@ export class TokenService {
       ).toPromise();
       localStorage.setItem('token', Object(response).jwtToken);
     } catch (error) {
+      // @ts-ignore
       if (error.status === 403) {
         await this.router.navigate(['/account/login']);
       }

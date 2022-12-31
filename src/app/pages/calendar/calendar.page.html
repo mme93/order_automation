@@ -41,8 +41,7 @@
     <ion-label>
       <b>Description :</b>
     </ion-label>
-    <ion-input type="text" placeholder="Title " [(ngModel)]="newEvent.description">
-    </ion-input>
+
   </ion-item>
 
   <ion-item>
@@ -97,11 +96,6 @@
     id="myCal"
     [eventSource]="allEvents"
     [calendarMode]="calendar.mode"
-    startHours="0"
-    noEventsLabel="There is no Event to display"
-    endHours="23"
-    step="30"
-    startingDayWeek="1"
     [currentDate]="calendar.currentDate"
     (onTitleChanged)="onViewTitleChanged($event)"
     (onEventSelected)="onEventSelected($event)"

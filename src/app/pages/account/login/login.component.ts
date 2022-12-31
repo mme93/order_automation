@@ -28,18 +28,21 @@ export class LoginComponent {
   login() {
     this.isLoading = true;
 
-    this.loginService.login(this.user.controls.name.value, this.user.controls.password.value).subscribe(
-      response => {
-        this.isLoading = false;
-        localStorage.setItem('token', response.token);
-        localStorage.setItem('company', response.company);
-        localStorage.setItem('userId', response.userId);
-        this.route.navigate(['home']);
-      }, error => {
-        this.isLoading = false;
-        this.isLogin = false;
-        console.log(error);
-      }
-    );
+    if (typeof this.user.controls.name.value === 'string' &&
+      typeof this.user.controls.password.value === 'string') {
+      this.loginService.login(this.user.controls.name.value, this.user.controls.password.value).subscribe(
+        response => {
+          this.isLoading = false;
+          localStorage.setItem('token', response.token);
+          localStorage.setItem('company', response.company);
+          localStorage.setItem('userId', response.userId);
+          this.route.navigate(['home']);
+        }, error => {
+          this.isLoading = false;
+          this.isLogin = false;
+          console.log(error);
+        }
+      );
+    }
   }
 }

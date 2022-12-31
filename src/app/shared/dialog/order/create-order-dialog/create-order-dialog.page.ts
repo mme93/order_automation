@@ -75,7 +75,8 @@ export class CreateOrderDialogPage {
       postalCode: this.customer.postalCode,
       callNumber: this.customer.callNumber,
       information: this.customer.information,
-      company: localStorage.getItem('company'),
+      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      company: <string>localStorage.getItem('company'),
 
       orderInformation: this.orderInformation,
       refNr: this.refNr,
@@ -84,7 +85,8 @@ export class CreateOrderDialogPage {
       endDate: this.endDate,
       furtherInformation: this.furtherInformation,
       todos: this.orderTodos,
-      userId: localStorage.getItem('userId'),
+      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      userId: <string>localStorage.getItem('userId'),
       status: '0',
       password: ''
     })

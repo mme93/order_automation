@@ -14,7 +14,7 @@ import {OrderService} from '../../../shared/services/http/order/order.service';
 })
 export class OrdersComponent implements AfterViewInit {
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
 
   resultOrder: Order[] = [];
   orders: OrderElement[] = [];
@@ -42,6 +42,7 @@ export class OrdersComponent implements AfterViewInit {
           counter++;
         });
         this.dataSource = new MatTableDataSource<OrderElement>(this.orders);
+        // @ts-ignore
         this.dataSource.paginator = this.paginator;
       }, error => console.log(error));
   }
@@ -53,6 +54,7 @@ export class OrdersComponent implements AfterViewInit {
         queryParams: {sourceURL: '/order/orders', orderId: this.resultOrder[index-1].id}
       });
   }
+  // @ts-ignore
   getStatusTextFromNumber(status: string): string{
     if(status.toString() === '0'){
       return 'Created';
@@ -64,12 +66,14 @@ export class OrdersComponent implements AfterViewInit {
       return 'Paused';
     }
   }
+  // @ts-ignore
   handleChange(event) {
     const query: string = event.target.value.toLowerCase();
     this.dataSource = new MatTableDataSource<OrderElement>(
       this.orderFilterService.filterOrder(
         query, new MatTableDataSource<OrderElement>(this.orders)
       ));
+    // @ts-ignore
     this.dataSource.paginator = this.paginator;
   }
 }

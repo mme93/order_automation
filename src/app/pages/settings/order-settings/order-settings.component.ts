@@ -10,7 +10,7 @@ import {OrderService} from '../../../shared/services/http/order/order.service';
 })
 export class OrderSettingsComponent implements OnInit {
   newTodo = '';
-  orderSettings: OrderSettings;
+  orderSettings: OrderSettings | undefined;
   todos: Todo[] = [];
 
   constructor(private orderService: OrderService) {

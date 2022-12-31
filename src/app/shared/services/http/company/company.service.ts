@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../../../../environments/environment';
 import {Company} from '../../../model/firm/company';
@@ -8,9 +8,10 @@ import {Company} from '../../../model/firm/company';
 })
 export class CompanyService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
-  getCompany(){
+  getCompany() {
     const httpOptions = {
       headers: new HttpHeaders({
         // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -18,10 +19,10 @@ export class CompanyService {
         // eslint-disable-next-line @typescript-eslint/naming-convention
         Authorization: 'Bearer ' + localStorage.getItem('token'),
         // eslint-disable-next-line @typescript-eslint/naming-convention
-        Company: localStorage.getItem('company')
+        Company: localStorage.getItem('company') || '{}'
       })
     };
-    return this.http.get<Company>(environment.backendUrl+'company/', httpOptions);
+    return this.http.get<Company>(environment.backendUrl + 'company/', httpOptions);
   }
 
 }

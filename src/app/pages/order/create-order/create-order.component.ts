@@ -4,6 +4,7 @@ import {Customer} from '../../../shared/model/firm/customer';
 import {OrderTodo} from '../../../shared/model/order/todo';
 import {CustomerService} from '../../../shared/services/http/customer/customer.service';
 import {OrderService} from '../../../shared/services/http/order/order.service';
+import {Order} from '../../../shared/model/order/order';
 
 
 @Component({
@@ -34,7 +35,7 @@ export class CreateOrderComponent implements OnInit {
     city: '',
     postalCode: '',
     callNumber: '',
-    company: localStorage.getItem('company'),
+    company: '',
     information: ''
   };
   selectedCustomer = '';
@@ -66,6 +67,8 @@ export class CreateOrderComponent implements OnInit {
     private orderService: OrderService,
     private router: Router
   ) {
+    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+    this.newCustomer.company = <string>localStorage.getItem('company');
   }
 
   ngOnInit() {
@@ -121,7 +124,8 @@ export class CreateOrderComponent implements OnInit {
     this.isLoading = true;
     //Existing Customer
     if (this.customerChoice === this.customerChoiceArray[0]) {
-      this.orderService.createOrder({
+      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      this.orderService.createOrder(<Order>{
         id: -1,
         customerID: this.existingCustomer.id,
         firstName: this.existingCustomer.firstName,
@@ -168,7 +172,8 @@ export class CreateOrderComponent implements OnInit {
         postalCode: this.newCustomer.postalCode,
         callNumber: this.newCustomer.callNumber,
         information: this.newCustomer.information,
-        company: localStorage.getItem('company'),
+        // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+        company: <string>localStorage.getItem('company'),
 
         orderInformation: this.orderInformation,
         refNr: this.refNr,
@@ -177,7 +182,8 @@ export class CreateOrderComponent implements OnInit {
         endDate: this.endDate,
         furtherInformation: this.furtherInformation,
         todos: this.orderTodos,
-        userId: localStorage.getItem('userId'),
+        // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+        userId: <string>localStorage.getItem('userId'),
         status: '0',
         password: ''
       })
@@ -204,7 +210,8 @@ export class CreateOrderComponent implements OnInit {
         postalCode: '',
         callNumber: this.onlyTelephoneNumber,
         information: '',
-        company: localStorage.getItem('company'),
+        // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+        company: <string>localStorage.getItem('company'),
 
         orderInformation: this.orderInformation,
         refNr: this.refNr,
@@ -213,7 +220,8 @@ export class CreateOrderComponent implements OnInit {
         endDate: this.endDate,
         furtherInformation: this.furtherInformation,
         todos: this.orderTodos,
-        userId: localStorage.getItem('userId'),
+        // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+        userId: <string>localStorage.getItem('userId'),
         status: '0',
         password: ''
       })
