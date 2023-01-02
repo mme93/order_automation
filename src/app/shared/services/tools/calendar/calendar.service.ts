@@ -22,6 +22,10 @@ export interface CalendarMonthView {
   isCurrentMonth: boolean;
 }
 
+export interface CalendarMonthViewRow {
+  row: CalendarMonthView[];
+}
+
 export interface CalendarWeekView {
   days: CalendarDay;
   isCurrentMonth: boolean;
@@ -35,14 +39,14 @@ export class CalendarService {
 
   getCalendarMonthView(calendarModel: CalendarModel, yearsIndex: number, monthsIndex: number): CalendarMonthView[] {
     const month: CalendarMonthView[] = [];
-    let beforeMonthDays=0;
+    let beforeMonthDays = 0;
     if (monthsIndex === 0) {
       // @ts-ignore
       beforeMonthDays = calendarModel.years[yearsIndex][0][0].days.getDay();
-    }else if (monthsIndex === 11) {
+    } else if (monthsIndex === 11) {
       // @ts-ignore
       beforeMonthDays = calendarModel.years[yearsIndex][11][0].days.getDay();
-    }else {
+    } else {
       // @ts-ignore
       beforeMonthDays = calendarModel.years[yearsIndex][monthsIndex][0].days.getDay();
     }
@@ -99,7 +103,7 @@ export class CalendarService {
           isCurrentMonth: false
         });
         afterDay++;
-      }else{
+      } else {
         let testDate;
         if (monthsIndex === 0) {
           // @ts-ignore
@@ -109,20 +113,36 @@ export class CalendarService {
           testDate = calendarModel.years[yearsIndex][11][currentDay].days;
         } else {
           // @ts-ignore
-          console.log(i+' | '+monthsSize+' | '+beforeMonthDays);
-          // @ts-ignore
           testDate = calendarModel.years[yearsIndex][monthsIndex][currentDay].days;
         }
         month.push({
           day: currentDay + 1,
           // @ts-ignore
           date: testDate,
-          isCurrentMonth: false
+          isCurrentMonth: true
         });
         currentDay++;
       }
     }
     return month;
+  }
+
+  getCalendarMonthRow(month: CalendarMonthView[]) {
+    const rows: CalendarMonthViewRow[] = [];
+    let row: CalendarMonthView[] = [];
+    for (let i = 0; i < (month.length / 7); i++) {
+      row.push(month[i*7]);
+      row.push(month[1+(i*7)]);
+      row.push(month[2+(i*7)]);
+      row.push(month[3+(i*7)]);
+      row.push(month[4+(i*7)]);
+      row.push(month[5+(i*7)]);
+      row.push(month[6+(i*7)]);
+      // @ts-ignore
+      rows.push(row);
+      row = [];
+    }
+    return rows;
   }
 
   getCalendarWeekView() {

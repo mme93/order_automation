@@ -30,10 +30,8 @@ export class TestPage implements OnInit {
   ngOnInit() {
 
     this.calendarModel = this.calendarService.getCalendarDates();
-    console.log(
-      this.calendarService.getCalendarMonthView(
-        this.calendarModel,73,2));
-    //console.log(this.calendarService.getTest(this.calendarModel,73,1));
+    this.calendarService.getCalendarMonthRow(this.calendarService.getCalendarMonthView(
+      this.calendarModel, this.currentYearIndex, this.currentMonthIndex));
   }
 
 
