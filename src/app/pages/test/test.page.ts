@@ -1,4 +1,11 @@
 import {Component, OnInit} from '@angular/core';
+import {
+  CalendarModel,
+  CalendarMonth,
+  CalendarMonthView,
+  CalendarService
+} from '../../shared/services/tools/calendar/calendar.service';
+
 
 @Component({
   selector: 'app-test',
@@ -6,13 +13,43 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./test.page.scss'],
 })
 export class TestPage implements OnInit {
+  months = ['January', 'February', 'March', 'April', 'Mai', 'Jun', 'July', 'August', 'September', 'October', 'November', 'December'];
+  days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+  mode = ['month', 'week', 'day'];
+  years = this.calendarService.getYears();
+  currentYearIndex = this.calendarService.getCurrentYearIndex();
+  currentMonthIndex = this.calendarService.getCurrentMonthIndex();
+  shownYear = this.years[this.currentYearIndex];
+  shownMonth = this.months[this.currentMonthIndex];
+  calendarModel: CalendarModel = {years: []};
 
-  icons = ['menu', 'key'];
 
-  constructor() {
+  constructor(private calendarService: CalendarService) {
   }
 
   ngOnInit() {
+
+    this.calendarModel = this.calendarService.getCalendarDates();
+    console.log(
+      this.calendarService.getCalendarMonthView(
+        this.calendarModel,73,2));
+    //console.log(this.calendarService.getTest(this.calendarModel,73,1));
   }
 
+
+  next() {
+
+  }
+
+  back() {
+
+  }
+
+  today() {
+
+  }
+
+  changeMode(month: string) {
+
+  }
 }
