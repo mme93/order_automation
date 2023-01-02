@@ -62,8 +62,7 @@
               "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
-              "namedChunks": true,
-              "allowedHosts": ["services-meier.de/"]
+              "namedChunks": true
             },
             "ci": {
               "progress": false
