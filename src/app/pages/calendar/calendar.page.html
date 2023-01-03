@@ -1,22 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-item lines="none">
-      <ion-buttons>
-        <ion-menu-button menu="main-menu"></ion-menu-button>
-      </ion-buttons>
-      <div class="firm_text">
-        <ion-label>Services</ion-label>
-      </div>
-      <ion-buttons slot="end">
-        <ion-button href="/settings">
-          <ion-icon name="settings-outline"></ion-icon>
-        </ion-button>
-        <ion-button href="/account/profile">
-          <ion-icon name="person-circle-outline"></ion-icon>
-        </ion-button>
-      </ion-buttons>
-      <ion-title>Calendar Events</ion-title>
-    </ion-item>
+    <ion-title>Calender</ion-title>
   </ion-toolbar>
   <ion-toolbar>
     <ion-buttons slot="start">
@@ -28,52 +12,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content *ngIf="showAddenEvent">
-  <ion-item>
-    <ion-label>
-      <b>Title :</b>
-    </ion-label>
-    <ion-input type="text" placeholder="Title " [(ngModel)]="newEvent.title">
-    </ion-input>
-  </ion-item>
-
-  <ion-item>
-    <ion-label>
-      <b>Description :</b>
-    </ion-label>
-
-  </ion-item>
-
-  <ion-item>
-    <ion-label>
-      <b>Start Date :</b>
-    </ion-label>
-    <ion-datetime
-      done-text="OK"
-      cancel-text="Cancel"
-      displayFormat="DD/MM/YYYY HH:MM"
-      pickerFormat="MMM DHH:mm"
-      [(ngModel)]="newEvent.startTime">
-    </ion-datetime>
-  </ion-item>
-
-  <ion-item>
-    <ion-label>
-      <b>End Date :</b>
-    </ion-label>
-    <ion-datetime
-      done-text="OK"
-      cancel-text="Cancel"
-      displayFormat="DD/MM/YYYY HH:MM"
-      pickerFormat="MMM DHH:mm"
-      [(ngModel)]="newEvent.endTime"
-    >
-    </ion-datetime>
-  </ion-item>
-  <ion-button color="danger" expand="block" (click)="addEvent()">Add Event</ion-button>
-</ion-content>
-
-<ion-content *ngIf="!showAddenEvent">
+<ion-content>
   <ion-row>
     <ion-col size="2">
       <ion-button fill="clear" (click)="back()">
@@ -82,7 +21,7 @@
     </ion-col>
 
     <ion-col size="8" class="ion-text-center">
-      <h2>{{currentMonth}}</h2>
+      <h1>{{shownYear}} {{shownMonth}}</h1>
     </ion-col>
 
     <ion-col size="2">
@@ -91,21 +30,149 @@
       </ion-button>
     </ion-col>
   </ion-row>
+  <ion-card *ngIf="currentMode==='week'" class="calendar_card_week">
+    <ion-row class="calendar_card_week_name">
+      <ion-col *ngFor="let dayCol of days" size="1.714" style="border-style: solid">
+        {{dayCol}}
+      </ion-col>
+    </ion-row>
 
-  <calendar
-    id="myCal"
-    [eventSource]="allEvents"
-    [calendarMode]="calendar.mode"
-    [currentDate]="calendar.currentDate"
-    (onTitleChanged)="onViewTitleChanged($event)"
-    (onEventSelected)="onEventSelected($event)"
-    [timeInterval]="30"
-  ></calendar>
+    <ion-row *ngFor="let row of rows;let i=index" class="calendar_row_week">
+      <ion-col size="1.714" *ngIf="i === selectedRowIndex" class="calendar_col_week">
+
+      </ion-col>
+
+      <ion-col size="1.714" *ngIf="i === selectedRowIndex" class="calendar_col_week">
+
+      </ion-col>
+
+      <ion-col size="1.714" *ngIf="i === selectedRowIndex" class="calendar_col_week">
+
+      </ion-col>
+
+      <ion-col size="1.714" *ngIf="i === selectedRowIndex" class="calendar_col_week">
+
+      </ion-col>
+
+      <ion-col size="1.714" *ngIf="i === selectedRowIndex" class="calendar_col_week">
+
+      </ion-col>
+
+      <ion-col size="1.714" *ngIf="i === selectedRowIndex" class="calendar_col_week">
+
+      </ion-col>
+
+      <ion-col size="1.714" *ngIf="i === selectedRowIndex" class="calendar_col_week">
+
+      </ion-col>
+    </ion-row>
+  </ion-card>
+
+  <ion-card *ngIf="currentMode==='day'" class="calendar_card_day">
+
+    <ion-row *ngFor="let hour of hours" class="calendar_row_day">
+      {{hour}}
+    </ion-row>
+  </ion-card>
+
+  <ion-card *ngIf="currentMode==='month'">
+    <ion-row>
+      <ion-col *ngFor="let dayCol of days" size="1.714" style="border-style: solid">
+        {{dayCol}}
+      </ion-col>
+    </ion-row>
+    <div *ngIf="currentMonthIndex === todayMonthIndex">
+      <ion-row *ngFor="let row of rows;let i=index" class="calendar_row">
+        <ion-col size="1.714" class="calendar_col_today" *ngIf="i * 7 === todayDayIndex">
+          {{month[i * 7].day}}
+        </ion-col>
+
+        <ion-col size="1.714" class="calendar_col" *ngIf="i * 7 !== todayDayIndex">
+          {{month[i * 7].day}}
+        </ion-col>
+
+        <ion-col size="1.714" class="calendar_col_today" *ngIf="1 + (i * 7) === todayDayIndex ">
+          {{month[1 + (i * 7)].day}}
+        </ion-col>
+
+        <ion-col size="1.714" class="calendar_col" *ngIf="1 + (i * 7) !== todayDayIndex ">
+          {{month[1 + (i * 7)].day}}
+        </ion-col>
+
+        <ion-col size="1.714" class="calendar_col_today" *ngIf="2 + (i * 7) === todayDayIndex ">
+          {{month[2 + (i * 7)].day}}
+        </ion-col>
+
+        <ion-col size="1.714" class="calendar_col" *ngIf="2 + (i * 7) !== todayDayIndex ">
+          {{month[2 + (i * 7)].day}}
+        </ion-col>
+
+        <ion-col size="1.714" class="calendar_col_today" *ngIf="3 + (i * 7) === todayDayIndex ">
+          {{month[3 + (i * 7)].day}}
+        </ion-col>
+
+        <ion-col size="1.714" class="calendar_col" *ngIf="3 + (i * 7) !== todayDayIndex ">
+          {{month[3 + (i * 7)].day}}
+        </ion-col>
+
+        <ion-col size="1.714" class="calendar_col_today" *ngIf="4 + (i * 7) === todayDayIndex ">
+          {{month[4 + (i * 7)].day}}
+        </ion-col>
+
+        <ion-col size="1.714" class="calendar_col" *ngIf="4 + (i * 7) !== todayDayIndex ">
+          {{month[4 + (i * 7)].day}}
+        </ion-col>
+
+        <ion-col size="1.714" class="calendar_col_today" *ngIf="5+ (i * 7) === todayDayIndex ">
+          {{month[5 + (i * 7)].day}}
+        </ion-col>
+
+        <ion-col size="1.714" class="calendar_col" *ngIf="5+ (i * 7) !== todayDayIndex ">
+          {{month[5 + (i * 7)].day}}
+        </ion-col>
+
+        <ion-col size="1.714" class="calendar_col_today" *ngIf="6 + (i * 7) === todayDayIndex ">
+          {{month[6 + (i * 7)].day}}
+        </ion-col>
+
+        <ion-col size="1.714" class="calendar_col" *ngIf="6 + (i * 7) !== todayDayIndex ">
+          {{month[6 + (i * 7)].day}}
+        </ion-col>
+
+      </ion-row>
+    </div>
+    <div *ngIf="currentMonthIndex !== todayMonthIndex">
+      <ion-row *ngFor="let row of rows;let i=index" class="calendar_row">
+        <ion-col size="1.714" class="calendar_col">
+          {{month[i * 7].day}}
+        </ion-col>
+
+        <ion-col size="1.714" class="calendar_col">
+          {{month[1 + (i * 7)].day}}
+        </ion-col>
+
+        <ion-col size="1.714" class="calendar_col">
+          {{month[2 + (i * 7)].day}}
+        </ion-col>
+
+        <ion-col size="1.714" class="calendar_col">
+          {{month[3 + (i * 7)].day}}
+        </ion-col>
+
+        <ion-col size="1.714" class="calendar_col">
+          {{month[4 + (i * 7)].day}}
+        </ion-col>
+
+        <ion-col size="1.714" class="calendar_col">
+          {{month[5 + (i * 7)].day}}
+        </ion-col>
+
+        <ion-col size="1.714" class="calendar_col">
+          {{month[6 + (i * 7)].day}}
+        </ion-col>
+      </ion-row>
+    </div>
+
+  </ion-card>
+
 </ion-content>
-
-<ion-fab vertical="bottom" horizontal="end">
-  <ion-fab-button (click)="showHideForm()">
-    <ion-icon *ngIf="!showAddenEvent" name="add"></ion-icon>
-    <ion-icon *ngIf="showAddenEvent" name="close"></ion-icon>
-  </ion-fab-button>
-</ion-fab>

@@ -1,16 +1,13 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {CalendarMode, IEvent} from 'ionic2-calendar/calendar';
-import {CalendarComponent} from 'ionic2-calendar';
+import {Component, OnInit} from '@angular/core';
 import {ModalController} from '@ionic/angular';
 import {EventdetailsPage} from './eventdetails/eventdetails.page';
-import {CalendarService} from '../../shared/services/http/calendar/calendar.service';
+import {
+  CalendarModel,
+  CalendarMonthView,
+  CalendarMonthViewRow,
+  CalendarService
+} from '../../shared/services/tools/calendar/calendar.service';
 
-export interface CalendarView {
-  title: string;
-  description: string;
-  startTime: string;
-  endTime: string;
-}
 
 @Component({
   selector: 'app-calendar',
@@ -19,159 +16,92 @@ export interface CalendarView {
 })
 export class CalendarPage implements OnInit {
 
-  //https://www.youtube.com/watch?v=V8zPORSbX7Y
-  //https://ionicframework.com/docs/api/modal
-
-
-  @ViewChild(CalendarComponent, {static: true}) myCal: CalendarComponent | undefined;
-
-  myData = [
-    {
-      title: 'My first Event',
-      description: 'My first Description',
-      startTime: new Date('November 27, 2022 13:15:30'),
-      endTime: new Date('November 27, 2022 23:15:30'),
-    },
-    {
-      title: 'My second Event',
-      description: 'My second Description',
-      startTime: new Date('November 18, 2022 13:15:30'),
-      endTime: new Date('November 18, 2022 23:15:30'),
-    },
-    {
-      title: 'My third Event',
-      description: 'My third Description',
-      startTime: new Date('November 17, 2022 13:15:30'),
-      endTime: new Date('November 17, 2022 23:15:30'),
-    },
-    {
-      title: 'My third Event',
-      description: 'My third Description',
-      startTime: new Date('November 17, 2022 13:15:30'),
-      endTime: new Date('November 17, 2022 23:15:30'),
-    },
-    {
-      title: 'My third Event',
-      description: 'My third Description',
-      startTime: new Date('November 17, 2022 13:15:30'),
-      endTime: new Date('November 17, 2022 23:15:30'),
-    },
-    {
-      title: 'My third Event',
-      description: 'My third Description',
-      startTime: new Date('November 17, 2022 13:15:30'),
-      endTime: new Date('November 17, 2022 23:15:30'),
-    },
-    {
-      title: 'My fith Event',
-      description: 'My fith Description',
-      startTime: new Date('November 16, 2022 13:15:30'),
-      endTime: new Date('November 16, 2022 23:15:30'),
-    },
-    {
-      title: 'Masdasdasdsent',
-      description: 'My fith Description',
-      startTime: new Date('November 22, 2022 21:24:54'),
-      endTime: new Date('November 22, 2022 22:24:54'),
-    }
-  ];
-
-  allEvents = [];
-  currentMonth: string | undefined;
-  calendar = {
-    mode: 'month' as CalendarMode,
-    currentDate: new Date()
-  };
-
-  newEvent: IEvent = {
-    title: '',
-    description: '',
-    // @ts-ignore
-    startTime: '',
-    // @ts-ignore
-    endTime: ''
-  };
-
-  showAddenEvent: boolean | undefined;
+  months = ['January', 'February', 'March', 'April', 'Mai', 'Jun', 'July', 'August', 'September', 'October', 'November', 'December'];
+  days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+  mode = ['month', 'week', 'day'];
+  hours = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24];
+  years = this.calendarService.getYears();
+  todayYearIndex = this.calendarService.getCurrentYearIndex();
+  todayMonthIndex = this.calendarService.getCurrentMonthIndex();
+  todayDayIndex = this.calendarService.getCurrentDayIndex();
+  currentYearIndex = this.calendarService.getCurrentYearIndex();
+  currentMonthIndex = this.calendarService.getCurrentMonthIndex();
+  shownYear = this.years[this.currentYearIndex];
+  shownMonth = this.months[this.currentMonthIndex];
+  calendarModel: CalendarModel = {years: []};
+  rows: CalendarMonthViewRow[] = [];
+  month: CalendarMonthView[] = [];
+  currentMode = 'month';
+  selectedRowIndex = 0;
 
   constructor(
     private modalController: ModalController,
     private calendarService: CalendarService
   ) {
-    // @ts-ignore
-    this.allEvents = this.myData;
   }
 
-  //Todo: Backend Daten werden nicht richtig angezeigt
   ngOnInit() {
-    this.calendarService.getCalendarEvents().subscribe(
-      result => {
-        result.forEach(event => {
-          //console.log(event.startTime+' | '+event.endTime);
-          // @ts-ignore
-          this.allEvents.push({
-            title: event.title,
-            description: event.description,
-            startTime: new Date(event.startTime),
-            endTime: new Date(event.endTime)
-          });
-        });
-      }
-    );
-  }
-
-  onViewTitleChanged(title: string) {
-    this.currentMonth = title;
-  }
-
-  async onEventSelected(ev: IEvent) {
-    this.newEvent = ev;
-    const modal = await this.modalController.create({
-      component: EventdetailsPage,
-      componentProps: ev
-    });
-    await modal.present();
+    this.calendarModel = this.calendarService.getCalendarDates();
+    this.month = this.calendarService.getCalendarMonthView(
+      this.calendarModel, this.currentYearIndex, this.currentMonthIndex);
+    this.rows = this.calendarService.getCalendarMonthRow(this.month);
   }
 
   next() {
-    // @ts-ignore
-    this.myCal.slideNext();
+    if (this.currentMonthIndex === 11) {
+      this.currentMonthIndex = 0;
+      this.currentYearIndex = this.currentYearIndex + 1;
+      this.month = this.calendarService.getCalendarMonthView(
+        this.calendarModel, this.currentYearIndex, this.currentMonthIndex);
+      this.rows = this.calendarService.getCalendarMonthRow(this.month);
+    } else {
+      this.currentMonthIndex++;
+      this.month = this.calendarService.getCalendarMonthView(
+        this.calendarModel, this.currentYearIndex, this.currentMonthIndex);
+      this.rows = this.calendarService.getCalendarMonthRow(this.month);
+    }
+    this.shownMonth = this.months[this.currentMonthIndex];
+    this.shownYear = this.years[this.currentYearIndex];
   }
 
   back() {
-    // @ts-ignore
-    this.myCal.slidePrev();
-  }
-
-  showHideForm() {
-    this.showAddenEvent = !this.showAddenEvent;
-    this.newEvent = {
-      title: '',
-      description: '',
-      // @ts-ignore
-      startTime: new Date().toISOString(),
-      // @ts-ignore
-      endTime: new Date().toISOString()
-    };
+    if (this.currentMonthIndex === 0) {
+      this.currentMonthIndex = 11;
+      this.currentYearIndex = this.currentYearIndex - 1;
+      this.month = this.calendarService.getCalendarMonthView(
+        this.calendarModel, this.currentYearIndex, this.currentMonthIndex);
+      this.rows = this.calendarService.getCalendarMonthRow(this.month);
+    } else {
+      this.currentMonthIndex--;
+      this.month = this.calendarService.getCalendarMonthView(
+        this.calendarModel, this.currentYearIndex, this.currentMonthIndex);
+      this.rows = this.calendarService.getCalendarMonthRow(this.month);
+    }
+    this.shownMonth = this.months[this.currentMonthIndex];
+    this.shownYear = this.years[this.currentYearIndex];
   }
 
   today() {
-    this.calendar.currentDate = new Date();
+    this.currentYearIndex = this.todayYearIndex;
+    this.currentMonthIndex = this.todayMonthIndex;
+    this.shownMonth = this.months[this.currentMonthIndex];
+    this.shownYear = this.years[this.currentYearIndex];
+    this.currentMode = 'month';
+    this.month = this.calendarService.getCalendarMonthView(
+      this.calendarModel, this.currentYearIndex, this.currentMonthIndex);
+    this.rows = this.calendarService.getCalendarMonthRow(this.month);
   }
 
   changeMode(mode: string) {
-    this.calendar.mode = mode as CalendarMode;
+    this.currentMode = mode;
   }
 
-  addEvent() {
-    // @ts-ignore
-    this.allEvents.push({
-      title: this.newEvent.title,
+  async onEventSelected() {
+    const modal = await this.modalController.create({
+      component: EventdetailsPage,
       // @ts-ignore
-      description: this.newEvent.description,
-      startTime: new Date(this.newEvent.startTime),
-      endTime: new Date(this.newEvent.endTime)
+      componentProps: null
     });
-    this.showAddenEvent = !this.showAddenEvent;
+    await modal.present();
   }
 }
