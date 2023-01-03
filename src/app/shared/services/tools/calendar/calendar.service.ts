@@ -131,13 +131,13 @@ export class CalendarService {
     const rows: CalendarMonthViewRow[] = [];
     let row: CalendarMonthView[] = [];
     for (let i = 0; i < (month.length / 7); i++) {
-      row.push(month[i*7]);
-      row.push(month[1+(i*7)]);
-      row.push(month[2+(i*7)]);
-      row.push(month[3+(i*7)]);
-      row.push(month[4+(i*7)]);
-      row.push(month[5+(i*7)]);
-      row.push(month[6+(i*7)]);
+      row.push(month[i * 7]);
+      row.push(month[1 + (i * 7)]);
+      row.push(month[2 + (i * 7)]);
+      row.push(month[3 + (i * 7)]);
+      row.push(month[4 + (i * 7)]);
+      row.push(month[5 + (i * 7)]);
+      row.push(month[6 + (i * 7)]);
       // @ts-ignore
       rows.push(row);
       row = [];
@@ -147,6 +147,21 @@ export class CalendarService {
 
   getCalendarWeekView() {
 
+  }
+
+  getCurrentDayIndex() {
+    let firstDayIndex = new Date(
+      new Date().getFullYear() ,
+      new Date().getMonth(),
+      1
+    ).getDay();
+    firstDayIndex = (firstDayIndex === 0) ? 6 : firstDayIndex - 1;
+    const dayInMonth=new Date(
+      new Date().getFullYear() ,
+      new Date().getMonth(),
+      new Date().getDate()
+    ).getDate();
+    return firstDayIndex+dayInMonth-1;
   }
 
   getCurrentYearIndex() {

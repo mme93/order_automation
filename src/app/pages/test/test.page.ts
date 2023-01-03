@@ -17,6 +17,9 @@ export class TestPage implements OnInit {
   days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
   mode = ['month', 'week', 'day'];
   years = this.calendarService.getYears();
+  todayYearIndex = this.calendarService.getCurrentYearIndex();
+  todayMonthIndex = this.calendarService.getCurrentMonthIndex();
+  todayDayIndex = this.calendarService.getCurrentDayIndex();
   currentYearIndex = this.calendarService.getCurrentYearIndex();
   currentMonthIndex = this.calendarService.getCurrentMonthIndex();
   shownYear = this.years[this.currentYearIndex];
@@ -37,13 +40,13 @@ export class TestPage implements OnInit {
 
 
   next() {
-    if(this.currentMonthIndex===11){
-      this.currentMonthIndex=0;
-      this.currentYearIndex=this.currentMonthIndex+1;
+    if (this.currentMonthIndex === 11) {
+      this.currentMonthIndex = 0;
+      this.currentYearIndex = this.currentYearIndex + 1;
       this.month = this.calendarService.getCalendarMonthView(
         this.calendarModel, this.currentYearIndex, this.currentMonthIndex);
       this.rows = this.calendarService.getCalendarMonthRow(this.month);
-    }else{
+    } else {
       this.currentMonthIndex++;
       this.month = this.calendarService.getCalendarMonthView(
         this.calendarModel, this.currentYearIndex, this.currentMonthIndex);
@@ -54,13 +57,13 @@ export class TestPage implements OnInit {
   }
 
   back() {
-    if(this.currentMonthIndex===0){
-      this.currentMonthIndex=11;
-      this.currentYearIndex=this.currentYearIndex-1;
+    if (this.currentMonthIndex === 0) {
+      this.currentMonthIndex = 11;
+      this.currentYearIndex = this.currentYearIndex - 1;
       this.month = this.calendarService.getCalendarMonthView(
         this.calendarModel, this.currentYearIndex, this.currentMonthIndex);
       this.rows = this.calendarService.getCalendarMonthRow(this.month);
-    }else{
+    } else {
       this.currentMonthIndex--;
       this.month = this.calendarService.getCalendarMonthView(
         this.calendarModel, this.currentYearIndex, this.currentMonthIndex);
@@ -68,6 +71,7 @@ export class TestPage implements OnInit {
     }
     this.shownMonth = this.months[this.currentMonthIndex];
     this.shownYear = this.years[this.currentYearIndex];
+    console.log(this.todayDayIndex);
   }
 
   today() {

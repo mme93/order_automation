@@ -36,39 +36,97 @@
         {{dayCol}}
       </ion-col>
     </ion-row>
+    <div *ngIf="currentMonthIndex === todayMonthIndex">
+      <ion-row *ngFor="let row of rows;let i=index" class="calendar_row" >
+        <ion-col size="1.714" class="calendar_col_today" *ngIf="i * 7 === todayDayIndex">
+          {{month[i * 7].day}}
+        </ion-col>
 
-    <ion-row *ngFor="let row of rows;let i=index">
+        <ion-col size="1.714" class="calendar_col_today" *ngIf="1 + (i * 7) === todayDayIndex ">
+          {{month[1 + (i * 7)].day}}
+        </ion-col>
 
-      <ion-col size="1.714" style="border-style: solid;height: 80px">
-        {{month[i*7].day}}
-      </ion-col>
+        <ion-col size="1.714" class="calendar_col_today" *ngIf="2 + (i * 7) === todayDayIndex ">
+          {{month[2 + (i * 7)].day}}
+        </ion-col>
 
-      <ion-col size="1.714" style="border-style: solid">
-        {{month[1+(i*7)].day}}
-      </ion-col>
+        <ion-col size="1.714" class="calendar_col_today" *ngIf="3 + (i * 7) === todayDayIndex ">
+          {{month[3 + (i * 7)].day}}
+        </ion-col>
 
-      <ion-col size="1.714" style="border-style: solid">
-        {{month[2+(i*7)].day}}
-      </ion-col>
+        <ion-col size="1.714" class="calendar_col_today" *ngIf="4 + (i * 7) === todayDayIndex ">
+          {{month[4 + (i * 7)].day}}
+        </ion-col>
 
-      <ion-col size="1.714" style="border-style: solid">
-        {{month[3+(i*7)].day}}
-      </ion-col>
+        <ion-col size="1.714" class="calendar_col_today" *ngIf="5+ (i * 7) === todayDayIndex ">
+          {{month[5 + (i * 7)].day}}
+        </ion-col>
 
-      <ion-col size="1.714" style="border-style: solid">
-        {{month[4+(i*7)].day}}
-      </ion-col>
+        <ion-col size="1.714" class="calendar_col_today" *ngIf="6 + (i * 7) === todayDayIndex ">
+          {{month[6 + (i * 7)].day}}
+        </ion-col>
 
-      <ion-col size="1.714" style="border-style: solid">
-        {{month[5+(i*7)].day}}
-      </ion-col>
+        <ion-col size="1.714" class="calendar_col" *ngIf="i * 7 !== todayDayIndex">
+          {{month[i * 7].day}}
+        </ion-col>
 
-      <ion-col size="1.714" style="border-style: solid">
-        {{month[6+(i*7)].day}}
-      </ion-col>
+        <ion-col size="1.714" class="calendar_col" *ngIf="1 + (i * 7) !== todayDayIndex ">
+          {{month[1 + (i * 7)].day}}
+        </ion-col>
 
-    </ion-row>
+        <ion-col size="1.714" class="calendar_col" *ngIf="2 + (i * 7) !== todayDayIndex ">
+          {{month[2 + (i * 7)].day}}
+        </ion-col>
 
+        <ion-col size="1.714" class="calendar_col" *ngIf="3 + (i * 7) !== todayDayIndex ">
+          {{month[3 + (i * 7)].day}}
+        </ion-col>
+
+        <ion-col size="1.714" class="calendar_col" *ngIf="4 + (i * 7) !== todayDayIndex ">
+          {{month[4 + (i * 7)].day}}
+        </ion-col>
+
+        <ion-col size="1.714" class="calendar_col" *ngIf="5+ (i * 7) !== todayDayIndex ">
+          {{month[5 + (i * 7)].day}}
+        </ion-col>
+
+        <ion-col size="1.714" class="calendar_col" *ngIf="6 + (i * 7) !== todayDayIndex ">
+          {{month[6 + (i * 7)].day}}
+        </ion-col>
+
+      </ion-row>
+    </div>
+    <div *ngIf="currentMonthIndex !== todayMonthIndex">
+      <ion-row *ngFor="let row of rows;let i=index" class="calendar_row" >
+        <ion-col size="1.714" class="calendar_col">
+          {{month[i * 7].day}}
+        </ion-col>
+
+        <ion-col size="1.714" class="calendar_col">
+          {{month[1 + (i * 7)].day}}
+        </ion-col>
+
+        <ion-col size="1.714" class="calendar_col">
+          {{month[2 + (i * 7)].day}}
+        </ion-col>
+
+        <ion-col size="1.714" class="calendar_col">
+          {{month[3 + (i * 7)].day}}
+        </ion-col>
+
+        <ion-col size="1.714" class="calendar_col">
+          {{month[4 + (i * 7)].day}}
+        </ion-col>
+
+        <ion-col size="1.714" class="calendar_col">
+          {{month[5 + (i * 7)].day}}
+        </ion-col>
+
+        <ion-col size="1.714" class="calendar_col">
+          {{month[6 + (i * 7)].day}}
+        </ion-col>
+      </ion-row>
+    </div>
 
   </ion-card>
 
