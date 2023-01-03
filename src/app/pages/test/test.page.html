@@ -30,14 +30,59 @@
       </ion-button>
     </ion-col>
   </ion-row>
-  <ion-card>
+  <ion-card *ngIf="currentMode==='week'" class="calendar_card_week">
+    <ion-row class="calendar_card_week_name">
+      <ion-col *ngFor="let dayCol of days" size="1.714" style="border-style: solid">
+        {{dayCol}}
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngFor="let row of rows;let i=index" class="calendar_row_week">
+      <ion-col size="1.714" *ngIf="i === selectedRowIndex" class="calendar_col_week">
+
+      </ion-col>
+
+      <ion-col size="1.714" *ngIf="i === selectedRowIndex" class="calendar_col_week">
+
+      </ion-col>
+
+      <ion-col size="1.714" *ngIf="i === selectedRowIndex" class="calendar_col_week">
+
+      </ion-col>
+
+      <ion-col size="1.714" *ngIf="i === selectedRowIndex" class="calendar_col_week">
+
+      </ion-col>
+
+      <ion-col size="1.714" *ngIf="i === selectedRowIndex" class="calendar_col_week">
+
+      </ion-col>
+
+      <ion-col size="1.714" *ngIf="i === selectedRowIndex" class="calendar_col_week">
+
+      </ion-col>
+
+      <ion-col size="1.714" *ngIf="i === selectedRowIndex" class="calendar_col_week">
+
+      </ion-col>
+    </ion-row>
+  </ion-card>
+
+  <ion-card *ngIf="currentMode==='day'" class="calendar_card_day">
+
+    <ion-row *ngFor="let hour of hours" class="calendar_row_day">
+      {{hour}}
+    </ion-row>
+  </ion-card>
+
+  <ion-card *ngIf="currentMode==='month'">
     <ion-row>
       <ion-col *ngFor="let dayCol of days" size="1.714" style="border-style: solid">
         {{dayCol}}
       </ion-col>
     </ion-row>
     <div *ngIf="currentMonthIndex === todayMonthIndex">
-      <ion-row *ngFor="let row of rows;let i=index" class="calendar_row" >
+      <ion-row *ngFor="let row of rows;let i=index" class="calendar_row">
         <ion-col size="1.714" class="calendar_col_today" *ngIf="i * 7 === todayDayIndex">
           {{month[i * 7].day}}
         </ion-col>
@@ -97,7 +142,7 @@
       </ion-row>
     </div>
     <div *ngIf="currentMonthIndex !== todayMonthIndex">
-      <ion-row *ngFor="let row of rows;let i=index" class="calendar_row" >
+      <ion-row *ngFor="let row of rows;let i=index" class="calendar_row">
         <ion-col size="1.714" class="calendar_col">
           {{month[i * 7].day}}
         </ion-col>

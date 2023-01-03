@@ -16,6 +16,7 @@ export class TestPage implements OnInit {
   months = ['January', 'February', 'March', 'April', 'Mai', 'Jun', 'July', 'August', 'September', 'October', 'November', 'December'];
   days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
   mode = ['month', 'week', 'day'];
+  hours = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24];
   years = this.calendarService.getYears();
   todayYearIndex = this.calendarService.getCurrentYearIndex();
   todayMonthIndex = this.calendarService.getCurrentMonthIndex();
@@ -27,6 +28,8 @@ export class TestPage implements OnInit {
   calendarModel: CalendarModel = {years: []};
   rows: CalendarMonthViewRow[] = [];
   month: CalendarMonthView[] = [];
+  currentMode = 'day';
+  selectedRowIndex = 0;
 
   constructor(private calendarService: CalendarService) {
   }
@@ -71,14 +74,20 @@ export class TestPage implements OnInit {
     }
     this.shownMonth = this.months[this.currentMonthIndex];
     this.shownYear = this.years[this.currentYearIndex];
-    console.log(this.todayDayIndex);
   }
 
   today() {
-
+    this.currentYearIndex = this.todayYearIndex;
+    this.currentMonthIndex = this.todayMonthIndex;
+    this.shownMonth = this.months[this.currentMonthIndex];
+    this.shownYear = this.years[this.currentYearIndex];
+    this.currentMode = 'month';
+    this.month = this.calendarService.getCalendarMonthView(
+      this.calendarModel, this.currentYearIndex, this.currentMonthIndex);
+    this.rows = this.calendarService.getCalendarMonthRow(this.month);
   }
 
-  changeMode(month: string) {
-
+  changeMode(mode: string) {
+    this.currentMode = mode;
   }
 }
