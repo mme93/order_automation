@@ -28,7 +28,7 @@ export interface CalendarMonthView {
 }
 
 export interface CalendarMonthViewRow {
-  row: CalendarMonthView[];
+  monthRow: CalendarMonthView[];
 }
 
 export interface CalendarWeekView {

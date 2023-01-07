@@ -2,10 +2,16 @@
   border-style: solid;
   height: 100%;
 }
+.calendar_col:hover {
+  background-color: green;
+}
 .calendar_col_not_current_month{
   border-style: solid;
   height: 100%;
   background-color: red;
+}
+.calendar_col_not_current_month:hover{
+  background-color: green;
 }
 .calendar_col_today {
   border: 5px solid #006581;

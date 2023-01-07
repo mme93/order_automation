@@ -91,11 +91,12 @@ export class CalendarPage implements OnInit {
   }
 
   setCurrentDayCSS() {
-    const rowIndex=Math.floor(this.todayDayIndex/7);
+    const rowIndex = Math.floor(this.todayDayIndex / 7);
     // @ts-ignore
-    this.rows[rowIndex][this.todayDayIndex-(rowIndex*7)].css='calendar_selected_today';
+    this.rows[rowIndex][this.todayDayIndex - (rowIndex * 7)].css = 'calendar_selected_today';
     // @ts-ignore
-    this.rows[rowIndex][this.todayDayIndex-(rowIndex*7)].oldCSS='calendar_col_today';
+    this.rows[rowIndex][this.todayDayIndex - (rowIndex * 7)].oldCSS = 'calendar_col_today';
+    this.month[this.selectIndex].defaultCSS = 'calendar_col_today';
   }
 
   updateCalenderMonthUI() {
@@ -123,6 +124,16 @@ export class CalendarPage implements OnInit {
 
   changeMode(mode: string) {
     this.currentMode = mode;
+  }
+
+  selectDay(index: number) {
+    if(this.todayDayIndex===index){
+      this.month[index].css = 'calendar_selected_today';
+    }else{
+      this.month[index].css = 'calendar_selected_day';
+    }
+    this.month[this.selectIndex].css = this.month[this.selectIndex].defaultCSS;
+    this.selectIndex = index;
   }
 
   async onEventSelected() {

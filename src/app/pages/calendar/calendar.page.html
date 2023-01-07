@@ -91,7 +91,7 @@
     </ion-row>
     <ion-row *ngFor="let row of rows;let i=index" class="calendar_row">
       <!--Monday-->
-      <ion-col size="1.714" class="{{month[i * 7].css}}">
+      <ion-col size="1.714" class="{{month[i * 7].css}}" (click)="selectDay(i * 7)">
         {{month[i * 7].day}}
         <div *ngIf="month[i * 7].calendarEvent.length<4">
           <div class="calender_month_event_text" *ngFor="let event of month[i * 7].calendarEvent">
@@ -114,7 +114,7 @@
         </div>
       </ion-col>
       <!--Tuesday-->
-      <ion-col size="1.714" class="{{month[1+(i*7)].css}}">
+      <ion-col size="1.714" class="{{month[1+(i*7)].css}}" (click)="selectDay(1+(i*7))">
         {{month[1 + (i * 7)].day}}
         <div *ngIf="month[1+(i*7)].calendarEvent.length<4">
           <div class="calender_month_event_text" *ngFor="let event of month[1 + (i * 7)].calendarEvent">
@@ -137,7 +137,7 @@
         </div>
       </ion-col>
       <!--Wednesday-->
-      <ion-col size="1.714" class="{{month[2+(i*7)].css}}">
+      <ion-col size="1.714" class="{{month[2+(i*7)].css}}" (click)="selectDay(2+(i*7))">
         {{month[2 + (i * 7)].day}}
         <div *ngIf="month[2+(i*7)].calendarEvent.length<4">
           <div class="calender_month_event_text" *ngFor="let event of month[2 + (i * 7)].calendarEvent">
@@ -160,7 +160,7 @@
         </div>
       </ion-col>
       <!--Thursday-->
-      <ion-col size="1.714" class="{{month[3+(i*7)].css}}">
+      <ion-col size="1.714" class="{{month[3+(i*7)].css}}" (click)="selectDay(3+(i*7))">
         {{month[3 + (i * 7)].day}}
         <div *ngIf="month[3+(i*7)].calendarEvent.length<4">
           <div class="calender_month_event_text" *ngFor="let event of month[3 + (i * 7)].calendarEvent">
@@ -183,7 +183,7 @@
         </div>
       </ion-col>
       <!--Friday-->
-      <ion-col size="1.714" class="{{month[4+(i*7)].css}}">
+      <ion-col size="1.714" class="{{month[4+(i*7)].css}}" (click)="selectDay(4+(i*7))">
         {{month[4 + (i * 7)].day}}
         <div *ngIf="month[4+(i*7)].calendarEvent.length<4">
           <div class="calender_month_event_text" *ngFor="let event of month[4 + (i * 7)].calendarEvent">
@@ -206,7 +206,7 @@
         </div>
       </ion-col>
       <!--Saturday-->
-      <ion-col size="1.714" class="{{month[5+(i*7)].css}}">
+      <ion-col size="1.714" class="{{month[5+(i*7)].css}}" (click)="selectDay(5+(i*7))">
         {{month[5 + (i * 7)].day}}
         <div *ngIf="month[2+(i*7)].calendarEvent.length<4">
           <div class="calender_month_event_text" *ngFor="let event of month[5 + (i * 7)].calendarEvent">
@@ -229,7 +229,7 @@
         </div>
       </ion-col>
       <!--Sunday-->
-      <ion-col size="1.714" class="{{month[6+(i*7)].css}}">
+      <ion-col size="1.714" class="{{month[6+(i*7)].css}}" (click)="selectDay(6+(i*7))">
         {{month[6 + (i * 7)].day}}
         <div *ngIf="month[6+(i*7)].calendarEvent.length<4">
           <div class="calender_month_event_text" *ngFor="let event of month[6 + (i * 7)].calendarEvent">
