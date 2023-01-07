@@ -1,21 +1,33 @@
+.calendar_name{
+  background-color: #3d3c3c;
+  color: white;
+}
 .calendar_col {
-  border-style: solid;
+  border:1px solid black;
   height: 100%;
+  background-color: #3d3c3c;
+  color: white;
 }
 .calendar_col:hover {
   background-color: green;
 }
 .calendar_col_not_current_month{
-  border-style: solid;
+  border:1px solid black;
   height: 100%;
-  background-color: red;
+  background-color: #1a1a1a;
+  color: white;
 }
 .calendar_col_not_current_month:hover{
-  background-color: green;
+  background-color: #3d3c3c;
 }
 .calendar_col_today {
   border: 5px solid #006581;
   height: 100%;
+  background-color: #3d3c3c;
+  color: white;
+}
+.calendar_col_today:hover {
+  background-color: #3d3c3c;
 }
 
 .calendar_selected_day{

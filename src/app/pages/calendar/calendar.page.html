@@ -85,7 +85,7 @@
   <!--Month-Mode-->
   <ion-card *ngIf="currentMode==='month'">
     <ion-row>
-      <ion-col *ngFor="let dayCol of days" size="1.714" style="border-style: solid">
+      <ion-col *ngFor="let dayCol of days" size="1.714" class="calendar_name" style="text-align: center;border: 1px solid black">
         {{dayCol}}
       </ion-col>
     </ion-row>
