@@ -7,6 +7,8 @@ import {
   CalendarMonthViewRow,
   CalendarService
 } from '../../shared/services/tools/calendar/calendar.service';
+import {OrderService} from '../../shared/services/http/order/order.service';
+import {Order} from '../../shared/model/order/order';
 
 
 @Component({
@@ -28,23 +30,29 @@ export class CalendarPage implements OnInit {
   currentMonthIndex = this.calendarService.getCurrentMonthIndex();
   shownYear = this.years[this.currentYearIndex];
   shownMonth = this.months[this.currentMonthIndex];
-  calendarModel: CalendarModel = {years: []};
+  calendarModel: CalendarModel = {years: [], orders: []};
   rows: CalendarMonthViewRow[] = [];
   month: CalendarMonthView[] = [];
   currentMode = 'month';
   selectedRowIndex = 0;
+  exampleText = ['12:15 Herr Mueller, TÜV', '13:30 Mittags Pause', '14:00 Wartung des Fords MH-XX-123'];
 
   constructor(
     private modalController: ModalController,
-    private calendarService: CalendarService
+    private calendarService: CalendarService,
+    private orderService: OrderService
   ) {
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.calendarModel = this.calendarService.getCalendarDates();
+    const orders = await Promise.all([this.orderService.getOrders().toPromise()]) as unknown as Order[];
+    // @ts-ignore
+    this.calendarModel.orders = orders[0];
     this.month = this.calendarService.getCalendarMonthView(
       this.calendarModel, this.currentYearIndex, this.currentMonthIndex);
     this.rows = this.calendarService.getCalendarMonthRow(this.month);
+    console.log(this.rows);
   }
 
   next() {

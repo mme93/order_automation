@@ -1,7 +1,9 @@
 import {Injectable} from '@angular/core';
+import {Order} from '../../../model/order/order';
 
 export interface CalendarModel {
   years: CalendarYear[];
+  orders: Order[];
 }
 
 export interface CalendarYear {
@@ -20,6 +22,7 @@ export interface CalendarMonthView {
   day: number;
   date: Date;
   isCurrentMonth: boolean;
+  calendarEvent: CalendarEvent[];
 }
 
 export interface CalendarMonthViewRow {
@@ -31,11 +34,26 @@ export interface CalendarWeekView {
   isCurrentMonth: boolean;
 }
 
+export interface CalendarEvent {
+  start: Date;
+  end: Date;
+  title: string;
+  eventArt: string;
+  eventID: number;
+}
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class CalendarService {
+
+  getOrderFilter(year: number, month: number, day: number, orders: Order[]) {
+    return orders.filter(value =>
+      new Date(value.startDate).getDay() === day
+      && new Date(value.startDate).getMonth() === month
+      && new Date(value.startDate).getFullYear() === year);
+  }
 
   getCalendarMonthView(calendarModel: CalendarModel, yearsIndex: number, monthsIndex: number): CalendarMonthView[] {
     const month: CalendarMonthView[] = [];
@@ -60,6 +78,7 @@ export class CalendarService {
     let afterDay = 0;
     let currentDay = 0;
     for (let i = 0; i < monthViewSize; i++) {
+      const calendarEvent: CalendarEvent[] = [];
       if (i < beforeMonthDays) {
         let testDate;
         let currentMonthSize = 0;
@@ -68,39 +87,95 @@ export class CalendarService {
           currentMonthSize = calendarModel.years[yearsIndex - 1][11].length;
           // @ts-ignore
           testDate = calendarModel.years[yearsIndex - 1][11][currentMonthSize - beforeMonthDays + i].days;
+          this.getOrderFilter(yearsIndex + 1950 - 1, 11, currentMonthSize - beforeMonthDays + i, calendarModel.orders).forEach(order => {
+            calendarEvent.push({
+              start: order.startDate,
+              end: order.endDate,
+              title: order.orderInformation,
+              eventArt: 'order',
+              eventID: order.id
+            });
+          });
         } else if (monthsIndex === 11) {
           // @ts-ignore
           currentMonthSize = calendarModel.years[yearsIndex - 1][10].length;
           // @ts-ignore
           testDate = calendarModel.years[yearsIndex - 1][10][currentMonthSize - beforeMonthDays + i].days;
+          this.getOrderFilter(yearsIndex + 1950 - 1, 10, currentMonthSize - beforeMonthDays + i, calendarModel.orders).forEach(order => {
+            calendarEvent.push({
+              start: order.startDate,
+              end: order.endDate,
+              title: order.orderInformation,
+              eventArt: 'order',
+              eventID: order.id
+            });
+          });
         } else {
           // @ts-ignore
           currentMonthSize = calendarModel.years[yearsIndex][monthsIndex - 1].length;
           // @ts-ignore
           testDate = calendarModel.years[yearsIndex][monthsIndex - 1][currentMonthSize - beforeMonthDays + i].days;
+          this.getOrderFilter(yearsIndex + 1950, monthsIndex - 1, currentMonthSize - beforeMonthDays + i, calendarModel.orders).forEach(order => {
+            calendarEvent.push({
+              start: order.startDate,
+              end: order.endDate,
+              title: order.orderInformation,
+              eventArt: 'order',
+              eventID: order.id
+            });
+          });
         }
         month.push({
           day: (currentMonthSize - beforeMonthDays + i + 1),
           date: testDate,
-          isCurrentMonth: false
+          isCurrentMonth: false,
+          calendarEvent
         });
       } else if (i > monthsSize + beforeMonthDays - 1) {
         let testDate;
         if (monthsIndex === 0) {
           // @ts-ignore
           testDate = calendarModel.years[yearsIndex][1][afterDay].days;
+          this.getOrderFilter(yearsIndex + 1950, 1, afterDay, calendarModel.orders).forEach(order => {
+            calendarEvent.push({
+              start: order.startDate,
+              end: order.endDate,
+              title: order.orderInformation,
+              eventArt: 'order',
+              eventID: order.id
+            });
+          });
         } else if (monthsIndex === 11) {
           // @ts-ignore
           testDate = calendarModel.years[yearsIndex + 1][0][afterDay].days;
+          this.getOrderFilter(yearsIndex + 1950 + 1, 0, afterDay, calendarModel.orders).forEach(order => {
+            calendarEvent.push({
+              start: order.startDate,
+              end: order.endDate,
+              title: order.orderInformation,
+              eventArt: 'order',
+              eventID: order.id
+            });
+          });
         } else {
           // @ts-ignore
           testDate = calendarModel.years[yearsIndex][monthsIndex + 1][afterDay].days;
+          this.getOrderFilter(yearsIndex + 1950, monthsIndex + 1, afterDay, calendarModel.orders).forEach(order => {
+            calendarEvent.push({
+              start: order.startDate,
+              end: order.endDate,
+              title: order.orderInformation,
+              eventArt: 'order',
+              eventID: order.id
+            });
+          });
         }
         month.push({
           day: afterDay + 1,
           // @ts-ignore
           date: testDate,
-          isCurrentMonth: false
+          isCurrentMonth: false,
+          calendarEvent
         });
         afterDay++;
       } else {
@@ -108,19 +183,48 @@ export class CalendarService {
         if (monthsIndex === 0) {
           // @ts-ignore
           testDate = calendarModel.years[yearsIndex][0][currentDay].days;
+          this.getOrderFilter(yearsIndex + 1950, 0, currentDay, calendarModel.orders).forEach(order => {
+            calendarEvent.push({
+              start: order.startDate,
+              end: order.endDate,
+              title: order.orderInformation,
+              eventArt: 'order',
+              eventID: order.id
+            });
+          });
         } else if (monthsIndex === 11) {
           // @ts-ignore
           testDate = calendarModel.years[yearsIndex][11][currentDay].days;
+          this.getOrderFilter(yearsIndex + 1950, 11, currentDay, calendarModel.orders).forEach(order => {
+            calendarEvent.push({
+              start: order.startDate,
+              end: order.endDate,
+              title: order.orderInformation,
+              eventArt: 'order',
+              eventID: order.id
+            });
+          });
         } else {
           // @ts-ignore
           testDate = calendarModel.years[yearsIndex][monthsIndex][currentDay].days;
+          this.getOrderFilter(yearsIndex + 1950, monthsIndex, currentDay + 1, calendarModel.orders).forEach(order => {
+            calendarEvent.push({
+              start: order.startDate,
+              end: order.endDate,
+              title: order.orderInformation,
+              eventArt: 'order',
+              eventID: order.id
+            });
+          });
         }
         month.push({
           day: currentDay + 1,
           // @ts-ignore
           date: testDate,
-          isCurrentMonth: true
+          isCurrentMonth: true,
+          calendarEvent
         });
+
         currentDay++;
       }
     }
@@ -151,17 +255,17 @@ export class CalendarService {
 
   getCurrentDayIndex() {
     let firstDayIndex = new Date(
-      new Date().getFullYear() ,
+      new Date().getFullYear(),
       new Date().getMonth(),
       1
     ).getDay();
     firstDayIndex = (firstDayIndex === 0) ? 6 : firstDayIndex - 1;
-    const dayInMonth=new Date(
-      new Date().getFullYear() ,
+    const dayInMonth = new Date(
+      new Date().getFullYear(),
       new Date().getMonth(),
       new Date().getDate()
     ).getDate();
-    return firstDayIndex+dayInMonth-1;
+    return firstDayIndex + dayInMonth - 1;
   }
 
   getCurrentYearIndex() {
@@ -179,7 +283,8 @@ export class CalendarService {
       years.push(this.getYear(1950 + i));
     }
     return {
-      years
+      years,
+      orders: []
     };
   }
 
