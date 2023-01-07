@@ -52,7 +52,6 @@ export class CalendarPage implements OnInit {
     this.month = this.calendarService.getCalendarMonthView(
       this.calendarModel, this.currentYearIndex, this.currentMonthIndex);
     this.rows = this.calendarService.getCalendarMonthRow(this.month);
-    console.log(this.rows);
   }
 
   next() {
