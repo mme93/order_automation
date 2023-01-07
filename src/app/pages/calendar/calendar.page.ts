@@ -34,8 +34,12 @@ export class CalendarPage implements OnInit {
   rows: CalendarMonthViewRow[] = [];
   month: CalendarMonthView[] = [];
   currentMode = 'month';
-  selectedRowIndex = 0;
-  exampleText = ['12:15 Herr Mueller, TÜV', '13:30 Mittags Pause', '14:00 Wartung des Fords MH-XX-123'];
+  todayRowIndex = Math.floor(this.todayDayIndex/7);
+  todayCalendarWeekNumber=0;
+  //TODO
+  selectIndex=this.calendarService.getCurrentDayIndex();
+  //TODO
+  weekTitle= this.calendarService.getCalenderWeekTitle();
 
   constructor(
     private modalController: ModalController,
@@ -67,8 +71,7 @@ export class CalendarPage implements OnInit {
         this.calendarModel, this.currentYearIndex, this.currentMonthIndex);
       this.rows = this.calendarService.getCalendarMonthRow(this.month);
     }
-    this.shownMonth = this.months[this.currentMonthIndex];
-    this.shownYear = this.years[this.currentYearIndex];
+    this.updateCalenderMonthUI();
   }
 
   back() {
@@ -84,10 +87,17 @@ export class CalendarPage implements OnInit {
         this.calendarModel, this.currentYearIndex, this.currentMonthIndex);
       this.rows = this.calendarService.getCalendarMonthRow(this.month);
     }
+    this.updateCalenderMonthUI();
+  }
+  updateCalenderMonthUI(){
     this.shownMonth = this.months[this.currentMonthIndex];
     this.shownYear = this.years[this.currentYearIndex];
+    if(this.currentMonthIndex === this.todayMonthIndex){
+      this.selectIndex=this.calendarService.getCurrentDayIndex();
+    }else{
+      this.selectIndex=this.calendarService.getStartSelectedIndex(this.rows[0]);
+    }
   }
-
   today() {
     this.currentYearIndex = this.todayYearIndex;
     this.currentMonthIndex = this.todayMonthIndex;
@@ -97,6 +107,7 @@ export class CalendarPage implements OnInit {
     this.month = this.calendarService.getCalendarMonthView(
       this.calendarModel, this.currentYearIndex, this.currentMonthIndex);
     this.rows = this.calendarService.getCalendarMonthRow(this.month);
+    this.selectIndex=this.calendarService.getCurrentDayIndex();
   }
 
   changeMode(mode: string) {

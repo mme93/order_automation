@@ -48,6 +48,28 @@ export interface CalendarEvent {
 })
 export class CalendarService {
 
+  getCalenderWeekTitle() {
+
+    return '02 01.2023 - 08.01.2023';
+  }
+
+  getCalendarWeekView() {
+
+  }
+
+  getStartSelectedIndex(calendarMonthViewRow: CalendarMonthViewRow) {
+    let monthArrayIndex=0;
+    // @ts-ignore
+    for (const day of calendarMonthViewRow){
+      if(day.isCurrentMonth){
+        break;
+      }else{
+        monthArrayIndex++;
+      }
+    }
+    return monthArrayIndex;
+  }
+
   getOrderFilter(year: number, month: number, day: number, orders: Order[]) {
     return orders.filter(value =>
       new Date(value.startDate).getDay() === day
@@ -115,15 +137,16 @@ export class CalendarService {
           currentMonthSize = calendarModel.years[yearsIndex][monthsIndex - 1].length;
           // @ts-ignore
           testDate = calendarModel.years[yearsIndex][monthsIndex - 1][currentMonthSize - beforeMonthDays + i].days;
-          this.getOrderFilter(yearsIndex + 1950, monthsIndex - 1, currentMonthSize - beforeMonthDays + i, calendarModel.orders).forEach(order => {
-            calendarEvent.push({
-              start: order.startDate,
-              end: order.endDate,
-              title: order.orderInformation,
-              eventArt: 'order',
-              eventID: order.id
+          this.getOrderFilter(yearsIndex + 1950, monthsIndex - 1, currentMonthSize - beforeMonthDays + i, calendarModel.orders).forEach(
+            order => {
+              calendarEvent.push({
+                start: order.startDate,
+                end: order.endDate,
+                title: order.orderInformation,
+                eventArt: 'order',
+                eventID: order.id
+              });
             });
-          });
         }
         month.push({
           day: (currentMonthSize - beforeMonthDays + i + 1),
@@ -247,10 +270,6 @@ export class CalendarService {
       row = [];
     }
     return rows;
-  }
-
-  getCalendarWeekView() {
-
   }
 
   getCurrentDayIndex() {
