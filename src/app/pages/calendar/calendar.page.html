@@ -89,500 +89,169 @@
         {{dayCol}}
       </ion-col>
     </ion-row>
-    <div *ngIf="currentMonthIndex === todayMonthIndex">
-      <ion-row *ngFor="let row of rows;let i=index" class="calendar_row">
-        <ion-col size="1.714" class="calendar_col_today" *ngIf="i * 7 === todayDayIndex">
-          {{month[i * 7].day}}
-          <div *ngIf="month[i * 7].calendarEvent.length<4">
-            <div class="calender_month_event_text" *ngFor="let event of month[i * 7].calendarEvent">
-              {{event.title}}
-            </div>
+    <ion-row *ngFor="let row of rows;let i=index" class="calendar_row">
+      <!--Monday-->
+      <ion-col size="1.714" class="{{month[i * 7].css}}">
+        {{month[i * 7].day}}
+        <div *ngIf="month[i * 7].calendarEvent.length<4">
+          <div class="calender_month_event_text" *ngFor="let event of month[i * 7].calendarEvent">
+            {{event.title}}
           </div>
-          <div *ngIf="month[i * 7].calendarEvent.length>3">
-            <div class="calender_month_event_text">
-              {{month[i * 7].calendarEvent[0].title}}
-            </div>
-            <div class="calender_month_event_text">
-              {{month[i * 7].calendarEvent[1].title}}
-            </div>
-            <div class="calender_month_event_text">
-              {{month[i * 7].calendarEvent[2].title}}
-            </div>
-            <div style="font-size: 12px; padding: 2px ;color: #dad4d4">
-              ...
-            </div>
+        </div>
+        <div *ngIf="month[i * 7].calendarEvent.length>3">
+          <div class="calender_month_event_text">
+            {{month[i * 7].calendarEvent[0].title}}
           </div>
-        </ion-col>
-
-        <ion-col size="1.714" class="calendar_col" *ngIf="i * 7 !== todayDayIndex">
-          {{month[i * 7].day}}
-          <div *ngIf="month[i * 7].calendarEvent.length<4">
-            <div class="calender_month_event_text" *ngFor="let event of month[i * 7].calendarEvent">
-              {{event.title}}
-            </div>
+          <div class="calender_month_event_text">
+            {{month[i * 7].calendarEvent[1].title}}
           </div>
-          <div *ngIf="month[i * 7].calendarEvent.length>3">
-            <div class="calender_month_event_text">
-              {{month[i * 7].calendarEvent[0].title}}
-            </div>
-            <div class="calender_month_event_text">
-              {{month[i * 7].calendarEvent[1].title}}
-            </div>
-            <div class="calender_month_event_text">
-              {{month[i * 7].calendarEvent[2].title}}
-            </div>
-            <div style="font-size: 12px; padding: 2px ;color: #dad4d4">
-              ...
-            </div>
+          <div class="calender_month_event_text">
+            {{month[i * 7].calendarEvent[2].title}}
           </div>
-        </ion-col>
-
-        <ion-col size="1.714" class="calendar_col_today" *ngIf="1 + (i * 7) === todayDayIndex ">
-          {{month[1 + (i * 7)].day}}
-          <div *ngIf="month[1 + (i * 7)].calendarEvent.length<4">
-            <div class="calender_month_event_text" *ngFor="let event of month[1 + (i * 7)].calendarEvent">
-              {{event.title}}
-            </div>
+          <div style="font-size: 12px; padding: 2px ;color: #dad4d4">
+            ...
           </div>
-          <div *ngIf="month[1 + (i * 7)].calendarEvent.length>3">
-            <div class="calender_month_event_text">
-              {{month[1 + (i * 7)].calendarEvent[0].title}}
-            </div>
-            <div class="calender_month_event_text">
-              {{month[1 + (i * 7)].calendarEvent[1].title}}
-            </div>
-            <div class="calender_month_event_text">
-              {{month[1 + (i * 7)].calendarEvent[2].title}}
-            </div>
-            <div style="font-size: 12px; padding: 2px ;color: #dad4d4">
-              ...
-            </div>
+        </div>
+      </ion-col>
+      <!--Tuesday-->
+      <ion-col size="1.714" class="{{month[1+(i*7)].css}}">
+        {{month[1 + (i * 7)].day}}
+        <div *ngIf="month[1+(i*7)].calendarEvent.length<4">
+          <div class="calender_month_event_text" *ngFor="let event of month[1 + (i * 7)].calendarEvent">
+            {{event.title}}
           </div>
-        </ion-col>
-
-        <ion-col size="1.714" class="calendar_col" *ngIf="1 + (i * 7) !== todayDayIndex ">
-          {{month[1 + (i * 7)].day}}
-          <div *ngIf="month[1 + (i * 7)].calendarEvent.length<4">
-            <div class="calender_month_event_text" *ngFor="let event of month[1 + (i * 7)].calendarEvent">
-              {{event.title}}
-            </div>
+        </div>
+        <div *ngIf="month[1+(i*7)].calendarEvent.length>3">
+          <div class="calender_month_event_text">
+            {{month[1 + (i * 7)].calendarEvent[0].title}}
           </div>
-          <div *ngIf="month[1 + (i * 7)].calendarEvent.length>3">
-            <div class="calender_month_event_text">
-              {{month[1 + (i * 7)].calendarEvent[0].title}}
-            </div>
-            <div class="calender_month_event_text">
-              {{month[1 + (i * 7)].calendarEvent[1].title}}
-            </div>
-            <div class="calender_month_event_text">
-              {{month[1 + (i * 7)].calendarEvent[2].title}}
-            </div>
-            <div style="font-size: 12px; padding: 2px ;color: #dad4d4">
-              ...
-            </div>
+          <div class="calender_month_event_text">
+            {{month[1 + (i * 7)].calendarEvent[1].title}}
           </div>
-        </ion-col>
-
-        <ion-col size="1.714" class="calendar_col_today" *ngIf="2 + (i * 7) === todayDayIndex ">
-          <div>
-            {{month[2 + (i * 7)].day}}
-            <div *ngIf="month[2 + (i * 7)].calendarEvent.length<4">
-              <div class="calender_month_event_text" *ngFor="let event of month[2 + (i * 7)].calendarEvent">
-                {{event.title}}
-              </div>
-            </div>
-            <div *ngIf="month[2 + (i * 7)].calendarEvent.length>3">
-              <div class="calender_month_event_text">
-                {{month[2 + (i * 7)].calendarEvent[0].title}}
-              </div>
-              <div class="calender_month_event_text">
-                {{month[2 + (i * 7)].calendarEvent[1].title}}
-              </div>
-              <div class="calender_month_event_text">
-                {{month[2 + (i * 7)].calendarEvent[2].title}}
-              </div>
-              <div style="font-size: 12px; padding: 2px ;color: #dad4d4">
-                ...
-              </div>
-            </div>
+          <div class="calender_month_event_text">
+            {{month[1 + (i * 7)].calendarEvent[2].title}}
           </div>
-        </ion-col>
-
-        <ion-col size="1.714" class="calendar_col" *ngIf="2 + (i * 7) !== todayDayIndex ">
-          {{month[2 + (i * 7)].day}}
-          <div *ngIf="month[2 + (i * 7)].calendarEvent.length<4">
-            <div class="calender_month_event_text" *ngFor="let event of month[2 + (i * 7)].calendarEvent">
-              {{event.title}}
-            </div>
+          <div style="font-size: 12px; padding: 2px ;color: #dad4d4">
+            ...
           </div>
-          <div *ngIf="month[2 + (i * 7)].calendarEvent.length>3">
-            <div class="calender_month_event_text">
-              {{month[2 + (i * 7)].calendarEvent[0].title}}
-            </div>
-            <div class="calender_month_event_text">
-              {{month[2 + (i * 7)].calendarEvent[1].title}}
-            </div>
-            <div class="calender_month_event_text">
-              {{month[2 + (i * 7)].calendarEvent[2].title}}
-            </div>
-            <div style="font-size: 12px; padding: 2px ;color: #dad4d4">
-              ...
-            </div>
+        </div>
+      </ion-col>
+      <!--Wednesday-->
+      <ion-col size="1.714" class="{{month[2+(i*7)].css}}">
+        {{month[2 + (i * 7)].day}}
+        <div *ngIf="month[2+(i*7)].calendarEvent.length<4">
+          <div class="calender_month_event_text" *ngFor="let event of month[2 + (i * 7)].calendarEvent">
+            {{event.title}}
           </div>
-        </ion-col>
-
-        <ion-col size="1.714" class="calendar_col_today" *ngIf="3 + (i * 7) === todayDayIndex ">
-          {{month[3 + (i * 7)].day}}
-          <div *ngIf="month[3 + (i * 7)].calendarEvent.length<4">
-            <div class="calender_month_event_text" *ngFor="let event of month[3 + (i * 7)].calendarEvent">
-              {{event.title}}
-            </div>
+        </div>
+        <div *ngIf="month[2+(i*7)].calendarEvent.length>3">
+          <div class="calender_month_event_text">
+            {{month[2 + (i * 7)].calendarEvent[0].title}}
           </div>
-          <div *ngIf="month[3 + (i * 7)].calendarEvent.length>3">
-            <div class="calender_month_event_text">
-              {{month[3 + (i * 7)].calendarEvent[0].title}}
-            </div>
-            <div class="calender_month_event_text">
-              {{month[3 + (i * 7)].calendarEvent[1].title}}
-            </div>
-            <div class="calender_month_event_text">
-              {{month[3 + (i * 7)].calendarEvent[2].title}}
-            </div>
-            <div style="font-size: 12px; padding: 2px ;color: #dad4d4">
-              ...
-            </div>
+          <div class="calender_month_event_text">
+            {{month[2 + (i * 7)].calendarEvent[1].title}}
           </div>
-        </ion-col>
-
-        <ion-col size="1.714" class="calendar_col" *ngIf="3 + (i * 7) !== todayDayIndex ">
-          {{month[3 + (i * 7)].day}}
-          <div *ngIf="month[3 + (i * 7)].calendarEvent.length<4">
-            <div class="calender_month_event_text" *ngFor="let event of month[3 + (i * 7)].calendarEvent">
-              {{event.title}}
-            </div>
+          <div class="calender_month_event_text">
+            {{month[2 + (i * 7)].calendarEvent[2].title}}
           </div>
-          <div *ngIf="month[3 + (i * 7)].calendarEvent.length>3">
-            <div class="calender_month_event_text">
-              {{month[3 + (i * 7)].calendarEvent[0].title}}
-            </div>
-            <div class="calender_month_event_text">
-              {{month[3 + (i * 7)].calendarEvent[1].title}}
-            </div>
-            <div class="calender_month_event_text">
-              {{month[3 + (i * 7)].calendarEvent[2].title}}
-            </div>
-            <div style="font-size: 12px; padding: 2px ;color: #dad4d4">
-              ...
-            </div>
+          <div style="font-size: 12px; padding: 2px ;color: #dad4d4">
+            ...
           </div>
-        </ion-col>
-
-        <ion-col size="1.714" class="calendar_col_today" *ngIf="4 + (i * 7) === todayDayIndex ">
-          {{month[4 + (i * 7)].day}}
-          <div *ngIf="month[4 + (i * 7)].calendarEvent.length<4">
-            <div class="calender_month_event_text" *ngFor="let event of month[4 + (i * 7)].calendarEvent">
-              {{event.title}}
-            </div>
+        </div>
+      </ion-col>
+      <!--Thursday-->
+      <ion-col size="1.714" class="{{month[3+(i*7)].css}}">
+        {{month[3 + (i * 7)].day}}
+        <div *ngIf="month[3+(i*7)].calendarEvent.length<4">
+          <div class="calender_month_event_text" *ngFor="let event of month[3 + (i * 7)].calendarEvent">
+            {{event.title}}
           </div>
-          <div *ngIf="month[4 + (i * 7)].calendarEvent.length>3">
-            <div class="calender_month_event_text">
-              {{month[4 + (i * 7)].calendarEvent[0].title}}
-            </div>
-            <div class="calender_month_event_text">
-              {{month[4 + (i * 7)].calendarEvent[1].title}}
-            </div>
-            <div class="calender_month_event_text">
-              {{month[4 + (i * 7)].calendarEvent[2].title}}
-            </div>
-            <div style="font-size: 12px; padding: 2px ;color: #dad4d4">
-              ...
-            </div>
+        </div>
+        <div *ngIf="month[3+(i*7)].calendarEvent.length>3">
+          <div class="calender_month_event_text">
+            {{month[3 + (i * 7)].calendarEvent[0].title}}
           </div>
-        </ion-col>
-
-        <ion-col size="1.714" class="calendar_col" *ngIf="4 + (i * 7) !== todayDayIndex ">
-          {{month[4 + (i * 7)].day}}
-          <div *ngIf="month[4 + (i * 7)].calendarEvent.length<4">
-            <div class="calender_month_event_text" *ngFor="let event of month[4 + (i * 7)].calendarEvent">
-              {{event.title}}
-            </div>
+          <div class="calender_month_event_text">
+            {{month[3 + (i * 7)].calendarEvent[1].title}}
           </div>
-          <div *ngIf="month[4 + (i * 7)].calendarEvent.length>3">
-            <div class="calender_month_event_text">
-              {{month[4 + (i * 7)].calendarEvent[0].title}}
-            </div>
-            <div class="calender_month_event_text">
-              {{month[4 + (i * 7)].calendarEvent[1].title}}
-            </div>
-            <div class="calender_month_event_text">
-              {{month[4 + (i * 7)].calendarEvent[2].title}}
-            </div>
-            <div style="font-size: 12px; padding: 2px ;color: #dad4d4">
-              ...
-            </div>
+          <div class="calender_month_event_text">
+            {{month[3 + (i * 7)].calendarEvent[2].title}}
           </div>
-        </ion-col>
-
-        <ion-col size="1.714" class="calendar_col_today" *ngIf="5+ (i * 7) === todayDayIndex ">
-          {{month[5 + (i * 7)].day}}
-          <div *ngIf="month[5 + (i * 7)].calendarEvent.length<4">
-            <div class="calender_month_event_text" *ngFor="let event of month[5 + (i * 7)].calendarEvent">
-              {{event.title}}
-            </div>
+          <div style="font-size: 12px; padding: 2px ;color: #dad4d4">
+            ...
           </div>
-          <div *ngIf="month[5 + (i * 7)].calendarEvent.length>3">
-            <div class="calender_month_event_text">
-              {{month[5 + (i * 7)].calendarEvent[0].title}}
-            </div>
-            <div class="calender_month_event_text">
-              {{month[5 + (i * 7)].calendarEvent[1].title}}
-            </div>
-            <div class="calender_month_event_text">
-              {{month[5 + (i * 7)].calendarEvent[2].title}}
-            </div>
-            <div style="font-size: 12px; padding: 2px ;color: #dad4d4">
-              ...
-            </div>
+        </div>
+      </ion-col>
+      <!--Friday-->
+      <ion-col size="1.714" class="{{month[4+(i*7)].css}}">
+        {{month[4 + (i * 7)].day}}
+        <div *ngIf="month[4+(i*7)].calendarEvent.length<4">
+          <div class="calender_month_event_text" *ngFor="let event of month[4 + (i * 7)].calendarEvent">
+            {{event.title}}
           </div>
-        </ion-col>
-
-        <ion-col size="1.714" class="calendar_col" *ngIf="5+ (i * 7) !== todayDayIndex ">
-          {{month[5 + (i * 7)].day}}
-          <div *ngIf="month[5 + (i * 7)].calendarEvent.length<4">
-            <div class="calender_month_event_text" *ngFor="let event of month[5 + (i * 7)].calendarEvent">
-              {{event.title}}
-            </div>
+        </div>
+        <div *ngIf="month[4+(i*7)].calendarEvent.length>3">
+          <div class="calender_month_event_text">
+            {{month[4 + (i * 7)].calendarEvent[0].title}}
           </div>
-          <div *ngIf="month[5 + (i * 7)].calendarEvent.length>3">
-            <div class="calender_month_event_text">
-              {{month[5 + (i * 7)].calendarEvent[0].title}}
-            </div>
-            <div class="calender_month_event_text">
-              {{month[5 + (i * 7)].calendarEvent[1].title}}
-            </div>
-            <div class="calender_month_event_text">
-              {{month[5 + (i * 7)].calendarEvent[2].title}}
-            </div>
-            <div style="font-size: 12px; padding: 2px ;color: #dad4d4">
-              ...
-            </div>
+          <div class="calender_month_event_text">
+            {{month[4 + (i * 7)].calendarEvent[1].title}}
           </div>
-        </ion-col>
-
-        <ion-col size="1.714" class="calendar_col_today" *ngIf="6 + (i * 7) === todayDayIndex ">
-          {{month[6 + (i * 7)].day}}
-          <div *ngIf="month[6 + (i * 7)].calendarEvent.length<4">
-            <div class="calender_month_event_text" *ngFor="let event of month[6 + (i * 7)].calendarEvent">
-              {{event.title}}
-            </div>
+          <div class="calender_month_event_text">
+            {{month[4 + (i * 7)].calendarEvent[2].title}}
           </div>
-          <div *ngIf="month[6 + (i * 7)].calendarEvent.length>3">
-            <div class="calender_month_event_text">
-              {{month[6 + (i * 7)].calendarEvent[0].title}}
-            </div>
-            <div class="calender_month_event_text">
-              {{month[6 + (i * 7)].calendarEvent[1].title}}
-            </div>
-            <div class="calender_month_event_text">
-              {{month[6 + (i * 7)].calendarEvent[2].title}}
-            </div>
-            <div style="font-size: 12px; padding: 2px ;color: #dad4d4">
-              ...
-            </div>
+          <div style="font-size: 12px; padding: 2px ;color: #dad4d4">
+            ...
           </div>
-        </ion-col>
-
-        <ion-col size="1.714" class="calendar_col" *ngIf="6 + (i * 7) !== todayDayIndex ">
-          {{month[6 + (i * 7)].day}}
-          <div *ngIf="month[6 + (i * 7)].calendarEvent.length<4">
-            <div class="calender_month_event_text" *ngFor="let event of month[6 + (i * 7)].calendarEvent">
-              {{event.title}}
-            </div>
+        </div>
+      </ion-col>
+      <!--Saturday-->
+      <ion-col size="1.714" class="{{month[5+(i*7)].css}}">
+        {{month[5 + (i * 7)].day}}
+        <div *ngIf="month[2+(i*7)].calendarEvent.length<4">
+          <div class="calender_month_event_text" *ngFor="let event of month[5 + (i * 7)].calendarEvent">
+            {{event.title}}
           </div>
-          <div *ngIf="month[6 + (i * 7)].calendarEvent.length>3">
-            <div class="calender_month_event_text">
-              {{month[6 + (i * 7)].calendarEvent[0].title}}
-            </div>
-            <div class="calender_month_event_text">
-              {{month[6 + (i * 7)].calendarEvent[1].title}}
-            </div>
-            <div class="calender_month_event_text">
-              {{month[6 + (i * 7)].calendarEvent[2].title}}
-            </div>
-            <div style="font-size: 12px; padding: 2px ;color: #dad4d4">
-              ...
-            </div>
+        </div>
+        <div *ngIf="month[5+(i*7)].calendarEvent.length>3">
+          <div class="calender_month_event_text">
+            {{month[5 + (i * 7)].calendarEvent[0].title}}
           </div>
-        </ion-col>
-
-      </ion-row>
-    </div>
-    <div *ngIf="currentMonthIndex !== todayMonthIndex">
-      <ion-row *ngFor="let row of rows;let i=index" class="calendar_row">
-        <ion-col size="1.714" class="calendar_col">
-          {{month[i * 7].day}}
-          <div *ngIf="month[i * 7].calendarEvent.length<4">
-            <div class="calender_month_event_text" *ngFor="let event of month[i * 7].calendarEvent">
-              {{event.title}}
-            </div>
+          <div class="calender_month_event_text">
+            {{month[5 + (i * 7)].calendarEvent[1].title}}
           </div>
-          <div *ngIf="month[i * 7].calendarEvent.length>3">
-            <div class="calender_month_event_text">
-              {{month[i * 7].calendarEvent[0].title}}
-            </div>
-            <div class="calender_month_event_text">
-              {{month[i * 7].calendarEvent[1].title}}
-            </div>
-            <div class="calender_month_event_text">
-              {{month[i * 7].calendarEvent[2].title}}
-            </div>
-            <div style="font-size: 12px; padding: 2px ;color: #dad4d4">
-              ...
-            </div>
+          <div class="calender_month_event_text">
+            {{month[5 + (i * 7)].calendarEvent[2].title}}
           </div>
-        </ion-col>
-
-        <ion-col size="1.714" class="calendar_col">
-          {{month[1 + (i * 7)].day}}
-          <div *ngIf="month[1+(i*7)].calendarEvent.length<4">
-            <div class="calender_month_event_text" *ngFor="let event of month[1 + (i * 7)].calendarEvent">
-              {{event.title}}
-            </div>
+          <div style="font-size: 12px; padding: 2px ;color: #dad4d4">
+            ...
           </div>
-          <div *ngIf="month[1+(i*7)].calendarEvent.length>3">
-            <div class="calender_month_event_text">
-              {{month[1 + (i * 7)].calendarEvent[0].title}}
-            </div>
-            <div class="calender_month_event_text">
-              {{month[1 + (i * 7)].calendarEvent[1].title}}
-            </div>
-            <div class="calender_month_event_text">
-              {{month[1 + (i * 7)].calendarEvent[2].title}}
-            </div>
-            <div style="font-size: 12px; padding: 2px ;color: #dad4d4">
-              ...
-            </div>
+        </div>
+      </ion-col>
+      <!--Sunday-->
+      <ion-col size="1.714" class="{{month[6+(i*7)].css}}">
+        {{month[6 + (i * 7)].day}}
+        <div *ngIf="month[6+(i*7)].calendarEvent.length<4">
+          <div class="calender_month_event_text" *ngFor="let event of month[6 + (i * 7)].calendarEvent">
+            {{event.title}}
           </div>
-        </ion-col>
-
-        <ion-col size="1.714" class="calendar_col">
-          {{month[2 + (i * 7)].day}}
-          <div *ngIf="month[2+(i*7)].calendarEvent.length<4">
-            <div class="calender_month_event_text" *ngFor="let event of month[2 + (i * 7)].calendarEvent">
-              {{event.title}}
-            </div>
+        </div>
+        <div *ngIf="month[6+(i*7)].calendarEvent.length>3">
+          <div class="calender_month_event_text">
+            {{month[6 + (i * 7)].calendarEvent[0].title}}
           </div>
-          <div *ngIf="month[2+(i*7)].calendarEvent.length>3">
-            <div class="calender_month_event_text">
-              {{month[2 + (i * 7)].calendarEvent[0].title}}
-            </div>
-            <div class="calender_month_event_text">
-              {{month[2 + (i * 7)].calendarEvent[1].title}}
-            </div>
-            <div class="calender_month_event_text">
-              {{month[2 + (i * 7)].calendarEvent[2].title}}
-            </div>
-            <div style="font-size: 12px; padding: 2px ;color: #dad4d4">
-              ...
-            </div>
+          <div class="calender_month_event_text">
+            {{month[6 + (i * 7)].calendarEvent[1].title}}
           </div>
-        </ion-col>
-
-        <ion-col size="1.714" class="calendar_col">
-
-          {{month[3 + (i * 7)].day}}
-          <div *ngIf="month[3+(i*7)].calendarEvent.length<4">
-            <div class="calender_month_event_text" *ngFor="let event of month[3 + (i * 7)].calendarEvent">
-              {{event.title}}
-            </div>
+          <div class="calender_month_event_text">
+            {{month[6 + (i * 7)].calendarEvent[2].title}}
           </div>
-          <div *ngIf="month[3+(i*7)].calendarEvent.length>3">
-            <div class="calender_month_event_text">
-              {{month[3 + (i * 7)].calendarEvent[0].title}}
-            </div>
-            <div class="calender_month_event_text">
-              {{month[3 + (i * 7)].calendarEvent[1].title}}
-            </div>
-            <div class="calender_month_event_text">
-              {{month[3 + (i * 7)].calendarEvent[2].title}}
-            </div>
-            <div style="font-size: 12px; padding: 2px ;color: #dad4d4">
-              ...
-            </div>
+          <div style="font-size: 12px; padding: 2px ;color: #dad4d4">
+            ...
           </div>
-        </ion-col>
-
-        <ion-col size="1.714" class="calendar_col">
-          {{month[4 + (i * 7)].day}}
-          <div *ngIf="month[4+(i*7)].calendarEvent.length<4">
-            <div class="calender_month_event_text" *ngFor="let event of month[4 + (i * 7)].calendarEvent">
-              {{event.title}}
-            </div>
-          </div>
-          <div *ngIf="month[4+(i*7)].calendarEvent.length>3">
-            <div class="calender_month_event_text">
-              {{month[4 + (i * 7)].calendarEvent[0].title}}
-            </div>
-            <div class="calender_month_event_text">
-              {{month[4 + (i * 7)].calendarEvent[1].title}}
-            </div>
-            <div class="calender_month_event_text">
-              {{month[4 + (i * 7)].calendarEvent[2].title}}
-            </div>
-            <div style="font-size: 12px; padding: 2px ;color: #dad4d4">
-              ...
-            </div>
-          </div>
-        </ion-col>
-
-        <ion-col size="1.714" class="calendar_col">
-          {{month[5 + (i * 7)].day}}
-          <div *ngIf="month[2+(i*7)].calendarEvent.length<4">
-            <div class="calender_month_event_text" *ngFor="let event of month[5 + (i * 7)].calendarEvent">
-              {{event.title}}
-            </div>
-          </div>
-          <div *ngIf="month[5+(i*7)].calendarEvent.length>3">
-            <div class="calender_month_event_text">
-              {{month[5 + (i * 7)].calendarEvent[0].title}}
-            </div>
-            <div class="calender_month_event_text">
-              {{month[5 + (i * 7)].calendarEvent[1].title}}
-            </div>
-            <div class="calender_month_event_text">
-              {{month[5 + (i * 7)].calendarEvent[2].title}}
-            </div>
-            <div style="font-size: 12px; padding: 2px ;color: #dad4d4">
-              ...
-            </div>
-          </div>
-        </ion-col>
-
-        <ion-col size="1.714" class="calendar_col">
-          {{month[6 + (i * 7)].day}}
-          <div *ngIf="month[6+(i*7)].calendarEvent.length<4">
-            <div class="calender_month_event_text" *ngFor="let event of month[6 + (i * 7)].calendarEvent">
-              {{event.title}}
-            </div>
-          </div>
-          <div *ngIf="month[6+(i*7)].calendarEvent.length>3">
-            <div class="calender_month_event_text">
-              {{month[6 + (i * 7)].calendarEvent[0].title}}
-            </div>
-            <div class="calender_month_event_text">
-              {{month[6 + (i * 7)].calendarEvent[1].title}}
-            </div>
-            <div class="calender_month_event_text">
-              {{month[6 + (i * 7)].calendarEvent[2].title}}
-            </div>
-            <div style="font-size: 12px; padding: 2px ;color: #dad4d4">
-              ...
-            </div>
-          </div>
-        </ion-col>
-      </ion-row>
-    </div>
-
+        </div>
+      </ion-col>
+    </ion-row>
   </ion-card>
 
 </ion-content>

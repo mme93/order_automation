@@ -2,8 +2,22 @@
   border-style: solid;
   height: 100%;
 }
-
+.calendar_col_not_current_month{
+  border-style: solid;
+  height: 100%;
+  background-color: red;
+}
 .calendar_col_today {
+  border: 5px solid #006581;
+  height: 100%;
+}
+
+.calendar_selected_day{
+  border-style: solid;
+  height: 100%;
+  background-color: #3d3c3c;
+}
+.calendar_selected_today{
   border: 5px solid #006581;
   height: 100%;
   background-color: #3d3c3c;

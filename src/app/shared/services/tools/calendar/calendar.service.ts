@@ -23,6 +23,8 @@ export interface CalendarMonthView {
   date: Date;
   isCurrentMonth: boolean;
   calendarEvent: CalendarEvent[];
+  css: string;
+  defaultCSS: string;
 }
 
 export interface CalendarMonthViewRow {
@@ -58,12 +60,12 @@ export class CalendarService {
   }
 
   getStartSelectedIndex(calendarMonthViewRow: CalendarMonthViewRow) {
-    let monthArrayIndex=0;
+    let monthArrayIndex = 0;
     // @ts-ignore
-    for (const day of calendarMonthViewRow){
-      if(day.isCurrentMonth){
+    for (const day of calendarMonthViewRow) {
+      if (day.isCurrentMonth) {
         break;
-      }else{
+      } else {
         monthArrayIndex++;
       }
     }
@@ -152,7 +154,9 @@ export class CalendarService {
           day: (currentMonthSize - beforeMonthDays + i + 1),
           date: testDate,
           isCurrentMonth: false,
-          calendarEvent
+          calendarEvent,
+          css: 'calendar_col_not_current_month',
+          defaultCSS:'calendar_col_not_current_month'
         });
       } else if (i > monthsSize + beforeMonthDays - 1) {
         let testDate;
@@ -198,7 +202,9 @@ export class CalendarService {
           // @ts-ignore
           date: testDate,
           isCurrentMonth: false,
-          calendarEvent
+          calendarEvent,
+          css: 'calendar_col_not_current_month',
+          defaultCSS:'calendar_col_not_current_month'
         });
         afterDay++;
       } else {
@@ -245,7 +251,9 @@ export class CalendarService {
           // @ts-ignore
           date: testDate,
           isCurrentMonth: true,
-          calendarEvent
+          calendarEvent,
+          css: 'calendar_col',
+          defaultCSS:'calendar_col'
         });
 
         currentDay++;

@@ -34,12 +34,11 @@ export class CalendarPage implements OnInit {
   rows: CalendarMonthViewRow[] = [];
   month: CalendarMonthView[] = [];
   currentMode = 'month';
-  todayRowIndex = Math.floor(this.todayDayIndex/7);
-  todayCalendarWeekNumber=0;
+  todayRowIndex = Math.floor(this.todayDayIndex / 7);
+  todayCalendarWeekNumber = 0;
+  selectIndex = this.calendarService.getCurrentDayIndex();
   //TODO
-  selectIndex=this.calendarService.getCurrentDayIndex();
-  //TODO
-  weekTitle= this.calendarService.getCalenderWeekTitle();
+  weekTitle = this.calendarService.getCalenderWeekTitle();
 
   constructor(
     private modalController: ModalController,
@@ -56,6 +55,7 @@ export class CalendarPage implements OnInit {
     this.month = this.calendarService.getCalendarMonthView(
       this.calendarModel, this.currentYearIndex, this.currentMonthIndex);
     this.rows = this.calendarService.getCalendarMonthRow(this.month);
+    this.setCurrentDayCSS();
   }
 
   next() {
@@ -89,15 +89,26 @@ export class CalendarPage implements OnInit {
     }
     this.updateCalenderMonthUI();
   }
-  updateCalenderMonthUI(){
+
+  setCurrentDayCSS() {
+    const rowIndex=Math.floor(this.todayDayIndex/7);
+    // @ts-ignore
+    this.rows[rowIndex][this.todayDayIndex-(rowIndex*7)].css='calendar_selected_today';
+    // @ts-ignore
+    this.rows[rowIndex][this.todayDayIndex-(rowIndex*7)].oldCSS='calendar_col_today';
+  }
+
+  updateCalenderMonthUI() {
     this.shownMonth = this.months[this.currentMonthIndex];
     this.shownYear = this.years[this.currentYearIndex];
-    if(this.currentMonthIndex === this.todayMonthIndex){
-      this.selectIndex=this.calendarService.getCurrentDayIndex();
-    }else{
-      this.selectIndex=this.calendarService.getStartSelectedIndex(this.rows[0]);
+    if (this.currentMonthIndex === this.todayMonthIndex && this.currentYearIndex === this.todayYearIndex) {
+      this.selectIndex = this.calendarService.getCurrentDayIndex();
+      this.setCurrentDayCSS();
+    } else {
+      this.selectIndex = this.calendarService.getStartSelectedIndex(this.rows[0]);
     }
   }
+
   today() {
     this.currentYearIndex = this.todayYearIndex;
     this.currentMonthIndex = this.todayMonthIndex;
@@ -107,7 +118,7 @@ export class CalendarPage implements OnInit {
     this.month = this.calendarService.getCalendarMonthView(
       this.calendarModel, this.currentYearIndex, this.currentMonthIndex);
     this.rows = this.calendarService.getCalendarMonthRow(this.month);
-    this.selectIndex=this.calendarService.getCurrentDayIndex();
+    this.selectIndex = this.calendarService.getCurrentDayIndex();
   }
 
   changeMode(mode: string) {
