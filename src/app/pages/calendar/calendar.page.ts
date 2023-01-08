@@ -142,12 +142,31 @@ export class CalendarPage implements OnInit {
       }
       this.updateCalenderMonthUI();
     } else if (this.currentMode === 'week') {
+      this.month[this.selectIndex].css = this.month[this.selectIndex].defaultCSS;
       this.selectRow--;
-      if (this.selectRow - 1 < 0) {
+      if (this.selectRow < 0) {
         this.backMonth();
-
+        this.shownMonth = this.months[this.currentMonthIndex];
+        this.shownYear = this.years[this.currentYearIndex];
+        this.selectRow = this.rows.length - 2;
+        for(let i=0;i<7;i++){
+          // @ts-ignore
+            if(!this.rows[this.selectRow][i].isCurrentMonth){
+              this.selectIndex=(this.selectRow+1)*7-i;
+              break;
+          }
+        }
+        this.setWeek();
+      } else {
+        this.selectIndex = this.selectIndex - 7;
+        if (this.todayDayIndex === this.selectIndex) {
+          this.month[this.selectIndex].css = 'calendar_selected_today';
+        } else {
+          this.month[this.selectIndex].css = 'calendar_selected_day';
+        }
+        this.setWeek();
       }
-      this.setWeek();
+
     } else if (this.currentMode === 'day') {
 
     }
