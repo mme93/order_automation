@@ -149,13 +149,7 @@ export class CalendarPage implements OnInit {
         this.shownMonth = this.months[this.currentMonthIndex];
         this.shownYear = this.years[this.currentYearIndex];
         this.selectRow = this.rows.length - 2;
-        for(let i=0;i<7;i++){
-          // @ts-ignore
-            if(!this.rows[this.selectRow][i].isCurrentMonth){
-              this.selectIndex=(this.selectRow+1)*7-i;
-              break;
-          }
-        }
+        this.selectIndex=(this.rows.length-1)*7-1;
         this.setWeek();
       } else {
         this.selectIndex = this.selectIndex - 7;
@@ -166,7 +160,6 @@ export class CalendarPage implements OnInit {
         }
         this.setWeek();
       }
-
     } else if (this.currentMode === 'day') {
 
     }
