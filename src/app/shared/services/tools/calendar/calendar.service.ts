@@ -245,10 +245,10 @@ export class CalendarService {
         });
         afterDay++;
       } else {
-        let testDate;
+        let currentDate;
         if (monthsIndex === 0) {
           // @ts-ignore
-          testDate = calendarModel.years[yearsIndex][0][currentDay].days;
+          currentDate = calendarModel.years[yearsIndex][0][currentDay].days;
           this.getOrderFilter(yearsIndex + 1950, 0, currentDay, calendarModel.orders).forEach(order => {
             calendarEvent.push({
               start: order.startDate,
@@ -262,7 +262,7 @@ export class CalendarService {
           });
         } else if (monthsIndex === 11) {
           // @ts-ignore
-          testDate = calendarModel.years[yearsIndex][11][currentDay].days;
+          currentDate = calendarModel.years[yearsIndex][11][currentDay].days;
           this.getOrderFilter(yearsIndex + 1950, 11, currentDay, calendarModel.orders).forEach(order => {
             calendarEvent.push({
               start: order.startDate,
@@ -276,7 +276,7 @@ export class CalendarService {
           });
         } else {
           // @ts-ignore
-          testDate = calendarModel.years[yearsIndex][monthsIndex][currentDay].days;
+          currentDate = calendarModel.years[yearsIndex][monthsIndex][currentDay].days;
           this.getOrderFilter(yearsIndex + 1950, monthsIndex, currentDay + 1, calendarModel.orders).forEach(order => {
             calendarEvent.push({
               start: order.startDate,
@@ -292,7 +292,7 @@ export class CalendarService {
         month.push({
           day: currentDay + 1,
           // @ts-ignore
-          date: testDate,
+          date: currentDate,
           isCurrentMonth: true,
           calendarEvent,
           css: 'calendar_col',
