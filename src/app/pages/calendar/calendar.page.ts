@@ -195,6 +195,7 @@ export class CalendarPage implements OnInit {
       this.calendarModel, this.currentYearIndex, this.currentMonthIndex);
     this.rows = this.calendarService.getCalendarMonthRow(this.month);
     this.selectIndex = this.calendarService.getCurrentDayIndex();
+    this.setCurrentDayCSS();
   }
 
   changeMode(mode: string) {
