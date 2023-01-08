@@ -50,13 +50,36 @@ export interface CalendarEvent {
 })
 export class CalendarService {
 
-  getCalenderWeekTitle() {
+  getCalenderWeekTitle(week: CalendarMonthView[]) {
+    let month = week[0].date.getMonth() + 1;
+    let startDay;
+    if (week[0].date.getDate() < 10) {
+      startDay = '0' + week[0].date.getDate();
+    } else {
+      startDay = week[0].date.getDate();
+    }
+    let startMonth;
+    if (month < 10) {
+      startMonth = '0' + month;
+    } else {
+      startMonth = month;
+    }
+    let endDay;
+    if (week[6].date.getDate() < 10) {
+      endDay = '0' + week[6].date.getDate();
+    } else {
+      endDay = week[6].date.getDate();
+    }
+    let endMonth;
+    month = week[6].date.getMonth() + 1;
+    if (month < 10) {
+      endMonth = '0' + month;
+    } else {
+      endMonth = month;
+    }
 
-    return '02 01.2023 - 08.01.2023';
-  }
-
-  getCalendarWeekView() {
-
+    return startDay + '.' + startMonth + '.' + week[0].date.getFullYear() + ' - ' +
+      endDay + '.' + endMonth + '.' + week[6].date.getFullYear();
   }
 
   getStartSelectedIndex(calendarMonthViewRow: CalendarMonthViewRow) {
@@ -156,7 +179,7 @@ export class CalendarService {
           isCurrentMonth: false,
           calendarEvent,
           css: 'calendar_col_not_current_month',
-          defaultCSS:'calendar_col_not_current_month'
+          defaultCSS: 'calendar_col_not_current_month'
         });
       } else if (i > monthsSize + beforeMonthDays - 1) {
         let testDate;
@@ -204,7 +227,7 @@ export class CalendarService {
           isCurrentMonth: false,
           calendarEvent,
           css: 'calendar_col_not_current_month',
-          defaultCSS:'calendar_col_not_current_month'
+          defaultCSS: 'calendar_col_not_current_month'
         });
         afterDay++;
       } else {
@@ -253,7 +276,7 @@ export class CalendarService {
           isCurrentMonth: true,
           calendarEvent,
           css: 'calendar_col',
-          defaultCSS:'calendar_col'
+          defaultCSS: 'calendar_col'
         });
 
         currentDay++;
@@ -340,6 +363,15 @@ export class CalendarService {
       years.push(i);
     }
     return years;
+  }
+
+  getFirstDayIndexFromMonth(currentYearIndex: number, currentMonthIndex: number) {
+    const date = new Date(1950 + currentYearIndex, currentMonthIndex, 1);
+    return (date.getDay() === 0) ? 6 : date.getDay() - 1;
+  }
+
+  getLastDayIndexFromMonth(currentYearIndex: number, currentMonthIndex: number) {
+
   }
 
 }

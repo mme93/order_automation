@@ -33,12 +33,13 @@ export class CalendarPage implements OnInit {
   calendarModel: CalendarModel = {years: [], orders: []};
   rows: CalendarMonthViewRow[] = [];
   month: CalendarMonthView[] = [];
-  currentMode = 'month';
+  week: CalendarMonthView[] = [];
+  currentMode = 'week';
   todayRowIndex = Math.floor(this.todayDayIndex / 7);
   todayCalendarWeekNumber = 0;
   selectIndex = this.calendarService.getCurrentDayIndex();
-  //TODO
-  weekTitle = this.calendarService.getCalenderWeekTitle();
+  selectRow = Math.floor(this.selectIndex / 7);
+  weekTitle = '';
 
   constructor(
     private modalController: ModalController,
@@ -56,9 +57,20 @@ export class CalendarPage implements OnInit {
       this.calendarModel, this.currentYearIndex, this.currentMonthIndex);
     this.rows = this.calendarService.getCalendarMonthRow(this.month);
     this.setCurrentDayCSS();
+    this.setWeek();
   }
 
-  next() {
+  setWeek() {
+    this.week = [];
+    for (let i = 0; i < 7; i++) {
+      this.week.push(
+        this.month[i + (7 * this.selectRow)]
+      );
+    }
+    this.weekTitle = this.calendarService.getCalenderWeekTitle(this.week);
+  }
+
+  nextMonth() {
     if (this.currentMonthIndex === 11) {
       this.currentMonthIndex = 0;
       this.currentYearIndex = this.currentYearIndex + 1;
@@ -71,10 +83,43 @@ export class CalendarPage implements OnInit {
         this.calendarModel, this.currentYearIndex, this.currentMonthIndex);
       this.rows = this.calendarService.getCalendarMonthRow(this.month);
     }
-    this.updateCalenderMonthUI();
   }
 
-  back() {
+  next() {
+    if (this.currentMode === 'month') {
+      this.nextMonth();
+      if (!(this.currentYearIndex === this.todayYearIndex && this.currentMonthIndex === this.todayMonthIndex)) {
+        this.selectDay(this.calendarService.getFirstDayIndexFromMonth(this.currentYearIndex, this.currentMonthIndex));
+      }
+      this.updateCalenderMonthUI();
+    } else if (this.currentMode === 'week') {
+      this.selectRow++;
+      this.month[this.selectIndex].css = this.month[this.selectIndex].defaultCSS;
+      if (this.selectRow === (this.month.length / 7) - 1) {
+        this.nextMonth();
+        this.selectRow = 0;
+        this.selectIndex = this.calendarService.getFirstDayIndexFromMonth(this.currentYearIndex, this.currentMonthIndex);
+        if (this.todayDayIndex === this.selectIndex) {
+          this.month[this.selectIndex].css = 'calendar_selected_today';
+        } else {
+          this.month[this.selectIndex].css = 'calendar_selected_day';
+        }
+        this.updateCalenderMonthUI();
+      } else {
+        this.selectIndex = this.selectIndex + 7;
+        if (this.todayDayIndex === this.selectIndex) {
+          this.month[this.selectIndex].css = 'calendar_selected_today';
+        } else {
+          this.month[this.selectIndex].css = 'calendar_selected_day';
+        }
+      }
+      this.setWeek();
+    } else if (this.currentMode === 'day') {
+
+    }
+  }
+
+  backMonth() {
     if (this.currentMonthIndex === 0) {
       this.currentMonthIndex = 11;
       this.currentYearIndex = this.currentYearIndex - 1;
@@ -87,7 +132,25 @@ export class CalendarPage implements OnInit {
         this.calendarModel, this.currentYearIndex, this.currentMonthIndex);
       this.rows = this.calendarService.getCalendarMonthRow(this.month);
     }
-    this.updateCalenderMonthUI();
+  }
+
+  back() {
+    if (this.currentMode === 'month') {
+      this.backMonth();
+      if (!(this.currentYearIndex === this.todayYearIndex && this.currentMonthIndex === this.todayMonthIndex)) {
+        this.selectDay(this.calendarService.getFirstDayIndexFromMonth(this.currentYearIndex, this.currentMonthIndex));
+      }
+      this.updateCalenderMonthUI();
+    } else if (this.currentMode === 'week') {
+      this.selectRow--;
+      if (this.selectRow - 1 < 0) {
+        this.backMonth();
+
+      }
+      this.setWeek();
+    } else if (this.currentMode === 'day') {
+
+    }
   }
 
   setCurrentDayCSS() {
@@ -127,13 +190,15 @@ export class CalendarPage implements OnInit {
   }
 
   selectDay(index: number) {
-    if(this.todayDayIndex===index){
+    if (this.todayDayIndex === index) {
       this.month[index].css = 'calendar_selected_today';
-    }else{
+    } else {
       this.month[index].css = 'calendar_selected_day';
     }
     this.month[this.selectIndex].css = this.month[this.selectIndex].defaultCSS;
     this.selectIndex = index;
+    this.selectRow = Math.floor(this.selectIndex / 7);
+    this.setWeek();
   }
 
   async onEventSelected() {
