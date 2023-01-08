@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ModalController} from '@ionic/angular';
 import {EventdetailsPage} from './eventdetails/eventdetails.page';
 import {
+  CalendarEvent,
   CalendarModel,
   CalendarMonthView,
   CalendarMonthViewRow,
@@ -58,6 +59,32 @@ export class CalendarPage implements OnInit {
     this.rows = this.calendarService.getCalendarMonthRow(this.month);
     this.setCurrentDayCSS();
     this.setWeek();
+    this.sortEventsByStartDate();
+  }
+
+  sortEventsByStartDate() {
+
+    this.month.forEach((month) => {
+      const montEvent = month.calendarEvent;
+      if (montEvent.length > 0) {
+        const seconds: any[] = [];
+        montEvent.forEach((value, index) => {
+          const splitTime = value.startTime.split(':');
+          seconds.push({
+            time: Number(splitTime[0]) * 60 + Number(splitTime[1]),
+            index
+          });
+        });
+        seconds.sort((a, b) => a.time - b.time);
+        const resultEvent: CalendarEvent[] = [];
+        seconds.forEach(second => {
+          resultEvent.push(
+            montEvent[second.index]
+          );
+        });
+        month.calendarEvent = resultEvent;
+      }
+    });
   }
 
   setWeek() {
@@ -91,6 +118,7 @@ export class CalendarPage implements OnInit {
       if (!(this.currentYearIndex === this.todayYearIndex && this.currentMonthIndex === this.todayMonthIndex)) {
         this.selectDay(this.calendarService.getFirstDayIndexFromMonth(this.currentYearIndex, this.currentMonthIndex));
       }
+      this.sortEventsByStartDate();
       this.updateCalenderMonthUI();
     } else if (this.currentMode === 'week') {
       this.selectRow++;
@@ -104,6 +132,7 @@ export class CalendarPage implements OnInit {
         } else {
           this.month[this.selectIndex].css = 'calendar_selected_day';
         }
+        this.sortEventsByStartDate();
         this.updateCalenderMonthUI();
       } else {
         this.selectIndex = this.selectIndex + 7;
@@ -140,6 +169,7 @@ export class CalendarPage implements OnInit {
       if (!(this.currentYearIndex === this.todayYearIndex && this.currentMonthIndex === this.todayMonthIndex)) {
         this.selectDay(this.calendarService.getFirstDayIndexFromMonth(this.currentYearIndex, this.currentMonthIndex));
       }
+      this.sortEventsByStartDate();
       this.updateCalenderMonthUI();
     } else if (this.currentMode === 'week') {
       this.month[this.selectIndex].css = this.month[this.selectIndex].defaultCSS;
@@ -149,17 +179,15 @@ export class CalendarPage implements OnInit {
         this.shownMonth = this.months[this.currentMonthIndex];
         this.shownYear = this.years[this.currentYearIndex];
         this.selectRow = this.rows.length - 2;
-        this.selectIndex=(this.rows.length-1)*7-1;
-        this.setWeek();
-      } else {
-        this.selectIndex = this.selectIndex - 7;
-        if (this.todayDayIndex === this.selectIndex) {
-          this.month[this.selectIndex].css = 'calendar_selected_today';
-        } else {
-          this.month[this.selectIndex].css = 'calendar_selected_day';
-        }
-        this.setWeek();
+        this.selectIndex = (this.rows.length - 1) * 7 - 1;
+        this.sortEventsByStartDate();
       }
+      if (this.todayDayIndex === this.selectIndex) {
+        this.month[this.selectIndex].css = 'calendar_selected_today';
+      } else {
+        this.month[this.selectIndex].css = 'calendar_selected_day';
+      }
+      this.setWeek();
     } else if (this.currentMode === 'day') {
 
     }

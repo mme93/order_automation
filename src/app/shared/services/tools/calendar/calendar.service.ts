@@ -307,7 +307,15 @@ export class CalendarService {
 
   getTimeFromDate(date: Date) {
     date = new Date(date);
-    return date.getHours() + ':' + date.getMinutes();
+    let hour = '' + date.getHours();
+    if (date.getHours() < 10) {
+      hour = '0' + date.getHours();
+    }
+    let min = '' + date.getMinutes();
+    if (date.getMinutes() < 10) {
+      min = '0' + date.getMinutes();
+    }
+    return hour + ':' + min;
   }
 
   getCalendarMonthRow(month: CalendarMonthView[]) {
