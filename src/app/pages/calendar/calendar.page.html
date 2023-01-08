@@ -28,7 +28,7 @@
 
     </ion-col>
     <ion-col size="8" class="ion-text-center" *ngIf="currentMode==='day'">
-      <h1>{{shownYear}} {{shownMonth}} {{}}</h1>
+      <h1>{{shownYear}} {{shownMonth}}</h1>
     </ion-col>
 
     <ion-col size="2">
@@ -47,11 +47,17 @@
     </ion-row>
     <ion-row class="calendar_row_week">
       <ion-col size="1.714" class="calendar_col_week" *ngFor="let day of week">
-        <div *ngFor="let event of day.calendarEvent">
-          {{event.title}}
+        <div *ngFor="let event of day.calendarEvent" style="border-style: solid; margin-bottom: 5px">
+          <div>
+            {{event.startTime}} - {{event.endTime}}
+          </div>
+          <div>
+            {{event.title}}
+          </div>
         </div>
       </ion-col>
     </ion-row>
+
   </ion-card>
   <!--Day-Mode-->
   <ion-card *ngIf="currentMode==='day'" class="calendar_card_day">

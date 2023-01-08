@@ -39,6 +39,8 @@ export interface CalendarWeekView {
 export interface CalendarEvent {
   start: Date;
   end: Date;
+  startTime: string;
+  endTime: string;
   title: string;
   eventArt: string;
   eventID: number;
@@ -140,7 +142,9 @@ export class CalendarService {
               end: order.endDate,
               title: order.orderInformation,
               eventArt: 'order',
-              eventID: order.id
+              eventID: order.id,
+              startTime: this.getTimeFromDate(order.startDate),
+              endTime: this.getTimeFromDate(order.endDate)
             });
           });
         } else if (monthsIndex === 11) {
@@ -154,7 +158,9 @@ export class CalendarService {
               end: order.endDate,
               title: order.orderInformation,
               eventArt: 'order',
-              eventID: order.id
+              eventID: order.id,
+              startTime: this.getTimeFromDate(order.startDate),
+              endTime: this.getTimeFromDate(order.endDate)
             });
           });
         } else {
@@ -169,7 +175,9 @@ export class CalendarService {
                 end: order.endDate,
                 title: order.orderInformation,
                 eventArt: 'order',
-                eventID: order.id
+                eventID: order.id,
+                startTime: this.getTimeFromDate(order.startDate),
+                endTime: this.getTimeFromDate(order.endDate)
               });
             });
         }
@@ -192,7 +200,9 @@ export class CalendarService {
               end: order.endDate,
               title: order.orderInformation,
               eventArt: 'order',
-              eventID: order.id
+              eventID: order.id,
+              startTime: this.getTimeFromDate(order.startDate),
+              endTime: this.getTimeFromDate(order.endDate)
             });
           });
         } else if (monthsIndex === 11) {
@@ -204,7 +214,9 @@ export class CalendarService {
               end: order.endDate,
               title: order.orderInformation,
               eventArt: 'order',
-              eventID: order.id
+              eventID: order.id,
+              startTime: this.getTimeFromDate(order.startDate),
+              endTime: this.getTimeFromDate(order.endDate)
             });
           });
         } else {
@@ -216,7 +228,9 @@ export class CalendarService {
               end: order.endDate,
               title: order.orderInformation,
               eventArt: 'order',
-              eventID: order.id
+              eventID: order.id,
+              startTime: this.getTimeFromDate(order.startDate),
+              endTime: this.getTimeFromDate(order.endDate)
             });
           });
         }
@@ -241,7 +255,9 @@ export class CalendarService {
               end: order.endDate,
               title: order.orderInformation,
               eventArt: 'order',
-              eventID: order.id
+              eventID: order.id,
+              startTime: this.getTimeFromDate(order.startDate),
+              endTime: this.getTimeFromDate(order.endDate)
             });
           });
         } else if (monthsIndex === 11) {
@@ -253,7 +269,9 @@ export class CalendarService {
               end: order.endDate,
               title: order.orderInformation,
               eventArt: 'order',
-              eventID: order.id
+              eventID: order.id,
+              startTime: this.getTimeFromDate(order.startDate),
+              endTime: this.getTimeFromDate(order.endDate)
             });
           });
         } else {
@@ -265,7 +283,9 @@ export class CalendarService {
               end: order.endDate,
               title: order.orderInformation,
               eventArt: 'order',
-              eventID: order.id
+              eventID: order.id,
+              startTime: this.getTimeFromDate(order.startDate),
+              endTime: this.getTimeFromDate(order.endDate)
             });
           });
         }
@@ -283,6 +303,11 @@ export class CalendarService {
       }
     }
     return month;
+  }
+
+  getTimeFromDate(date: Date) {
+    date = new Date(date);
+    return date.getHours() + ':' + date.getMinutes();
   }
 
   getCalendarMonthRow(month: CalendarMonthView[]) {
