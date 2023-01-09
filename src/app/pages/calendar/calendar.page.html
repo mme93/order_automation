@@ -28,7 +28,7 @@
 
     </ion-col>
     <ion-col size="8" class="ion-text-center" *ngIf="currentMode==='day'">
-      <h1>{{shownYear}} {{shownMonth}}</h1>
+      <h1>{{dayTitle}}</h1>
     </ion-col>
 
     <ion-col size="2">
@@ -65,6 +65,7 @@
       {{hour}}
     </ion-row>
   </ion-card>
+
   <!--Month-Mode-->
   <ion-card *ngIf="currentMode==='month'">
     <ion-row>

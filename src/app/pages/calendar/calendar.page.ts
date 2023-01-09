@@ -35,12 +35,21 @@ export class CalendarPage implements OnInit {
   rows: CalendarMonthViewRow[] = [];
   month: CalendarMonthView[] = [];
   week: CalendarMonthView[] = [];
-  currentMode = 'week';
+  day: CalendarMonthView = {
+    day: 0,
+    date: new Date(),
+    isCurrentMonth: false,
+    calendarEvent: [],
+    css: '',
+    defaultCSS: ''
+  }
+  currentMode = 'day';
   todayRowIndex = Math.floor(this.todayDayIndex / 7);
   todayCalendarWeekNumber = 0;
   selectIndex = this.calendarService.getCurrentDayIndex();
   selectRow = Math.floor(this.selectIndex / 7);
   weekTitle = '';
+  dayTitle = '';
 
   constructor(
     private modalController: ModalController,
@@ -60,10 +69,27 @@ export class CalendarPage implements OnInit {
     this.setCurrentDayCSS();
     this.setWeek();
     this.sortEventsByStartDate();
+    this.setDayInformation();
+  }
+
+  setDayInformation() {
+    this.day = this.month[this.selectIndex];
+    let day;
+    if (this.day.day < 10) {
+      day = '0' + this.day.day;
+    } else {
+      day = this.day.day;
+    }
+    let month;
+    if (this.currentMonthIndex + 1 < 10) {
+      month = '0' + (this.currentMonthIndex + 1);
+    } else {
+      month = (this.currentMonthIndex + 1);
+    }
+    this.dayTitle = day + '.' + month + '.' + (1950 + this.currentYearIndex);
   }
 
   sortEventsByStartDate() {
-
     this.month.forEach((month) => {
       const montEvent = month.calendarEvent;
       if (montEvent.length > 0) {
@@ -120,6 +146,7 @@ export class CalendarPage implements OnInit {
       }
       this.sortEventsByStartDate();
       this.updateCalenderMonthUI();
+      this.setDayInformation();
     } else if (this.currentMode === 'week') {
       this.selectRow++;
       this.month[this.selectIndex].css = this.month[this.selectIndex].defaultCSS;
@@ -134,6 +161,7 @@ export class CalendarPage implements OnInit {
         }
         this.sortEventsByStartDate();
         this.updateCalenderMonthUI();
+        this.setDayInformation();
       } else {
         this.selectIndex = this.selectIndex + 7;
         if (this.todayDayIndex === this.selectIndex) {
@@ -171,6 +199,7 @@ export class CalendarPage implements OnInit {
       }
       this.sortEventsByStartDate();
       this.updateCalenderMonthUI();
+      this.setDayInformation();
     } else if (this.currentMode === 'week') {
       this.month[this.selectIndex].css = this.month[this.selectIndex].defaultCSS;
       this.selectRow--;
@@ -181,6 +210,7 @@ export class CalendarPage implements OnInit {
         this.selectRow = this.rows.length - 2;
         this.selectIndex = (this.rows.length - 1) * 7 - 1;
         this.sortEventsByStartDate();
+        this.setDayInformation();
       }
       if (this.todayDayIndex === this.selectIndex) {
         this.month[this.selectIndex].css = 'calendar_selected_today';
@@ -224,6 +254,7 @@ export class CalendarPage implements OnInit {
     this.rows = this.calendarService.getCalendarMonthRow(this.month);
     this.selectIndex = this.calendarService.getCurrentDayIndex();
     this.setCurrentDayCSS();
+    this.setDayInformation();
   }
 
   changeMode(mode: string) {
@@ -240,6 +271,7 @@ export class CalendarPage implements OnInit {
     this.selectIndex = index;
     this.selectRow = Math.floor(this.selectIndex / 7);
     this.setWeek();
+    this.setDayInformation();
   }
 
   async onEventSelected() {
