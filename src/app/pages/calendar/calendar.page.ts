@@ -6,7 +6,7 @@ import {
   CalendarModel,
   CalendarMonthView,
   CalendarMonthViewRow,
-  CalendarService
+  CalendarService,
 } from '../../shared/services/tools/calendar/calendar.service';
 import {OrderService} from '../../shared/services/http/order/order.service';
 import {Order} from '../../shared/model/order/order';
@@ -22,7 +22,6 @@ export class CalendarPage implements OnInit {
   months = ['January', 'February', 'March', 'April', 'Mai', 'Jun', 'July', 'August', 'September', 'October', 'November', 'December'];
   days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
   mode = ['month', 'week', 'day'];
-  hours = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24];
   years = this.calendarService.getYears();
   todayYearIndex = this.calendarService.getCurrentYearIndex();
   todayMonthIndex = this.calendarService.getCurrentMonthIndex();
@@ -35,15 +34,7 @@ export class CalendarPage implements OnInit {
   rows: CalendarMonthViewRow[] = [];
   month: CalendarMonthView[] = [];
   week: CalendarMonthView[] = [];
-  day: CalendarMonthView = {
-    day: 0,
-    date: new Date(),
-    isCurrentMonth: false,
-    calendarEvent: [],
-    css: '',
-    defaultCSS: ''
-  }
-  currentMode = 'day';
+  currentMode = 'month';
   todayRowIndex = Math.floor(this.todayDayIndex / 7);
   todayCalendarWeekNumber = 0;
   selectIndex = this.calendarService.getCurrentDayIndex();
@@ -73,12 +64,11 @@ export class CalendarPage implements OnInit {
   }
 
   setDayInformation() {
-    this.day = this.month[this.selectIndex];
     let day;
-    if (this.day.day < 10) {
-      day = '0' + this.day.day;
+    if (this.month[this.selectIndex].day < 10) {
+      day = '0' + this.month[this.selectIndex].day;
     } else {
-      day = this.day.day;
+      day = this.month[this.selectIndex].day;
     }
     let month;
     if (this.currentMonthIndex + 1 < 10) {
@@ -88,6 +78,7 @@ export class CalendarPage implements OnInit {
     }
     this.dayTitle = day + '.' + month + '.' + (1950 + this.currentYearIndex);
   }
+
 
   sortEventsByStartDate() {
     this.month.forEach((month) => {

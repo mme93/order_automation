@@ -7,7 +7,6 @@
       <ion-button color="primary" (click)="today()">Today</ion-button>
       <ion-button color="primary" (click)="changeMode('month')">Month</ion-button>
       <ion-button color="primary" (click)="changeMode('week')">Week</ion-button>
-      <ion-button color="primary" (click)="changeMode('day')">Day</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -61,15 +60,13 @@
   </ion-card>
   <!--Day-Mode-->
   <ion-card *ngIf="currentMode==='day'" class="calendar_card_day">
-    <ion-row *ngFor="let hour of hours" class="calendar_row_day">
-      {{hour}}
-    </ion-row>
   </ion-card>
 
   <!--Month-Mode-->
   <ion-card *ngIf="currentMode==='month'">
     <ion-row>
-      <ion-col *ngFor="let dayCol of days" size="1.714" class="calendar_name" style="text-align: center;border: 1px solid black">
+      <ion-col *ngFor="let dayCol of days" size="1.714" class="calendar_name"
+               style="text-align: center;border: 1px solid black">
         {{dayCol}}
       </ion-col>
     </ion-row>

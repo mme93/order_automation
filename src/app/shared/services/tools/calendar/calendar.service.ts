@@ -46,7 +46,6 @@ export interface CalendarEvent {
   eventID: number;
 }
 
-
 @Injectable({
   providedIn: 'root'
 })
