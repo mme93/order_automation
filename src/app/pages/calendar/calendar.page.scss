@@ -1,0 +1,83 @@
+.calendar_name{
+  background-color: #3d3c3c;
+  color: white;
+}
+.calendar_col {
+  border:1px solid black;
+  height: 100%;
+  background-color: #3d3c3c;
+  color: white;
+}
+.calendar_col:hover {
+  background-color: #5b5858;
+}
+.calendar_col_not_current_month{
+  border:1px solid black;
+  height: 100%;
+  background-color: #1a1a1a;
+}
+.calendar_col_not_current_month:hover{
+  background-color: #5b5858;
+}
+.calendar_col_today {
+  border: 5px solid #006581;
+  height: 100%;
+  background-color: #3d3c3c;
+  color: white;
+}
+.calendar_col_today:hover {
+  background-color: #5b5858;
+}
+
+.calendar_selected_day{
+  border:1px solid black;
+  font-weight: 900;
+  height: 100%;
+  background-color: #5b5858;
+  color: white;
+}
+.calendar_selected_today{
+  border: 5px solid #006581;
+  font-weight: 900;
+  height: 100%;
+  background-color: #5b5858;
+  color: white;
+}
+
+.calendar_row {
+  height: 110px;
+}
+
+.calendar_col_week {
+  border-style: solid;
+  height: 100%;
+}
+
+.calendar_row_week {
+  height: 550px;
+}
+
+.calendar_card_week {
+  height: 600px
+}
+
+.calendar_card_week_name {
+  height: 50px
+}
+
+.calendar_card_day {
+  height: 800px;
+}
+
+.calender_month_event_text {
+  font-size: 12px;
+  padding: 2px;
+  margin-bottom: 2px;
+  color: white;
+  font-weight: normal;
+  background-color: #333131;
+}
+.calender_month_event_text:hover{
+  padding: 4px;
+  font-size: 14px;
+}

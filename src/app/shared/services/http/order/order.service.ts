@@ -79,7 +79,7 @@ export class OrderService {
         Authorization: 'Bearer ' + localStorage.getItem('token')
       })
     };
-    return this.http.put(environment.backendUrl +'order/update', JSON.stringify(order), httpOptions).subscribe();
+    return this.http.put(environment.backendUrl + 'order/update', JSON.stringify(order), httpOptions).subscribe();
   }
 
   deleteOrder(order: Order) {
@@ -91,6 +91,6 @@ export class OrderService {
         Authorization: 'Bearer ' + localStorage.getItem('token')
       })
     };
-    return this.http.delete(environment.backendUrl +'order/delete/'+order.id, httpOptions).subscribe();
+    return this.http.delete(environment.backendUrl + 'order/delete/' + order.id, httpOptions).subscribe();
   }
 }
