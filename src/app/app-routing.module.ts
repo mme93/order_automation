@@ -63,9 +63,15 @@ const routes: Routes = [
     then(m => m.CreateOrderDialogPageModule)
   },
   {
+    path: 'vehicle',
+    loadChildren: () => import('./pages/vehicle/vehicle.module').then( m => m.VehiclePageModule)
+  },
+  {
     path: '**',
     component: ErrorComponent
   }
+
+
 
 ];
 

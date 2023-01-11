@@ -12,32 +12,61 @@
       </ion-toolbar>
     </ion-header>
     <ion-content>
-      <ion-list>
+      <ion-accordion-group>
+        <!-- Home-->
         <ion-item button routerLink="/home">
-          <ion-icon name="home-outline" slot="start" class="iconStyle"></ion-icon>
+          <mat-icon slot="start" class="iconStyle" fontIcon="home"></mat-icon>
           <ion-label>Start</ion-label>
         </ion-item>
+        <!-- Order-->
         <ion-item button routerLink="order/orders">
-          <ion-icon name="document-text-outline" slot="start" class="iconStyle"></ion-icon>
+          <mat-icon slot="start" class="iconStyle" fontIcon="edit_document"></mat-icon>
           <ion-label>Order</ion-label>
         </ion-item>
+        <!-- Customer-->
         <ion-item button routerLink="customer/customers">
-          <ion-icon name="accessibility-outline" slot="start" class="iconStyle"></ion-icon>
+          <mat-icon slot="start" class="iconStyle" fontIcon="mood"></mat-icon>
           <ion-label>Customer</ion-label>
         </ion-item>
+        <!-- Calendar-->
         <ion-item button routerLink="calendar">
-          <ion-icon name="calendar-number-outline" slot="start" class="iconStyle"></ion-icon>
+          <mat-icon slot="start" class="iconStyle" fontIcon="calendar_month"></mat-icon>
           <ion-label>Calendar</ion-label>
         </ion-item>
+        <!-- Vehicle-->
+        <ion-accordion value="first">
+          <ion-item slot="header">
+            <mat-icon slot="start" class="iconStyle" fontIcon="car_repair"></mat-icon>
+            <ion-label>Vehicle</ion-label>
+          </ion-item>
+          <ion-item button routerLink="/vehicle/car" slot="content" lines="none">
+            <mat-icon slot="start" class="iconStyle" style="margin-left: 16px" fontIcon="directions_car"></mat-icon>
+            <ion-label>Car</ion-label>
+          </ion-item>
+          <ion-item button routerLink="/vehicle/registrationdocument" slot="content" lines="none">
+            <mat-icon slot="start" class="iconStyle" style="margin-left: 16px" fontIcon="pedal_bike"></mat-icon>
+            <ion-label>Motorbike</ion-label>
+          </ion-item>
+          <ion-item button routerLink="/vehicle/motorbike" slot="content">
+            <mat-icon slot="start" class="iconStyle" style="margin-left: 16px" fontIcon="article"></mat-icon>
+            <ion-label>Vehicle-Doc.</ion-label>
+          </ion-item>
+          <div style="border-top: 1px solid #bbb;" slot="content"></div>
+        </ion-accordion>
+
+        <!-- Help-->
         <ion-item button routerLink="help">
-          <ion-icon name="information-circle-outline" slot="start" class="iconStyle"></ion-icon>
+          <mat-icon slot="start" class="iconStyle" fontIcon="help"></mat-icon>
           <ion-label>Help</ion-label>
         </ion-item>
+        <!-- Logout-->
         <ion-item button (click)="logout()">
-          <ion-icon name="log-out-outline" slot="start" class="iconStyle"></ion-icon>
+          <mat-icon slot="start" class="iconStyle" fontIcon="logout"></mat-icon>
           <ion-label>Logout</ion-label>
         </ion-item>
-      </ion-list>
+
+      </ion-accordion-group>
+
     </ion-content>
   </ion-menu>
   <ion-router-outlet id="main"></ion-router-outlet>
