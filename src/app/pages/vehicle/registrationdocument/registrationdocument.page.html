@@ -19,16 +19,6 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <h1>Vehicle Registration Document</h1>
-  <mat-label>File matInput</mat-label>
-  <button mat-icon-button matPrefix (click)="f_input.click()">
-    <mat-icon>attach_file</mat-icon>
-  </button>
-  <input type="text" readonly matInput/>
-  <input
-    type="file"
-    multiple
-    hidden
-    #f_input
-  />
+  <h1>Documents</h1>
+  <ion-button (click)="onEventSelected()" expand="block">Upload File</ion-button>
 </ion-content>

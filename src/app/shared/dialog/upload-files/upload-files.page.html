@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>upload_files</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <mat-label>File matInput</mat-label>
+  <button mat-icon-button matPrefix (click)="f_input.click()">
+    <mat-icon>attach_file</mat-icon>
+  </button>
+  <input type="text" readonly matInput/>
+  <input
+    type="file"
+    multiple
+    hidden
+    #f_input
+  />
+</ion-content>

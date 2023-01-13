@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {ModalController} from "@ionic/angular";
+import {UploadFilesPage} from "../../../shared/dialog/upload-files/upload-files.page";
 
 @Component({
   selector: 'app-registrationdocument',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegistrationdocumentPage implements OnInit {
 
-  constructor() { }
+  constructor(private modalController: ModalController) { }
 
   ngOnInit() {
   }
 
+  async onEventSelected() {
+    const modal = await this.modalController.create({
+      component: UploadFilesPage
+    });
+    await modal.present();
+  }
 }

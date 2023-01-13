@@ -69,7 +69,11 @@ const routes: Routes = [
   {
     path: '**',
     component: ErrorComponent
+  },  {
+    path: 'upload-files',
+    loadChildren: () => import('./shared/dialog/upload-files/upload-files.module').then( m => m.UploadFilesPageModule)
   }
+
 
 
 
