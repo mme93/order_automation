@@ -5,6 +5,29 @@
 </ion-header>
 
 <ion-content>
+  <ion-item>
+    <ion-label>Select multiple file</ion-label>
+    <ion-input type="file" (change)="selectFileMultiple($event)" multiple></ion-input>
+  </ion-item>
+  <div>
+    --------------------------------------------------------------
+  </div>
+  <ion-item>
+    <ion-label>Select file</ion-label>
+    <ion-input type="file" (change)="selectFile($event)"></ion-input>
+  </ion-item>
+  <div>
+    --------------------------------------------------------------
+  </div>
+  <div *ngFor="let file of fileList">
+    <p>{{file}}</p>
+  </div>
+  <ion-button expand="block" (click)="upload()">Upload</ion-button>
+  <ion-button expand="block" (click)="uploadFiles()">UploadFiles</ion-button>
+  <!--
+  <label class="btn btn-default">
+    <input type="file" (change)="selectFile($event)" />
+  </label>
   <div *ngIf="currentFile" class="progress">
     <div
       class="progress-bar progress-bar-info progress-bar-striped"
@@ -39,4 +62,5 @@
       </li>
     </ul>
   </div>
+  -->
 </ion-content>
