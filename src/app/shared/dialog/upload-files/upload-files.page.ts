@@ -15,7 +15,7 @@ export interface DocFiles {
   templateUrl: './upload-files.page.html',
   styleUrls: ['./upload-files.page.scss'],
 })
-export class UploadFilesPage implements OnInit {
+export class UploadFilesPage{
   fileList: String[] = [];
   selectedFilesList: File [] | undefined = [];
   selectedFiles: FileList | undefined;
@@ -28,7 +28,7 @@ export class UploadFilesPage implements OnInit {
   }
 
 
-  selectFileMultiple(event: any) {
+  selectFiles(event: any) {
     this.selectedFiles = event.target.files;
     // @ts-ignore
     for (let i = 0; i < this.selectedFiles?.length; i++) {
@@ -36,59 +36,21 @@ export class UploadFilesPage implements OnInit {
       this.fileList.push(this.selectedFiles?.item(i).name);
       // @ts-ignore
       this.selectedFilesList?.push(this.selectedFiles?.item(i))
-      console.log(this.selectedFiles?.item(i))
     }
   }
 
-  selectFile(event: any) {
-    this.selectedFiles = event.target.files;
-  }
-
-  ngOnInit() {
-    //this.fileInfos = this.uploadService.getFiles();
-  }
-
-  uploadFiles() {
-    this.uploadService.uploadFiles(this.selectedFilesList).subscribe(
-      event => {
-        if (event.type === HttpEventType.UploadProgress) {
-          // @ts-ignore
-          this.progress = Math.round(100 * event.loaded / event.total);
-        } else if (event instanceof HttpResponse) {
-          this.message = event.body.message;
-         // this.fileInfos = this.uploadService.getFiles();
-        }
-      },
-      err => {
-        this.progress = 0;
-        this.message = 'Could not upload the file!';
-        this.currentFile = undefined;
-      });
-  }
-
   upload() {
-    this.progress = 0;
-
-    // @ts-ignore
-    this.currentFile = this.selectedFiles.item(0);
-
-    this.uploadService.upload(this.currentFile).subscribe(
+    this.uploadService.upload(this.selectedFilesList).subscribe(
       event => {
         if (event.type === HttpEventType.UploadProgress) {
           // @ts-ignore
           this.progress = Math.round(100 * event.loaded / event.total);
-        } else if (event instanceof HttpResponse) {
-          this.message = event.body.message;
-          this.fileInfos = this.uploadService.getFiles();
+        }else if (event.type === HttpEventType.Response) {
+          this.progress=0;
+          this.message = event.body;
         }
-      },
-      err => {
-        this.progress = 0;
-        this.message = 'Could not upload the file!';
-        this.currentFile = undefined;
       });
-
-    this.selectedFiles = undefined;
   }
+
 
 }
