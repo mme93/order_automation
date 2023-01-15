@@ -14,6 +14,7 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatCardModule} from "@angular/material/card";
 import {MatDividerModule} from "@angular/material/divider";
 import {MatListModule} from "@angular/material/list";
+import {MatTableModule} from "@angular/material/table";
 
 @NgModule({
   imports: [
@@ -27,6 +28,7 @@ import {MatListModule} from "@angular/material/list";
     MatIconModule,
     MatCardModule,
     MatDividerModule,
+    MatTableModule,
     MatListModule
   ],
   declarations: [UploadFilesPage]

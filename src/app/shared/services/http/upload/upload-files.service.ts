@@ -19,7 +19,6 @@ export class UploadFilesService {
       reportProgress: true,
       responseType: 'text'
     });
-
     return this.http.request(req);
   }
 

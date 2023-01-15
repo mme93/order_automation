@@ -1,0 +1,20 @@
+table {
+  font-weight: normal;
+
+  td {
+    font-size: 10px;
+  }
+
+  tr {
+    font-size: 10px;
+  }
+}
+
+ion-card {
+  overflow-x: scroll;
+  overflow-y: scroll;
+}
+
+mat-icon:hover {
+  background-color: gray;
+}
