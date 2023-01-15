@@ -1,19 +1,42 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>upload_files</ion-title>
+    <ion-title class="firm_text">Upload Files</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <mat-label>File matInput</mat-label>
-  <button mat-icon-button matPrefix (click)="f_input.click()">
-    <mat-icon>attach_file</mat-icon>
+  <div *ngIf="currentFile" class="progress">
+    <div
+      class="progress-bar progress-bar-info progress-bar-striped"
+      role="progressbar"
+      attr.aria-valuenow="{{ progress }}"
+      aria-valuemin="0"
+      aria-valuemax="100"
+      [ngStyle]="{ width: progress + '%' }"
+    >
+      {{ progress }}%
+    </div>
+  </div>
+
+  <label class="btn btn-default">
+    <input type="file" (change)="selectFile($event)" />
+  </label>
+
+  <button class="btn btn-success" [disabled]="!selectedFiles" (click)="upload()">
+    Upload
   </button>
-  <input type="text" readonly matInput/>
-  <input
-    type="file"
-    multiple
-    hidden
-    #f_input
-  />
+
+  <div class="alert alert-light" role="alert">{{ message }}</div>
+
+  <div class="card">
+    <div class="card-header">List of Files</div>
+    <ul
+      class="list-group list-group-flush"
+      *ngFor="let file of fileInfos | async"
+    >
+      <li class="list-group-item">
+        <a href="{{ file.url }}">{{ file.name }}</a>
+      </li>
+    </ul>
+  </div>
 </ion-content>

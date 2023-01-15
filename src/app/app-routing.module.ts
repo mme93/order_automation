@@ -9,6 +9,9 @@ const routes: Routes = [
     path: '',
     redirectTo: 'account',
     pathMatch: 'full'
+  },{
+    path: 'upload',
+    loadChildren: () => import('./shared/dialog/upload-files/upload-files.module').then(m => m.UploadFilesPageModule)
   },
   {
     path: 'account',
@@ -69,7 +72,8 @@ const routes: Routes = [
   {
     path: '**',
     component: ErrorComponent
-  },  {
+  },
+  {
     path: 'upload-files',
     loadChildren: () => import('./shared/dialog/upload-files/upload-files.module').then( m => m.UploadFilesPageModule)
   }
