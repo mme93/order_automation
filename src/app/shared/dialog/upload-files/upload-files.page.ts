@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {HttpEventType} from '@angular/common/http';
 import {UploadFilesService} from '../../services/http/upload/upload-files.service';
 import {MatTableDataSource} from '@angular/material/table';
+import {ModalController} from '@ionic/angular';
 
 export interface DocFiles {
   position: number;
@@ -27,7 +28,7 @@ export class UploadFilesPage {
   displayedColumns: string[] = ['position', 'name', 'size', 'type', 'status', 'delete'];
   dataSource = new MatTableDataSource<DocFiles>(this.docFiles);
 
-  constructor(private uploadService: UploadFilesService) {
+  constructor(private uploadService: UploadFilesService, private modalController: ModalController) {
   }
 
 
@@ -88,6 +89,7 @@ export class UploadFilesPage {
           this.isUploading = false;
           this.buttonText = 'Upload';
           this.changeStatus('Successful upload')
+          this.closeModal();
         }
       });
   }
@@ -99,5 +101,11 @@ export class UploadFilesPage {
     })
     this.selectedFilesList.splice(position, 1)
     this.dataSource = new MatTableDataSource<DocFiles>(this.docFiles);
+  }
+
+  closeModal() {
+    this.modalController.dismiss({
+      data: this.docFiles
+    });
   }
 }

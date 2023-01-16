@@ -19,5 +19,7 @@ export class RegistrationdocumentPage implements OnInit {
       component: UploadFilesPage
     });
     await modal.present();
+    const { data } = await modal.onDidDismiss();
+    console.log(data);
   }
 }
