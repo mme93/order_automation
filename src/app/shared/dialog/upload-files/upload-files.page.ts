@@ -17,7 +17,6 @@ export interface DocFiles {
   styleUrls: ['./upload-files.page.scss'],
 })
 export class UploadFilesPage {
-  clickedRows = new Set<DocFiles>();
   docFiles: DocFiles[] = [];
   selectedFilesList: File [] = [];
   selectedFiles: FileList | undefined;
@@ -25,7 +24,7 @@ export class UploadFilesPage {
   message = '';
   isUploading = false;
   buttonText = 'Upload';
-  displayedColumns: string[] = ['position', 'name', 'size', 'type', 'status','delete'];
+  displayedColumns: string[] = ['position', 'name', 'size', 'type', 'status', 'delete'];
   dataSource = new MatTableDataSource<DocFiles>(this.docFiles);
 
   constructor(private uploadService: UploadFilesService) {
@@ -37,23 +36,32 @@ export class UploadFilesPage {
     // @ts-ignore
     for (let i = 0; i < this.selectedFiles?.length; i++) {
       // @ts-ignore
-      this.selectedFilesList?.push(this.selectedFiles?.item(i))
-      this.docFiles.push(<DocFiles>{
-        position: i,
+      if (!this.checkDuplicateFileName(this.selectedFiles?.item(i).name)) {
         // @ts-ignore
-        name: this.selectedFiles?.item(i).name,
-        // @ts-ignore
-        size: Number((this.selectedFiles?.item(i).size / 1000 / 1000).toFixed(2)),
-        // @ts-ignore
-        type: this.selectedFiles?.item(i).type.split('/')[1],
-        status: 'Not uploaded'
-      });
+        this.selectedFilesList?.push(this.selectedFiles?.item(i))
+        this.docFiles.push(<DocFiles>{
+          position: i,
+          // @ts-ignore
+          name: this.selectedFiles?.item(i).name,
+          // @ts-ignore
+          size: Number((this.selectedFiles?.item(i).size / 1000 / 1000).toFixed(2)),
+          // @ts-ignore
+          type: this.selectedFiles?.item(i).type.split('/')[1],
+          status: 'Not uploaded'
+        });
+      }
     }
     this.dataSource = new MatTableDataSource<DocFiles>(this.docFiles);
   }
 
-  checkDuplicateFileName() {
-
+  checkDuplicateFileName(fileName: string) {
+    let duplicate = false;
+    this.docFiles.forEach(file => {
+      if (file.name === fileName) {
+        duplicate = true;
+      }
+    });
+    return duplicate;
   }
 
   changeStatus(status: string) {
@@ -85,11 +93,11 @@ export class UploadFilesPage {
   }
 
   remove(position: number) {
-    this.docFiles.splice(position,1);
-    this.docFiles.forEach((files,index) =>{
-        files.position=index;
+    this.docFiles.splice(position, 1);
+    this.docFiles.forEach((files, index) => {
+      files.position = index;
     })
-    this.selectedFilesList.splice(position,1)
+    this.selectedFilesList.splice(position, 1)
     this.dataSource = new MatTableDataSource<DocFiles>(this.docFiles);
   }
 }
