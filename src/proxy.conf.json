@@ -1,6 +1,0 @@
-{
-  "/document/*": {
-    "target": "http://localhost:8997",
-    "secure": false
-  }
-}
