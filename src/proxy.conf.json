@@ -1,0 +1,6 @@
+{
+  "/api": {
+    "target": "http://services-meier.de",
+    "secure": false
+  }
+}
