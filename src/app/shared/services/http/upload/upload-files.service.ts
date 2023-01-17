@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpEvent, HttpRequest} from '@angular/common/http';
+import {HttpClient, HttpEvent, HttpHeaders, HttpRequest} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
 @Injectable({
@@ -15,7 +15,7 @@ export class UploadFilesService {
     file?.forEach(file => {
       formData.append('file', file);
     })
-    const req = new HttpRequest('POST', 'http://localhost:8997/document/upload', formData, {
+    const req = new HttpRequest('POST', 'http://services-meier.de:8997/document/upload', formData, {
       reportProgress: true,
       responseType: 'text'
     });
