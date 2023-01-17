@@ -17,7 +17,6 @@ export class UploadFilesService {
     })
     const headers = new HttpHeaders().set('Access-Control-Allow-Origin', '*');
     const req = new HttpRequest('POST', '/document/upload', formData, {
-      headers: headers,
       reportProgress: true,
       responseType: 'text'
     });
