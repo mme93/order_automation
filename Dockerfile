@@ -7,4 +7,4 @@ RUN npm install -g @ionic/cli
 RUN npm install
 COPY ./ /app/
 EXPOSE 8100
-CMD ["ng", "serve", "--proxy", "-", "config", "proxy.conf.json"]
+CMD ["ng", "serve"]
