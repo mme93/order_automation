@@ -1,7 +1,6 @@
 {
-  "/document": {
+  "/document/*": {
     "target": "http://localhost:8997",
-    "secure": false,
-    "changeOrigin": true
+    "secure": false
   }
 }

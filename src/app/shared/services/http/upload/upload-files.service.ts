@@ -15,8 +15,9 @@ export class UploadFilesService {
     file?.forEach(file => {
       formData.append('file', file);
     })
-    const headers = new HttpHeaders().set('Access-Control-Allow-Origin', '*');
+    const headers = new HttpHeaders().set('Access-Control-Allow-Origin', 'http://localhost:8997/document/upload');
     const req = new HttpRequest('POST', '/document/upload', formData, {
+      headers: headers,
       reportProgress: true,
       responseType: 'text'
     });
