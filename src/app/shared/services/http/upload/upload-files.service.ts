@@ -16,7 +16,7 @@ export class UploadFilesService {
       formData.append('file', file);
     })
     const headers = new HttpHeaders().set('Access-Control-Allow-Origin', 'http://localhost:8997/document/upload');
-    const req = new HttpRequest('POST', 'services-meier.de/api/document/upload', formData, {
+    const req = new HttpRequest('POST', 'http://127.0.0.1:8997/document/upload', formData, {
       reportProgress: true,
       responseType: 'text'
     });
