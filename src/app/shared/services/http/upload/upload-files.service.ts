@@ -15,7 +15,7 @@ export class UploadFilesService {
     file?.forEach(file => {
       formData.append('file', file);
     })
-    const req = new HttpRequest('POST', 'http://services-meier.de:8997/document/upload', formData, {
+    const req = new HttpRequest('POST', 'http://services-meier:8997/document/path', formData, {
       reportProgress: true,
       responseType: 'text'
     });
