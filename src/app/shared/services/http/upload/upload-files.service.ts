@@ -15,12 +15,15 @@ export class UploadFilesService {
     file?.forEach(file => {
       formData.append('file', file);
     })
-    const req = new HttpRequest('POST', 'http://services-meier:8997/document/path', formData, {
+    const req = new HttpRequest('POST', 'http://services-meier.de:8997/document/upload', formData, {
+      headers: new HttpHeaders({
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      }),
       reportProgress: true,
       responseType: 'text'
     });
     return this.http.request(req);
   }
-
 
 }
