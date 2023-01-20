@@ -1,15 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
-  selector: 'app-car',
-  templateUrl: './car.page.html',
-  styleUrls: ['./car.page.scss'],
+    selector: 'app-car',
+    templateUrl: './car.page.html',
+    styleUrls: ['./car.page.scss'],
 })
-export class CarPage implements OnInit {
+export class CarPage {
 
-  constructor() { }
+    mode = 'create';
+    constructor() {
+    }
 
-  ngOnInit() {
-  }
+    changeMode(mode: string) {
+        this.mode = mode;
+    }
 
 }
