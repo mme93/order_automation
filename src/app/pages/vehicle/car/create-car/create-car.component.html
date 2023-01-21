@@ -2,15 +2,74 @@
 <ion-accordion-group [multiple]="true" [value]="['first']">
   <ion-accordion value="first">
     <ion-item slot="header" color="light">
-      <ion-label>Owner</ion-label>
+      <ion-label>Vehicle documents</ion-label>
     </ion-item>
     <ion-card slot="content">
+      <form [formGroup]="vehicleDocumentsGroup">
 
+        <ion-item lines="full">
+          <ion-label position="floating">FIN</ion-label>
+          <ion-input formControlName="fin" type="text" required></ion-input>
+        </ion-item>
+        <span class="error ion-padding" *ngIf="vehicleDocumentsGroup.controls.fin.invalid">
+              Name with min. lenght 1 is required.
+         </span>
+
+        <ion-item lines="full">
+          <ion-label position="floating">Vehicle Plate</ion-label>
+          <ion-input formControlName="vehiclePlate" type="text" required></ion-input>
+        </ion-item>
+        <span class="error ion-padding" *ngIf="vehicleDocumentsGroup.controls.vehiclePlate.invalid">
+              Name with min. lenght 1 is required.
+         </span>
+
+        <ion-item lines="full">
+          <ion-label position="floating">Power in KW</ion-label>
+          <ion-input formControlName="power" type="number" required></ion-input>
+        </ion-item>
+        <span class="error ion-padding" *ngIf="vehicleDocumentsGroup.controls.power.invalid">
+              Name with min. lenght 1 is required.
+         </span>
+
+        <ion-item lines="full">
+          <ion-select placeholder="Drive-Type">
+            <ion-select-option value="petrol ">Petrol </ion-select-option>
+            <ion-select-option value="diesel ">Diesel </ion-select-option>
+            <ion-select-option value="electric">Electric </ion-select-option>
+            <ion-select-option value="hybrid">Hybrid </ion-select-option>
+          </ion-select>
+        </ion-item>
+        <span class="error ion-padding" *ngIf="vehicleDocumentsGroup.controls.driveType.invalid">
+              Name with min. lenght 1 is required.
+         </span>
+
+        <ion-item lines="none">
+          <ion-toolbar>
+            <p style="text-align: center">Upload Vehicle Documents</p>
+            <ion-item button slot="end" (click)="removeFile()" *ngIf="selectedVehicleDocFiles">
+              <mat-icon>close</mat-icon>
+            </ion-item>
+            <ion-item button slot="end" (click)="analyseFile()" *ngIf="selectedVehicleDocFiles">
+              <mat-icon>waterfall_chart</mat-icon>
+            </ion-item>
+          </ion-toolbar>
+        </ion-item>
+        <ion-item *ngIf="!selectedVehicleDocFiles">
+          <span style="width: 45%"></span>
+          <input #fileInput hidden="true" type="file" (change)="selectVehicleDocFiles($event)" multiple/>
+          <ion-button (click)="fileInput.click()" style="min-height: 120px;min-width: 120px;">
+            <mat-icon style="font-size: 75px;min-height: 120px;min-width: 120px;  padding: 20px 0">upload_file</mat-icon>
+          </ion-button>
+        </ion-item>
+        <ion-item *ngIf="selectedVehicleDocFiles">
+          <ion-img [src]="imageUrl" style="max-width: 600px;height: auto;margin-left: 30%;margin-bottom: 20px"></ion-img>
+        </ion-item>
+      </form>
     </ion-card>
   </ion-accordion>
   <ion-accordion value="second">
     <ion-item slot="header" color="light">
-      <ion-label>Car-Settings</ion-label>
+      <ion-label>Vehicle documents</ion-label>
     </ion-item>
     <ion-card slot="content">
 

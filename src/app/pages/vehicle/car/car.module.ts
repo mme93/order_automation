@@ -11,6 +11,7 @@ import {CreateCarComponent} from './create-car/create-car.component';
 import {CarProfileComponent} from './car-profile/car-profile.component';
 import {OverviewCarsComponent} from './overview-cars/overview-cars.component';
 import {MatDividerModule} from '@angular/material/divider';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   imports: [
@@ -19,6 +20,8 @@ import {MatDividerModule} from '@angular/material/divider';
     IonicModule,
     CarPageRoutingModule,
     MatDividerModule,
+    ReactiveFormsModule,
+    MatIconModule
   ],
   declarations: [CarPage, CreateCarComponent,CarProfileComponent,OverviewCarsComponent]
 })

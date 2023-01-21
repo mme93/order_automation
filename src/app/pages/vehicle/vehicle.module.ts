@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { VehiclePageRoutingModule } from './vehicle-routing.module';
 
 import { VehiclePage } from './vehicle.page';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    VehiclePageRoutingModule
+    VehiclePageRoutingModule,
+    MatIconModule
   ],
   declarations: [VehiclePage]
 })
